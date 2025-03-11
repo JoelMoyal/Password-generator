@@ -22,7 +22,7 @@ A modern, multilingual, client-side password generator that creates strong, secu
 
 ## 🚀 Demo
 
-Try the live demo: [Secure Password Generator](https://your-username.github.io/password-generator/)
+Try the live demo: [Secure Password Generator]([https://your-username.github.io/password-generator/](https://pwasecurity.org/))
 
 ## 💻 Technologies Used
 
