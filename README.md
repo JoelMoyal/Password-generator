@@ -2,9 +2,9 @@
 
 A modern, multilingual, client-side password generator that creates strong, secure passwords with customizable options.
 
-![Password Generator Preview](./screenshots/password-generator-screenshot.png)
+![Password Generator Preview](./screenshots/password-generator-screenshot.png‚) 
 
-## 🌟 Features
+## 🌟 Features‚
 
 - **Strong Password Generation**: Create secure passwords with customizable length and character sets
 - **Multilingual Support**: Available in 2 languages:
