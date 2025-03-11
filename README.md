@@ -2,7 +2,7 @@
 
 A modern, multilingual, client-side password generator that creates strong, secure passwords with customizable options.
 
-![Password Generator Preview](./screenshots/password-generator-screenshot.png‚) 
+<img width="525" alt="ç" src="https://github.com/user-attachments/assets/75bff39b-d87f-4441-aac0-40f321428e27" />
 
 ## 🌟 Features‚
 
@@ -22,7 +22,7 @@ A modern, multilingual, client-side password generator that creates strong, secu
 
 ## 🚀 Demo
 
-Try the live demo: [Secure Password Generator](https://your-username.github.io/password-generator/)
+Try the live demo: [Secure Password Generator]([https://your-username.github.io/password-generator/](https://pwasecurity.org/))
 
 ## 💻 Technologies Used
 
