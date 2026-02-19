@@ -7,6 +7,24 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2353052637618024"
      crossorigin="anonymous"></script>
     <style>
+        :root {
+            --bg:       #0b0f1a;
+            --surface:  #111827;
+            --surface-2:#1a2236;
+            --border:   #1f2d45;
+            --border-h: #2d4266;
+            --text-1:   #f1f5f9;
+            --text-2:   #94a3b8;
+            --text-3:   #64748b;
+            --blue:     #3b82f6;
+            --blue-d:   #2563eb;
+            --purple:   #8b5cf6;
+            --purple-d: #7c3aed;
+            --green:    #22c55e;
+            --amber:    #f59e0b;
+            --red:      #ef4444;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -16,26 +34,9 @@
         html, body {
             height: 100%;
             width: 100%;
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #0d0d0d;
-            color: #00ff41;
-        }
-
-        /* CRT scanline overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.08) 0px,
-                rgba(0, 0, 0, 0.08) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 9999;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-1);
         }
 
         .wrapper {
@@ -49,47 +50,34 @@
         .container {
             width: 100%;
             max-width: 560px;
-            background-color: #0d0d0d;
-            border: 1px solid #00ff41;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 4px;
             padding: 28px 24px;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), 0 0 60px rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
 
         h1 {
-            color: #00ff41;
+            color: var(--text-1);
             text-align: center;
             margin-bottom: 6px;
             font-size: clamp(1.2rem, 4vw, 1.6rem);
             letter-spacing: 2px;
             text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
-        }
-
-        .cursor {
-            display: inline-block;
-            animation: blink 1s step-end infinite;
-            color: #00ff41;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
         }
 
         .subtitle {
             text-align: center;
             font-size: 11px;
-            color: #00aa2b;
+            color: var(--text-3);
             letter-spacing: 3px;
             margin-bottom: 24px;
         }
 
-        /* Section dividers */
         .section-label {
             font-size: 11px;
             letter-spacing: 3px;
-            color: #00aa2b;
+            color: var(--text-3);
             margin: 20px 0 12px;
             display: flex;
             align-items: center;
@@ -100,7 +88,7 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: #003a0f;
+            background: var(--border);
         }
 
         .form-group {
@@ -111,7 +99,7 @@
             display: block;
             margin-bottom: 6px;
             font-size: 13px;
-            color: #00cc33;
+            color: var(--text-2);
             letter-spacing: 1px;
         }
 
@@ -120,12 +108,12 @@
         textarea {
             width: 100%;
             padding: 10px 12px;
-            border: 1px solid #00ff41;
+            border: 1px solid var(--border);
             border-radius: 2px;
             font-size: 14px;
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #010f04;
-            color: #00ff41;
+            font-family: inherit;
+            background-color: var(--bg);
+            color: var(--text-1);
             outline: none;
             transition: box-shadow 0.2s;
         }
@@ -133,7 +121,7 @@
         input[type="number"]:focus,
         input[type="text"]:focus,
         textarea:focus {
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.25);
         }
 
         textarea {
@@ -155,7 +143,7 @@
             margin-right: 10px;
             width: 16px;
             height: 16px;
-            accent-color: #00ff41;
+            accent-color: var(--blue);
             cursor: pointer;
         }
 
@@ -167,45 +155,36 @@
         }
 
         button {
-            background-color: transparent;
-            color: #00ff41;
-            border: 1px solid #00ff41;
+            background-color: var(--blue);
+            color: #fff;
+            border: none;
             padding: 12px 20px;
-            border-radius: 2px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 14px;
-            font-family: 'Courier New', Courier, monospace;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-family: inherit;
             display: block;
             width: 100%;
             margin-top: 16px;
-            transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
+            transition: background-color 0.2s;
         }
 
         button:hover {
-            background-color: #00ff41;
-            color: #0d0d0d;
-            box-shadow: 0 0 18px rgba(0, 255, 65, 0.6);
+            background-color: var(--blue-d);
         }
 
         button:active {
-            background-color: #00cc33;
+            background-color: var(--blue-d);
         }
 
-        /* AI button distinct color */
         .ai-btn {
-            border-color: #00cfff;
-            color: #00cfff;
+            background-color: var(--purple);
         }
 
         .ai-btn:hover {
-            background-color: #00cfff;
-            color: #0d0d0d;
-            box-shadow: 0 0 18px rgba(0, 207, 255, 0.6);
+            background-color: var(--purple-d);
         }
 
-        /* Password display */
         .password-container {
             margin-top: 16px;
             position: relative;
@@ -213,21 +192,15 @@
 
         .password-display {
             padding: 14px;
-            background-color: #010f04;
-            border: 1px solid #00ff41;
+            background-color: var(--bg);
+            border: 1px solid var(--border);
             border-radius: 2px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 15px;
             word-break: break-all;
             padding-right: 70px;
             min-height: 50px;
-            color: #00ff41;
-            text-shadow: 0 0 6px rgba(0, 255, 65, 0.6);
-        }
-
-        .password-display::before {
-            content: '> ';
-            opacity: 0.5;
+            color: var(--text-1);
         }
 
         .copy-btn {
@@ -236,30 +209,28 @@
             top: 50%;
             transform: translateY(-50%);
             background-color: transparent;
-            color: #00ff41;
-            border: 1px solid #00ff41;
+            color: var(--blue);
+            border: 1px solid var(--blue);
             padding: 5px 10px;
             border-radius: 2px;
             cursor: pointer;
             font-size: 11px;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: inherit;
             width: auto;
             margin: 0;
             letter-spacing: 1px;
         }
 
         .copy-btn:hover {
-            background-color: #00ff41;
-            color: #0d0d0d;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            background-color: var(--blue);
+            color: #fff;
         }
 
-        /* Strength meter */
         .strength-meter {
             height: 4px;
             margin-top: 10px;
             border-radius: 2px;
-            background-color: #001a05;
+            background-color: var(--surface-2);
             overflow: hidden;
         }
 
@@ -267,7 +238,6 @@
             height: 100%;
             width: 0%;
             transition: width 0.4s, background-color 0.4s;
-            box-shadow: 0 0 8px currentColor;
         }
 
         .strength-text {
@@ -277,15 +247,14 @@
             letter-spacing: 2px;
         }
 
-        /* AI result */
         .ai-result {
             margin-top: 14px;
             padding: 14px;
-            background-color: #010f15;
-            border: 1px solid #00cfff;
+            background-color: var(--surface-2);
+            border: 1px solid var(--border);
             border-radius: 2px;
             font-size: 13px;
-            color: #00cfff;
+            color: var(--text-2);
             display: none;
             white-space: pre-wrap;
             word-break: break-word;
@@ -297,20 +266,19 @@
 
         .ai-password-line {
             font-size: 15px;
-            color: #00ff41;
+            color: var(--text-1);
             font-weight: bold;
             margin-bottom: 8px;
-            text-shadow: 0 0 6px rgba(0, 255, 65, 0.6);
         }
 
         .ai-explanation {
             font-size: 12px;
-            color: #0099cc;
+            color: var(--text-3);
             line-height: 1.5;
         }
 
         .ai-loading {
-            color: #00cfff;
+            color: var(--purple);
             font-size: 13px;
             letter-spacing: 2px;
             margin-top: 10px;
@@ -327,7 +295,6 @@
             50% { opacity: 0.3; }
         }
 
-        /* Language toggle */
         .language-toggle {
             display: flex;
             justify-content: flex-end;
@@ -344,44 +311,41 @@
             width: 36px;
             height: 28px;
             cursor: pointer;
-            opacity: 0.4;
-            transition: all 0.2s;
-            border-radius: 2px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: transparent;
-            color: #00ff41;
+            color: var(--text-3);
             font-weight: bold;
             font-size: 12px;
-            border: 1px solid #003a0f;
-            letter-spacing: 1px;
+            border: 1px solid var(--border);
+            font-family: inherit;
+            transition: all 0.2s;
         }
 
         .lang-icon.active {
-            opacity: 1;
-            border-color: #00ff41;
-            box-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
         }
 
         .lang-icon:hover {
             opacity: 0.8;
         }
 
-        /* Footer */
         .footer {
             margin-top: 28px;
             text-align: center;
             padding: 14px 0 0;
-            border-top: 1px solid #003a0f;
+            border-top: 1px solid var(--border);
             font-size: 12px;
-            color: #00aa2b;
+            color: var(--text-3);
         }
 
         .footer-name {
             font-weight: 600;
             margin-bottom: 8px;
-            letter-spacing: 2px;
         }
 
         .social-links {
@@ -392,18 +356,16 @@
         }
 
         .social-link {
-            color: #00aa2b;
+            color: var(--text-3);
             text-decoration: none;
-            transition: color 0.2s, text-shadow 0.2s;
+            transition: color 0.2s;
             display: flex;
             align-items: center;
             font-size: 12px;
-            letter-spacing: 1px;
         }
 
         .social-link:hover {
-            color: #00ff41;
-            text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+            color: var(--text-1);
         }
 
         .social-icon {
@@ -412,7 +374,6 @@
             margin-right: 5px;
         }
 
-        /* Mobile */
         @media (max-width: 480px) {
             .wrapper { padding: 10px; }
             .container { padding: 16px; }
@@ -435,7 +396,7 @@
                 </div>
             </div>
 
-            <h1 id="title">Secure Password Generator<span class="cursor">_</span></h1>
+            <h1 id="title">Secure Password Generator</h1>
             <div class="subtitle" id="subtitle">[ SYSTEM READY ]</div>
 
             <!-- Manual mode -->
@@ -558,20 +519,6 @@
             generateBtn.addEventListener('click', generatePassword);
             generatePassword();
 
-            // Typewriter effect
-            function typewriterEffect(element, text, speed = 30) {
-                element.textContent = '';
-                let i = 0;
-                const timer = setInterval(() => {
-                    if (i < text.length) {
-                        element.textContent += text[i];
-                        i++;
-                    } else {
-                        clearInterval(timer);
-                    }
-                }, speed);
-            }
-
             function generatePassword() {
                 let length = parseInt(lengthInput.value);
                 if (isNaN(length) || length < 8) { length = 8; lengthInput.value = 8; }
@@ -599,7 +546,7 @@
                 }
 
                 password = shuffleString(password);
-                typewriterEffect(passwordDisplay, password, 20);
+                passwordDisplay.textContent = password;
                 updateStrengthMeter(password);
             }
 
@@ -645,27 +592,25 @@
 
                 let color, label;
                 if (strength < 40) {
-                    color = '#ff3860';
+                    color = '#ef4444';
                     label = currentLang === 'en' ? 'WEAK' : 'SCHWACH';
                 } else if (strength < 70) {
-                    color = '#ffdd57';
+                    color = '#f59e0b';
                     label = currentLang === 'en' ? 'MODERATE' : 'MITTEL';
                 } else if (strength < 90) {
-                    color = '#00cfff';
+                    color = '#3b82f6';
                     label = currentLang === 'en' ? 'STRONG' : 'STARK';
                 } else {
-                    color = '#00ff41';
+                    color = '#22c55e';
                     label = currentLang === 'en' ? 'VERY STRONG' : 'SEHR STARK';
                 }
 
                 strengthFill.style.width = strength + '%';
                 strengthFill.style.backgroundColor = color;
-                strengthFill.style.boxShadow = `0 0 8px ${color}`;
                 strengthText.textContent = label;
                 strengthText.style.color = color;
             }
 
-            // AI generation
             aiBtn.addEventListener('click', async function () {
                 const description = aiInput.value.trim();
                 if (!description) {
@@ -702,7 +647,6 @@
                 }
             });
 
-            // Language
             const translations = {
                 en: {
                     title: 'Secure Password Generator',
@@ -745,9 +689,9 @@
             function setLanguage(lang) {
                 currentLang = lang;
                 const t = translations[lang];
-                document.getElementById('title').childNodes[0].textContent = t.title;
+                document.getElementById('title').textContent = t.title;
                 document.getElementById('subtitle').textContent = t.subtitle;
-                document.getElementById('manual-label').childNodes[0] && (document.getElementById('manual-label').textContent = t.manualLabel);
+                document.getElementById('manual-label').textContent = t.manualLabel;
                 document.getElementById('ai-label').textContent = t.aiLabel;
                 document.getElementById('length-label').textContent = t.lengthLabel;
                 document.getElementById('include-label').textContent = t.includeLabel;
