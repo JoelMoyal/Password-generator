@@ -689,6 +689,53 @@
             width: 15px;
             height: 15px;
         }
+        .footer-legal {
+            width: 100%;
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-3);
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        .footer-legal a { color: var(--text-3); text-decoration: none; }
+        .footer-legal a:hover { color: var(--text-2); }
+
+        /* ── COOKIE CONSENT ── */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            z-index: 999;
+            font-size: 13px;
+            color: var(--text-2);
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
+        }
+        .cookie-banner.hidden { display: none; }
+        .cookie-banner a { color: var(--blue); text-decoration: none; }
+        .cookie-banner a:hover { text-decoration: underline; }
+        .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
+        .cookie-btn {
+            padding: 7px 18px;
+            border-radius: 6px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .cookie-btn-accept { background: var(--blue); color: #fff; }
+        .cookie-btn-accept:hover { background: var(--blue-d); }
+        .cookie-btn-decline { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+        .cookie-btn-decline:hover { color: var(--text-1); }
 
         /* ── SLIDER BUBBLE ── */
         .slider-bubble {
@@ -878,16 +925,16 @@
         <div class="trust-strip">
             <div class="trust-inner">
                 <div class="trust-item">
-                    <span class="trust-title">Browser-Only</span>
-                    <span class="trust-sub">Zero server contact</span>
+                    <span class="trust-title" id="trust-1-title">Browser-Only</span>
+                    <span class="trust-sub" id="trust-1-sub">Zero server contact</span>
                 </div>
                 <div class="trust-item">
-                    <span class="trust-title">No Account</span>
-                    <span class="trust-sub">100% free</span>
+                    <span class="trust-title" id="trust-2-title">No Account</span>
+                    <span class="trust-sub" id="trust-2-sub">100% free</span>
                 </div>
                 <div class="trust-item">
-                    <span class="trust-title">AI-Powered</span>
-                    <span class="trust-sub">Natural language mode</span>
+                    <span class="trust-title" id="trust-3-title">AI-Powered</span>
+                    <span class="trust-sub" id="trust-3-sub">Natural language mode</span>
                 </div>
             </div>
         </div>
@@ -896,9 +943,9 @@
 
     <section class="features-section">
         <div class="section-center">
-            <span class="section-eyebrow">Why pwasecurity</span>
-            <h2 class="section-title">Built for security, designed for everyone</h2>
-            <p class="section-sub">No sign-ups, no servers, no tracking. Just fast, strong passwords generated right in your browser.</p>
+            <span class="section-eyebrow" id="feat-eyebrow">Why pwasecurity</span>
+            <h2 class="section-title" id="feat-title">Built for security, designed for everyone</h2>
+            <p class="section-sub" id="feat-sub">No sign-ups, no servers, no tracking. Just fast, strong passwords generated right in your browser.</p>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon fi-blue">
@@ -907,8 +954,8 @@
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
                     </div>
-                    <div class="feature-title">Completely Private</div>
-                    <p class="feature-body">All generation happens in your browser. Your passwords never touch our servers — because we don't have any.</p>
+                    <div class="feature-title" id="f1-title">Completely Private</div>
+                    <p class="feature-body" id="f1-body">All generation happens in your browser. Your passwords never touch our servers — because we don't have any.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon fi-green">
@@ -916,8 +963,8 @@
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         </svg>
                     </div>
-                    <div class="feature-title">Real-Time Strength Analysis</div>
-                    <p class="feature-body">Instantly see how strong your password is with our live entropy meter as you adjust length and character sets.</p>
+                    <div class="feature-title" id="f2-title">Real-Time Strength Analysis</div>
+                    <p class="feature-body" id="f2-body">Instantly see how strong your password is with our live entropy meter as you adjust length and character sets.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon fi-purple">
@@ -927,8 +974,8 @@
                             <polyline points="2 7 12 12 22 7"/>
                         </svg>
                     </div>
-                    <div class="feature-title">AI-Tailored Passwords</div>
-                    <p class="feature-body">Describe what you need in plain English and our AI will craft a password that fits your exact requirements.</p>
+                    <div class="feature-title" id="f3-title">AI-Tailored Passwords</div>
+                    <p class="feature-body" id="f3-body">Describe what you need in plain English and our AI will craft a password that fits your exact requirements.</p>
                 </div>
             </div>
         </div>
@@ -936,24 +983,24 @@
 
     <section class="faq-section">
         <div class="section-center">
-            <span class="section-eyebrow">FAQ</span>
-            <h2 class="section-title">Common questions</h2>
+            <span class="section-eyebrow" id="faq-eyebrow">FAQ</span>
+            <h2 class="section-title" id="faq-title">Common questions</h2>
             <div class="faq-list">
                 <details class="faq-item">
-                    <summary>Is this password generator truly secure?</summary>
-                    <p class="faq-answer">Yes. All passwords are generated using the Web Crypto API directly in your browser. No data is ever sent to a server, and the randomness is cryptographically strong.</p>
+                    <summary id="faq-1-q">Is this password generator truly secure?</summary>
+                    <p class="faq-answer" id="faq-1-a">Yes. All passwords are generated using the Web Crypto API directly in your browser. No data is ever sent to a server, and the randomness is cryptographically strong.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>Does AI Mode store my prompts or passwords?</summary>
-                    <p class="faq-answer">No. Your AI prompts are sent only to the Cloudflare Workers AI endpoint to generate a response. Nothing is logged or stored on our end.</p>
+                    <summary id="faq-2-q">Does AI Mode store my prompts or passwords?</summary>
+                    <p class="faq-answer" id="faq-2-a">No. Your AI prompts are sent only to the Cloudflare Workers AI endpoint to generate a response. Nothing is logged or stored on our end.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>How long should my password be?</summary>
-                    <p class="faq-answer">For most accounts, 16+ characters with a mix of uppercase, lowercase, numbers, and symbols is excellent. For high-value accounts like banking or email, aim for 20+ characters.</p>
+                    <summary id="faq-3-q">How long should my password be?</summary>
+                    <p class="faq-answer" id="faq-3-a">For most accounts, 16+ characters with a mix of uppercase, lowercase, numbers, and symbols is excellent. For high-value accounts like banking or email, aim for 20+ characters.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>Why use a passphrase instead of a random password?</summary>
-                    <p class="faq-answer">Passphrases are longer and easier to remember while still being very secure. Use AI Mode to generate a memorable passphrase tailored to your context.</p>
+                    <summary id="faq-4-q">Why use a passphrase instead of a random password?</summary>
+                    <p class="faq-answer" id="faq-4-a">Passphrases are longer and easier to remember while still being very secure. Use AI Mode to generate a memorable passphrase tailored to your context.</p>
                 </details>
             </div>
         </div>
@@ -963,7 +1010,11 @@
         <div class="footer-inner">
             <div class="footer-brand">
                 <strong>Joël Moyal</strong>
-                Free secure password generator
+                <span id="footer-tagline">Free secure password generator</span>
+            </div>
+            <div class="footer-legal">
+                <span>© 2026 pwasecurity · Joël Moyal</span>
+                <a href="/privacy.html">Privacy Policy</a>
             </div>
             <div class="social-links">
                 <a href="https://nl.linkedin.com/in/joel-moyal" target="_blank" class="social-link">
@@ -1055,6 +1106,14 @@
 
             generateBtn.addEventListener('click', generatePassword);
 
+            function secureRandInt(max) {
+                const buf = new Uint32Array(1);
+                const limit = 0x100000000 - (0x100000000 % max);
+                let val;
+                do { crypto.getRandomValues(buf); val = buf[0]; } while (val >= limit);
+                return val % max;
+            }
+
             function generatePassword() {
                 const length = +slider.value;
 
@@ -1070,13 +1129,13 @@
                 if (symbolsCheckbox.checked) chars += symbols;
 
                 let password = '';
-                if (uppercaseCheckbox.checked) password += uppercase.charAt(Math.floor(Math.random() * uppercase.length));
-                if (lowercaseCheckbox.checked) password += lowercase.charAt(Math.floor(Math.random() * lowercase.length));
-                if (numbersCheckbox.checked) password += numbers.charAt(Math.floor(Math.random() * numbers.length));
-                if (symbolsCheckbox.checked) password += symbols.charAt(Math.floor(Math.random() * symbols.length));
+                if (uppercaseCheckbox.checked) password += uppercase.charAt(secureRandInt(uppercase.length));
+                if (lowercaseCheckbox.checked) password += lowercase.charAt(secureRandInt(lowercase.length));
+                if (numbersCheckbox.checked) password += numbers.charAt(secureRandInt(numbers.length));
+                if (symbolsCheckbox.checked) password += symbols.charAt(secureRandInt(symbols.length));
 
                 for (let i = password.length; i < length; i++) {
-                    password += chars.charAt(Math.floor(Math.random() * chars.length));
+                    password += chars.charAt(secureRandInt(chars.length));
                 }
 
                 password = shuffleString(password);
@@ -1087,7 +1146,7 @@
             function shuffleString(string) {
                 let array = string.split('');
                 for (let i = array.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
+                    const j = secureRandInt(i + 1);
                     [array[i], array[j]] = [array[j], array[i]];
                 }
                 return array.join('');
@@ -1200,7 +1259,25 @@
                     aiLoading: 'Generating...',
                     aiSecurityNote: 'Your description is used only to generate the password and is never stored or memorized by the AI.',
                     strengthWeak: 'WEAK', strengthModerate: 'MODERATE', strengthStrong: 'STRONG', strengthVeryStrong: 'VERY STRONG',
-                    aiError: '[ERROR] Could not reach AI. Make sure the Workers AI binding is enabled in Cloudflare Pages settings.'
+                    aiError: '[ERROR] Could not reach AI. Make sure the Workers AI binding is enabled in Cloudflare Pages settings.',
+                    trust1Title: 'Browser-Only', trust1Sub: 'Zero server contact',
+                    trust2Title: 'No Account', trust2Sub: '100% free',
+                    trust3Title: 'AI-Powered', trust3Sub: 'Natural language mode',
+                    featEyebrow: 'Why pwasecurity', featTitle: 'Built for security, designed for everyone',
+                    featSub: 'No sign-ups, no servers, no tracking. Just fast, strong passwords generated right in your browser.',
+                    f1Title: 'Completely Private', f1Body: "All generation happens in your browser. Your passwords never touch our servers — because we don't have any.",
+                    f2Title: 'Real-Time Strength Analysis', f2Body: 'Instantly see how strong your password is with our live entropy meter as you adjust length and character sets.',
+                    f3Title: 'AI-Tailored Passwords', f3Body: 'Describe what you need in plain English and our AI will craft a password that fits your exact requirements.',
+                    faqEyebrow: 'FAQ', faqTitle: 'Common questions',
+                    faq1Q: 'Is this password generator truly secure?',
+                    faq1A: 'Yes. All passwords are generated using the Web Crypto API directly in your browser. No data is ever sent to a server, and the randomness is cryptographically strong.',
+                    faq2Q: 'Does AI Mode store my prompts or passwords?',
+                    faq2A: 'No. Your AI prompts are sent only to the Cloudflare Workers AI endpoint to generate a response. Nothing is logged or stored on our end.',
+                    faq3Q: 'How long should my password be?',
+                    faq3A: 'For most accounts, 16+ characters with a mix of uppercase, lowercase, numbers, and symbols is excellent. For high-value accounts like banking or email, aim for 20+ characters.',
+                    faq4Q: 'Why use a passphrase instead of a random password?',
+                    faq4A: 'Passphrases are longer and easier to remember while still being very secure. Use AI Mode to generate a memorable passphrase tailored to your context.',
+                    footerTagline: 'Free secure password generator'
                 },
                 de: {
                     title: 'Sicherer Passwort-Generator',
@@ -1221,7 +1298,25 @@
                     aiLoading: 'Generiere...',
                     aiSecurityNote: 'Deine Beschreibung wird nur zur Passwortgenerierung verwendet und wird von der KI weder gespeichert noch gemerkt.',
                     strengthWeak: 'SCHWACH', strengthModerate: 'MITTEL', strengthStrong: 'STARK', strengthVeryStrong: 'SEHR STARK',
-                    aiError: '[FEHLER] KI nicht erreichbar. Bitte Workers AI-Bindung in Cloudflare Pages aktivieren.'
+                    aiError: '[FEHLER] KI nicht erreichbar. Bitte Workers AI-Bindung in Cloudflare Pages aktivieren.',
+                    trust1Title: 'Nur im Browser', trust1Sub: 'Kein Serverkontakt',
+                    trust2Title: 'Kein Konto', trust2Sub: '100% kostenlos',
+                    trust3Title: 'KI-gestützt', trust3Sub: 'Natürliche Sprache',
+                    featEyebrow: 'Warum pwasecurity', featTitle: 'Für Sicherheit gebaut, für alle gestaltet',
+                    featSub: 'Keine Anmeldung, keine Server, kein Tracking. Einfach schnelle, starke Passwörter direkt im Browser.',
+                    f1Title: 'Vollständig privat', f1Body: 'Die gesamte Generierung findet in deinem Browser statt. Deine Passwörter berühren niemals unsere Server – weil wir keine haben.',
+                    f2Title: 'Echtzeit-Stärkeanalyse', f2Body: 'Sieh sofort, wie stark dein Passwort ist – mit unserem Live-Entropie-Meter, während du Länge und Zeichensätze anpasst.',
+                    f3Title: 'KI-optimierte Passwörter', f3Body: 'Beschreibe, was du brauchst, und unsere KI erstellt ein Passwort, das genau deinen Anforderungen entspricht.',
+                    faqEyebrow: 'FAQ', faqTitle: 'Häufige Fragen',
+                    faq1Q: 'Ist dieser Passwort-Generator wirklich sicher?',
+                    faq1A: 'Ja. Alle Passwörter werden mit der Web Crypto API direkt in deinem Browser generiert. Es werden keine Daten an einen Server gesendet, und die Zufälligkeit ist kryptografisch stark.',
+                    faq2Q: 'Speichert der KI-Modus meine Eingaben oder Passwörter?',
+                    faq2A: 'Nein. Deine KI-Eingaben werden nur an den Cloudflare Workers AI-Endpunkt gesendet, um eine Antwort zu generieren. Auf unserer Seite wird nichts protokolliert oder gespeichert.',
+                    faq3Q: 'Wie lang sollte mein Passwort sein?',
+                    faq3A: 'Für die meisten Konten sind 16+ Zeichen mit einer Mischung aus Groß- und Kleinbuchstaben, Zahlen und Symbolen ausgezeichnet. Für wichtige Konten wie Banking oder E-Mail empfehlen sich 20+ Zeichen.',
+                    faq4Q: 'Warum eine Passphrase statt eines zufälligen Passworts?',
+                    faq4A: 'Passphrasen sind länger und leichter zu merken und trotzdem sehr sicher. Nutze den KI-Modus, um eine einprägsame Passphrase für deinen Kontext zu erstellen.',
+                    footerTagline: 'Kostenloser sicherer Passwort-Generator'
                 },
                 fr: {
                     title: 'Générateur de mots de passe sécurisé',
@@ -1242,7 +1337,25 @@
                     aiLoading: 'Génération...',
                     aiSecurityNote: "Votre description est utilisée uniquement pour générer le mot de passe et n'est jamais stockée ni mémorisée par l'IA.",
                     strengthWeak: 'FAIBLE', strengthModerate: 'MOYEN', strengthStrong: 'FORT', strengthVeryStrong: 'TRÈS FORT',
-                    aiError: "[ERREUR] Impossible d'atteindre l'IA. Assurez-vous que la liaison Workers AI est activée dans les paramètres Cloudflare Pages."
+                    aiError: "[ERREUR] Impossible d'atteindre l'IA. Assurez-vous que la liaison Workers AI est activée dans les paramètres Cloudflare Pages.",
+                    trust1Title: 'Navigateur uniquement', trust1Sub: 'Aucun contact serveur',
+                    trust2Title: 'Sans compte', trust2Sub: '100% gratuit',
+                    trust3Title: 'Propulsé par IA', trust3Sub: 'Langage naturel',
+                    featEyebrow: 'Pourquoi pwasecurity', featTitle: 'Conçu pour la sécurité, pensé pour tous',
+                    featSub: 'Sans inscription, sans serveur, sans tracking. Des mots de passe forts générés directement dans votre navigateur.',
+                    f1Title: 'Totalement privé', f1Body: "Toute la génération se fait dans votre navigateur. Vos mots de passe ne touchent jamais nos serveurs — parce que nous n'en avons pas.",
+                    f2Title: 'Analyse de force en temps réel', f2Body: 'Voyez instantanément la solidité de votre mot de passe grâce à notre compteur d\'entropie en direct.',
+                    f3Title: 'Mots de passe adaptés par IA', f3Body: "Décrivez ce dont vous avez besoin et notre IA créera un mot de passe qui correspond exactement à vos exigences.",
+                    faqEyebrow: 'FAQ', faqTitle: 'Questions fréquentes',
+                    faq1Q: 'Ce générateur est-il vraiment sécurisé ?',
+                    faq1A: 'Oui. Tous les mots de passe sont générés via l\'API Web Crypto directement dans votre navigateur. Aucune donnée n\'est envoyée à un serveur.',
+                    faq2Q: 'Le mode IA stocke-t-il mes saisies ou mes mots de passe ?',
+                    faq2A: 'Non. Vos saisies IA sont envoyées uniquement à l\'endpoint Cloudflare Workers AI. Rien n\'est enregistré de notre côté.',
+                    faq3Q: 'Quelle longueur doit avoir mon mot de passe ?',
+                    faq3A: 'Pour la plupart des comptes, 16+ caractères avec un mélange de majuscules, minuscules, chiffres et symboles est excellent. Pour les comptes importants, visez 20+ caractères.',
+                    faq4Q: 'Pourquoi utiliser une phrase de passe ?',
+                    faq4A: 'Les phrases de passe sont plus longues et plus faciles à retenir tout en étant très sécurisées. Utilisez le mode IA pour en générer une adaptée à votre contexte.',
+                    footerTagline: 'Générateur de mots de passe gratuit et sécurisé'
                 },
                 es: {
                     title: 'Generador de contraseñas seguro',
@@ -1263,7 +1376,25 @@
                     aiLoading: 'Generando...',
                     aiSecurityNote: 'Tu descripción se usa solo para generar la contraseña y nunca es almacenada ni memorizada por la IA.',
                     strengthWeak: 'DÉBIL', strengthModerate: 'MODERADA', strengthStrong: 'FUERTE', strengthVeryStrong: 'MUY FUERTE',
-                    aiError: '[ERROR] No se pudo conectar con la IA. Asegúrate de que el binding de Workers AI esté habilitado en la configuración de Cloudflare Pages.'
+                    aiError: '[ERROR] No se pudo conectar con la IA. Asegúrate de que el binding de Workers AI esté habilitado en la configuración de Cloudflare Pages.',
+                    trust1Title: 'Solo navegador', trust1Sub: 'Sin contacto con servidor',
+                    trust2Title: 'Sin cuenta', trust2Sub: '100% gratis',
+                    trust3Title: 'Potenciado por IA', trust3Sub: 'Lenguaje natural',
+                    featEyebrow: 'Por qué pwasecurity', featTitle: 'Construido para la seguridad, diseñado para todos',
+                    featSub: 'Sin registros, sin servidores, sin rastreo. Contraseñas fuertes generadas directamente en tu navegador.',
+                    f1Title: 'Completamente privado', f1Body: 'Toda la generación ocurre en tu navegador. Tus contraseñas nunca tocan nuestros servidores — porque no tenemos ninguno.',
+                    f2Title: 'Análisis de fuerza en tiempo real', f2Body: 'Ve al instante qué tan fuerte es tu contraseña con nuestro medidor de entropía en vivo.',
+                    f3Title: 'Contraseñas adaptadas por IA', f3Body: 'Describe lo que necesitas y nuestra IA creará una contraseña que se adapte exactamente a tus requisitos.',
+                    faqEyebrow: 'FAQ', faqTitle: 'Preguntas frecuentes',
+                    faq1Q: '¿Es realmente seguro este generador?',
+                    faq1A: 'Sí. Todas las contraseñas se generan usando la Web Crypto API directamente en tu navegador. Ningún dato se envía a un servidor.',
+                    faq2Q: '¿El modo IA almacena mis entradas o contraseñas?',
+                    faq2A: 'No. Tus entradas de IA se envían solo al endpoint de Cloudflare Workers AI. Nada se registra ni almacena de nuestra parte.',
+                    faq3Q: '¿Qué longitud debe tener mi contraseña?',
+                    faq3A: 'Para la mayoría de cuentas, 16+ caracteres con mayúsculas, minúsculas, números y símbolos es excelente. Para cuentas importantes como banco o email, apunta a 20+ caracteres.',
+                    faq4Q: '¿Por qué usar una frase de contraseña?',
+                    faq4A: 'Las frases de contraseña son más largas y fáciles de recordar siendo muy seguras. Usa el modo IA para generar una memorable adaptada a tu contexto.',
+                    footerTagline: 'Generador de contraseñas seguro y gratuito'
                 },
                 it: {
                     title: 'Generatore di password sicure',
@@ -1284,7 +1415,25 @@
                     aiLoading: 'Generazione...',
                     aiSecurityNote: "La tua descrizione viene usata solo per generare la password e non viene mai memorizzata dall'IA.",
                     strengthWeak: 'DEBOLE', strengthModerate: 'MODERATA', strengthStrong: 'FORTE', strengthVeryStrong: 'MOLTO FORTE',
-                    aiError: "[ERRORE] Impossibile raggiungere l'IA. Assicurati che il binding Workers AI sia abilitato nelle impostazioni di Cloudflare Pages."
+                    aiError: "[ERRORE] Impossibile raggiungere l'IA. Assicurati che il binding Workers AI sia abilitato nelle impostazioni di Cloudflare Pages.",
+                    trust1Title: 'Solo browser', trust1Sub: 'Nessun contatto server',
+                    trust2Title: 'Nessun account', trust2Sub: '100% gratuito',
+                    trust3Title: 'Potenziato da IA', trust3Sub: 'Linguaggio naturale',
+                    featEyebrow: 'Perché pwasecurity', featTitle: 'Costruito per la sicurezza, progettato per tutti',
+                    featSub: 'Nessuna registrazione, nessun server, nessun tracking. Password forti generate direttamente nel tuo browser.',
+                    f1Title: 'Completamente privato', f1Body: "Tutta la generazione avviene nel tuo browser. Le tue password non toccano mai i nostri server — perché non ne abbiamo.",
+                    f2Title: 'Analisi della forza in tempo reale', f2Body: 'Vedi istantaneamente quanto è forte la tua password con il nostro misuratore di entropia in diretta.',
+                    f3Title: 'Password personalizzate dall\'IA', f3Body: 'Descrivi di cosa hai bisogno e la nostra IA creerà una password che soddisfa esattamente le tue esigenze.',
+                    faqEyebrow: 'FAQ', faqTitle: 'Domande frequenti',
+                    faq1Q: 'Questo generatore è davvero sicuro?',
+                    faq1A: 'Sì. Tutte le password vengono generate tramite la Web Crypto API direttamente nel tuo browser. Nessun dato viene mai inviato a un server.',
+                    faq2Q: 'La modalità IA memorizza i miei prompt o password?',
+                    faq2A: "No. I tuoi prompt IA vengono inviati solo all'endpoint Cloudflare Workers AI. Nulla viene registrato o memorizzato da parte nostra.",
+                    faq3Q: 'Quanto deve essere lunga la mia password?',
+                    faq3A: 'Per la maggior parte degli account, 16+ caratteri con maiuscole, minuscole, numeri e simboli è eccellente. Per account importanti come banca o email, punta a 20+ caratteri.',
+                    faq4Q: 'Perché usare una passphrase?',
+                    faq4A: 'Le passphrase sono più lunghe e facili da ricordare pur essendo molto sicure. Usa la modalità IA per generarne una memorabile adatta al tuo contesto.',
+                    footerTagline: 'Generatore di password sicuro e gratuito'
                 },
                 pt: {
                     title: 'Gerador de senhas seguro',
@@ -1305,7 +1454,25 @@
                     aiLoading: 'Gerando...',
                     aiSecurityNote: 'Sua descrição é usada apenas para gerar a senha e nunca é armazenada ou memorizada pela IA.',
                     strengthWeak: 'FRACA', strengthModerate: 'MODERADA', strengthStrong: 'FORTE', strengthVeryStrong: 'MUITO FORTE',
-                    aiError: '[ERRO] Não foi possível alcançar a IA. Certifique-se de que o binding Workers AI está habilitado nas configurações do Cloudflare Pages.'
+                    aiError: '[ERRO] Não foi possível alcançar a IA. Certifique-se de que o binding Workers AI está habilitado nas configurações do Cloudflare Pages.',
+                    trust1Title: 'Só no navegador', trust1Sub: 'Sem contato com servidor',
+                    trust2Title: 'Sem conta', trust2Sub: '100% grátis',
+                    trust3Title: 'Impulsionado por IA', trust3Sub: 'Linguagem natural',
+                    featEyebrow: 'Por que pwasecurity', featTitle: 'Construído para segurança, projetado para todos',
+                    featSub: 'Sem cadastros, sem servidores, sem rastreamento. Senhas fortes geradas diretamente no seu navegador.',
+                    f1Title: 'Completamente privado', f1Body: 'Toda a geração acontece no seu navegador. Suas senhas nunca tocam nossos servidores — porque não temos nenhum.',
+                    f2Title: 'Análise de força em tempo real', f2Body: 'Veja instantaneamente a força da sua senha com nosso medidor de entropia ao vivo.',
+                    f3Title: 'Senhas personalizadas por IA', f3Body: 'Descreva o que você precisa e nossa IA criará uma senha que atende exatamente aos seus requisitos.',
+                    faqEyebrow: 'FAQ', faqTitle: 'Perguntas frequentes',
+                    faq1Q: 'Este gerador é realmente seguro?',
+                    faq1A: 'Sim. Todas as senhas são geradas usando a Web Crypto API diretamente no seu navegador. Nenhum dado é enviado para um servidor.',
+                    faq2Q: 'O modo IA armazena meus prompts ou senhas?',
+                    faq2A: 'Não. Seus prompts de IA são enviados apenas para o endpoint do Cloudflare Workers AI. Nada é registrado ou armazenado do nosso lado.',
+                    faq3Q: 'Qual deve ser o comprimento da minha senha?',
+                    faq3A: 'Para a maioria das contas, 16+ caracteres com maiúsculas, minúsculas, números e símbolos é excelente. Para contas importantes como banco ou e-mail, use 20+ caracteres.',
+                    faq4Q: 'Por que usar uma frase de senha?',
+                    faq4A: 'Frases de senha são mais longas e fáceis de lembrar e ainda muito seguras. Use o modo IA para gerar uma memorável adaptada ao seu contexto.',
+                    footerTagline: 'Gerador de senhas seguro e gratuito'
                 },
                 nl: {
                     title: 'Veilige wachtwoordgenerator',
@@ -1326,7 +1493,25 @@
                     aiLoading: 'Genereren...',
                     aiSecurityNote: 'Uw beschrijving wordt alleen gebruikt om het wachtwoord te genereren en wordt nooit opgeslagen of onthouden door de AI.',
                     strengthWeak: 'ZWAK', strengthModerate: 'MATIG', strengthStrong: 'STERK', strengthVeryStrong: 'ZEER STERK',
-                    aiError: '[FOUT] Kan de AI niet bereiken. Zorg ervoor dat de Workers AI-binding is ingeschakeld in de Cloudflare Pages-instellingen.'
+                    aiError: '[FOUT] Kan de AI niet bereiken. Zorg ervoor dat de Workers AI-binding is ingeschakeld in de Cloudflare Pages-instellingen.',
+                    trust1Title: 'Alleen browser', trust1Sub: 'Geen servercontact',
+                    trust2Title: 'Geen account', trust2Sub: '100% gratis',
+                    trust3Title: 'AI-gestuurd', trust3Sub: 'Natuurlijke taal',
+                    featEyebrow: 'Waarom pwasecurity', featTitle: 'Gebouwd voor veiligheid, ontworpen voor iedereen',
+                    featSub: 'Geen aanmeldingen, geen servers, geen tracking. Sterke wachtwoorden gegenereerd in uw browser.',
+                    f1Title: 'Volledig privé', f1Body: 'Alle generatie vindt plaats in uw browser. Uw wachtwoorden raken onze servers nooit aan — omdat we er geen hebben.',
+                    f2Title: 'Realtime sterkte-analyse', f2Body: 'Zie direct hoe sterk uw wachtwoord is met onze live entropieméter terwijl u de instellingen aanpast.',
+                    f3Title: 'AI-aangepaste wachtwoorden', f3Body: 'Beschrijf wat u nodig heeft en onze AI maakt een wachtwoord dat exact aan uw eisen voldoet.',
+                    faqEyebrow: 'FAQ', faqTitle: 'Veelgestelde vragen',
+                    faq1Q: 'Is deze wachtwoordgenerator echt veilig?',
+                    faq1A: 'Ja. Alle wachtwoorden worden gegenereerd via de Web Crypto API direct in uw browser. Er worden nooit gegevens naar een server verzonden.',
+                    faq2Q: 'Slaat de AI-modus mijn invoer of wachtwoorden op?',
+                    faq2A: 'Nee. Uw AI-invoer wordt alleen naar het Cloudflare Workers AI-eindpunt gestuurd. Van onze kant wordt niets gelogd of opgeslagen.',
+                    faq3Q: 'Hoe lang moet mijn wachtwoord zijn?',
+                    faq3A: 'Voor de meeste accounts is 16+ tekens met een mix van hoofd- en kleine letters, cijfers en symbolen uitstekend. Voor belangrijke accounts zoals bank of e-mail: 20+ tekens.',
+                    faq4Q: 'Waarom een wachtwoordzin gebruiken?',
+                    faq4A: 'Wachtwoordzinnen zijn langer en makkelijker te onthouden terwijl ze nog steeds erg veilig zijn. Gebruik de AI-modus om er een op maat te genereren.',
+                    footerTagline: 'Gratis veilige wachtwoordgenerator'
                 },
                 pl: {
                     title: 'Bezpieczny generator haseł',
@@ -1347,7 +1532,25 @@
                     aiLoading: 'Generowanie...',
                     aiSecurityNote: 'Twój opis jest używany tylko do wygenerowania hasła i nigdy nie jest przechowywany ani zapamiętywany przez AI.',
                     strengthWeak: 'SŁABE', strengthModerate: 'ŚREDNIE', strengthStrong: 'SILNE', strengthVeryStrong: 'BARDZO SILNE',
-                    aiError: '[BŁĄD] Nie można połączyć się z AI. Upewnij się, że powiązanie Workers AI jest włączone w ustawieniach Cloudflare Pages.'
+                    aiError: '[BŁĄD] Nie można połączyć się z AI. Upewnij się, że powiązanie Workers AI jest włączone w ustawieniach Cloudflare Pages.',
+                    trust1Title: 'Tylko przeglądarka', trust1Sub: 'Zero kontaktu z serwerem',
+                    trust2Title: 'Bez konta', trust2Sub: '100% bezpłatne',
+                    trust3Title: 'Wspierane przez AI', trust3Sub: 'Język naturalny',
+                    featEyebrow: 'Dlaczego pwasecurity', featTitle: 'Zbudowane dla bezpieczeństwa, stworzone dla wszystkich',
+                    featSub: 'Bez rejestracji, bez serwerów, bez śledzenia. Silne hasła generowane bezpośrednio w przeglądarce.',
+                    f1Title: 'Całkowicie prywatne', f1Body: 'Cała generacja odbywa się w Twojej przeglądarce. Twoje hasła nigdy nie trafiają na nasze serwery — bo ich nie mamy.',
+                    f2Title: 'Analiza siły w czasie rzeczywistym', f2Body: 'Natychmiast sprawdź, jak silne jest Twoje hasło dzięki naszemu miernikowi entropii na żywo.',
+                    f3Title: 'Hasła dopasowane przez AI', f3Body: 'Opisz, czego potrzebujesz, a nasza AI stworzy hasło dokładnie spełniające Twoje wymagania.',
+                    faqEyebrow: 'FAQ', faqTitle: 'Często zadawane pytania',
+                    faq1Q: 'Czy ten generator haseł jest naprawdę bezpieczny?',
+                    faq1A: 'Tak. Wszystkie hasła są generowane za pomocą Web Crypto API bezpośrednio w Twojej przeglądarce. Żadne dane nie są wysyłane na serwer.',
+                    faq2Q: 'Czy tryb AI przechowuje moje dane lub hasła?',
+                    faq2A: 'Nie. Twoje dane AI są wysyłane tylko do endpointu Cloudflare Workers AI. Z naszej strony nic nie jest rejestrowane ani przechowywane.',
+                    faq3Q: 'Jak długie powinno być moje hasło?',
+                    faq3A: 'Dla większości kont 16+ znaków z mieszanką wielkich i małych liter, cyfr i symboli jest doskonałe. Dla ważnych kont jak bank czy e-mail: 20+ znaków.',
+                    faq4Q: 'Dlaczego używać hasła frazowego?',
+                    faq4A: 'Hasła frazowe są dłuższe i łatwiejsze do zapamiętania, a jednocześnie bardzo bezpieczne. Użyj trybu AI, aby wygenerować dopasowane hasło frazowe.',
+                    footerTagline: 'Darmowy bezpieczny generator haseł'
                 },
                 ru: {
                     title: 'Безопасный генератор паролей',
@@ -1368,7 +1571,25 @@
                     aiLoading: 'Создание...',
                     aiSecurityNote: 'Ваше описание используется только для генерации пароля и никогда не сохраняется и не запоминается ИИ.',
                     strengthWeak: 'СЛАБЫЙ', strengthModerate: 'УМЕРЕННЫЙ', strengthStrong: 'СИЛЬНЫЙ', strengthVeryStrong: 'ОЧЕНЬ СИЛЬНЫЙ',
-                    aiError: '[ОШИБКА] Не удалось подключиться к ИИ. Убедитесь, что привязка Workers AI включена в настройках Cloudflare Pages.'
+                    aiError: '[ОШИБКА] Не удалось подключиться к ИИ. Убедитесь, что привязка Workers AI включена в настройках Cloudflare Pages.',
+                    trust1Title: 'Только браузер', trust1Sub: 'Без контакта с сервером',
+                    trust2Title: 'Без аккаунта', trust2Sub: '100% бесплатно',
+                    trust3Title: 'На основе ИИ', trust3Sub: 'Естественный язык',
+                    featEyebrow: 'Почему pwasecurity', featTitle: 'Создано для безопасности, разработано для всех',
+                    featSub: 'Без регистрации, без серверов, без слежки. Надёжные пароли прямо в вашем браузере.',
+                    f1Title: 'Полная приватность', f1Body: 'Вся генерация происходит в вашем браузере. Ваши пароли никогда не попадают на наши серверы — потому что их нет.',
+                    f2Title: 'Анализ надёжности в реальном времени', f2Body: 'Мгновенно оценивайте надёжность пароля с помощью нашего live-измерителя энтропии.',
+                    f3Title: 'Пароли, адаптированные ИИ', f3Body: 'Опишите, что вам нужно, и наш ИИ создаст пароль, точно соответствующий вашим требованиям.',
+                    faqEyebrow: 'FAQ', faqTitle: 'Частые вопросы',
+                    faq1Q: 'Действительно ли этот генератор безопасен?',
+                    faq1A: 'Да. Все пароли генерируются через Web Crypto API прямо в вашем браузере. Данные никогда не отправляются на сервер.',
+                    faq2Q: 'Хранит ли режим ИИ мои запросы или пароли?',
+                    faq2A: 'Нет. Ваши запросы отправляются только на endpoint Cloudflare Workers AI. С нашей стороны ничего не записывается и не сохраняется.',
+                    faq3Q: 'Какой длины должен быть пароль?',
+                    faq3A: 'Для большинства аккаунтов отлично подходят 16+ символов с заглавными, строчными буквами, цифрами и символами. Для важных аккаунтов используйте 20+ символов.',
+                    faq4Q: 'Зачем использовать парольную фразу?',
+                    faq4A: 'Парольные фразы длиннее и легче запоминаются, при этом оставаясь очень надёжными. Используйте режим ИИ для создания запоминающейся фразы под ваш контекст.',
+                    footerTagline: 'Бесплатный безопасный генератор паролей'
                 }
             };
 
@@ -1376,6 +1597,7 @@
 
             function setLanguage(lang) {
                 currentLang = lang;
+                document.documentElement.lang = lang;
                 const t = translations[lang];
                 document.getElementById('title').textContent = t.title;
                 document.getElementById('subtitle').textContent = t.subtitle;
@@ -1394,6 +1616,36 @@
                 document.getElementById('ai-btn').textContent = t.aiBtn;
                 document.getElementById('ai-loading').textContent = t.aiLoading;
                 document.getElementById('ai-security-note-text').textContent = t.aiSecurityNote;
+
+                document.getElementById('trust-1-title').textContent = t.trust1Title;
+                document.getElementById('trust-1-sub').textContent   = t.trust1Sub;
+                document.getElementById('trust-2-title').textContent = t.trust2Title;
+                document.getElementById('trust-2-sub').textContent   = t.trust2Sub;
+                document.getElementById('trust-3-title').textContent = t.trust3Title;
+                document.getElementById('trust-3-sub').textContent   = t.trust3Sub;
+
+                document.getElementById('feat-eyebrow').textContent = t.featEyebrow;
+                document.getElementById('feat-title').textContent   = t.featTitle;
+                document.getElementById('feat-sub').textContent     = t.featSub;
+                document.getElementById('f1-title').textContent = t.f1Title;
+                document.getElementById('f1-body').textContent  = t.f1Body;
+                document.getElementById('f2-title').textContent = t.f2Title;
+                document.getElementById('f2-body').textContent  = t.f2Body;
+                document.getElementById('f3-title').textContent = t.f3Title;
+                document.getElementById('f3-body').textContent  = t.f3Body;
+
+                document.getElementById('faq-eyebrow').textContent = t.faqEyebrow;
+                document.getElementById('faq-title').textContent   = t.faqTitle;
+                document.getElementById('faq-1-q').textContent = t.faq1Q;
+                document.getElementById('faq-1-a').textContent = t.faq1A;
+                document.getElementById('faq-2-q').textContent = t.faq2Q;
+                document.getElementById('faq-2-a').textContent = t.faq2A;
+                document.getElementById('faq-3-q').textContent = t.faq3Q;
+                document.getElementById('faq-3-a').textContent = t.faq3A;
+                document.getElementById('faq-4-q').textContent = t.faq4Q;
+                document.getElementById('faq-4-a').textContent = t.faq4A;
+
+                document.getElementById('footer-tagline').textContent = t.footerTagline;
 
                 langSelect.value = lang;
 
@@ -1420,6 +1672,39 @@
             const nav = document.getElementById('main-nav');
             window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 10), { passive: true });
         });
+    </script>
+
+    <!-- Cookie consent banner -->
+    <div class="cookie-banner" id="cookie-banner">
+        <span>We use cookies for advertising (Google AdSense). See our <a href="/privacy.html">Privacy Policy</a>.</span>
+        <div class="cookie-actions">
+            <button class="cookie-btn cookie-btn-decline" id="cookie-decline">Decline</button>
+            <button class="cookie-btn cookie-btn-accept" id="cookie-accept">Accept</button>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const banner = document.getElementById('cookie-banner');
+            const consent = localStorage.getItem('cookie-consent');
+            if (consent) {
+                banner.classList.add('hidden');
+                if (consent === 'declined') pauseAds();
+            }
+            document.getElementById('cookie-accept').addEventListener('click', function () {
+                localStorage.setItem('cookie-consent', 'accepted');
+                banner.classList.add('hidden');
+            });
+            document.getElementById('cookie-decline').addEventListener('click', function () {
+                localStorage.setItem('cookie-consent', 'declined');
+                banner.classList.add('hidden');
+                pauseAds();
+            });
+            function pauseAds() {
+                document.querySelectorAll('ins.adsbygoogle, script[src*="adsbygoogle"]').forEach(function (el) {
+                    el.remove();
+                });
+            }
+        })();
     </script>
 </body>
 </html>
