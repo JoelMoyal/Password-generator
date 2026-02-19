@@ -1054,7 +1054,6 @@
             syncSlider();
 
             generateBtn.addEventListener('click', generatePassword);
-            generatePassword();
 
             function generatePassword() {
                 const length = +slider.value;
@@ -1372,6 +1371,8 @@
                     aiError: '[ОШИБКА] Не удалось подключиться к ИИ. Убедитесь, что привязка Workers AI включена в настройках Cloudflare Pages.'
                 }
             };
+
+            generatePassword();
 
             function setLanguage(lang) {
                 currentLang = lang;
