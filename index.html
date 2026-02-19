@@ -203,6 +203,27 @@
             line-height: 1.5;
         }
 
+        .ai-copy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-2);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s, color 0.2s;
+        }
+        .ai-copy-btn:hover { background: var(--border); color: var(--text-1); }
+        .ai-copy-btn svg { width: 13px; height: 13px; stroke: currentColor; flex-shrink: 0; }
+
         .ai-security-note {
             display: flex;
             align-items: flex-start;
@@ -491,24 +512,6 @@
         .option-item:hover { border-color: var(--border-h); background: var(--surface-2); }
         .option-item input { pointer-events: none; accent-color: var(--blue); width: 16px; height: 16px; }
         .option-item span { font-size: 13px; color: var(--text-2); }
-        .regen-btn {
-            width: 100%;
-            background: transparent;
-            border: 1px solid var(--blue);
-            color: var(--blue);
-            border-radius: 8px;
-            padding: 10px 16px;
-            font-size: clamp(11px, 3vw, 13px);
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-bottom: 16px;
-            margin-top: 0;
-            display: block;
-            white-space: normal;
-            word-break: break-word;
-        }
-        .regen-btn:hover { background: rgba(59,130,246,0.1); }
 
         /* ── TRUST STRIP ── */
         .trust-strip {
@@ -876,9 +879,11 @@
                     <input type="checkbox" id="symbols" checked>
                     <span id="symbols-label">Symbols !@#$</span>
                 </label>
+                <label class="option-item" for="no-ambiguous" style="grid-column: 1 / -1;">
+                    <input type="checkbox" id="no-ambiguous">
+                    <span id="no-ambiguous-label">Exclude ambiguous (0Ol1I)</span>
+                </label>
             </div>
-            <button class="regen-btn" id="regen-btn">Regenerate Password</button>
-
             <div class="pw-row">
                 <div class="pw-display" id="password-display">waiting for input...</div>
                 <button class="icon-btn" id="generate-btn" title="Generate new password">
@@ -892,6 +897,7 @@
                 <div class="strength-fill" id="strength-fill"></div>
             </div>
             <div class="strength-label" id="strength-text"></div>
+            <div id="strength-warning" style="display:none; font-size:12px; color:#ef4444; margin: 4px 0 8px; padding: 6px 10px; background: rgba(239,68,68,0.08); border-radius:6px; border-left: 3px solid #ef4444;"></div>
             <button class="copy-btn-full" id="copy-btn-full">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
@@ -921,6 +927,10 @@
             <div class="ai-result" id="ai-result">
                 <div class="ai-password-line" id="ai-password"></div>
                 <div class="ai-explanation" id="ai-explanation"></div>
+                <button class="ai-copy-btn" id="ai-copy-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span id="ai-copy-btn-text">Copy Password</span>
+                </button>
             </div>
             </div>
 
@@ -1057,6 +1067,8 @@
             const lowercaseCheckbox = document.getElementById('lowercase');
             const numbersCheckbox = document.getElementById('numbers');
             const symbolsCheckbox = document.getElementById('symbols');
+            const noAmbiguousCheckbox = document.getElementById('no-ambiguous');
+            const ambiguous = new Set('0Ol1I|{}[]()\\/`\'"');
             const slider    = document.getElementById('length');
             const sliderBubble = document.getElementById('slider-bubble');
             const sliderVal = document.getElementById('length-val');
@@ -1109,6 +1121,7 @@
             syncSlider();
 
             generateBtn.addEventListener('click', generatePassword);
+            document.querySelectorAll('#uppercase,#lowercase,#numbers,#symbols,#no-ambiguous').forEach(cb => cb.addEventListener('change', generatePassword));
 
             function secureRandInt(max) {
                 const buf = new Uint32Array(1);
@@ -1126,17 +1139,21 @@
                     lowercaseCheckbox.checked = true;
                 }
 
+                const filterAmb = s => noAmbiguousCheckbox.checked ? s.split('').filter(c => !ambiguous.has(c)).join('') : s;
+                const uc = filterAmb(uppercase), lc = filterAmb(lowercase), nm = filterAmb(numbers), sy = filterAmb(symbols);
+
                 let chars = '';
-                if (uppercaseCheckbox.checked) chars += uppercase;
-                if (lowercaseCheckbox.checked) chars += lowercase;
-                if (numbersCheckbox.checked) chars += numbers;
-                if (symbolsCheckbox.checked) chars += symbols;
+                if (uppercaseCheckbox.checked) chars += uc;
+                if (lowercaseCheckbox.checked) chars += lc;
+                if (numbersCheckbox.checked) chars += nm;
+                if (symbolsCheckbox.checked) chars += sy;
+                if (!chars) { noAmbiguousCheckbox.checked = false; generatePassword(); return; }
 
                 let password = '';
-                if (uppercaseCheckbox.checked) password += uppercase.charAt(secureRandInt(uppercase.length));
-                if (lowercaseCheckbox.checked) password += lowercase.charAt(secureRandInt(lowercase.length));
-                if (numbersCheckbox.checked) password += numbers.charAt(secureRandInt(numbers.length));
-                if (symbolsCheckbox.checked) password += symbols.charAt(secureRandInt(symbols.length));
+                if (uppercaseCheckbox.checked && uc) password += uc.charAt(secureRandInt(uc.length));
+                if (lowercaseCheckbox.checked && lc) password += lc.charAt(secureRandInt(lc.length));
+                if (numbersCheckbox.checked && nm) password += nm.charAt(secureRandInt(nm.length));
+                if (symbolsCheckbox.checked && sy) password += sy.charAt(secureRandInt(sy.length));
 
                 for (let i = password.length; i < length; i++) {
                     password += chars.charAt(secureRandInt(chars.length));
@@ -1176,37 +1193,60 @@
             });
 
             function updateStrengthMeter(password) {
-                let strength = 0;
-                const lengthFactor = Math.min(1, password.length / 20);
-                strength += lengthFactor * 40;
+                if (!password) return;
+                const t = translations[currentLang];
 
-                const hasUpper = /[A-Z]/.test(password);
-                const hasLower = /[a-z]/.test(password);
+                // Determine effective charset size from characters present
+                const hasUpper  = /[A-Z]/.test(password);
+                const hasLower  = /[a-z]/.test(password);
                 const hasNumber = /\d/.test(password);
                 const hasSymbol = /[^A-Za-z0-9]/.test(password);
-                const varietyCount = [hasUpper, hasLower, hasNumber, hasSymbol].filter(Boolean).length;
-                strength += varietyCount * 15;
+                let charsetSize = 0;
+                if (hasUpper)  charsetSize += 26;
+                if (hasLower)  charsetSize += 26;
+                if (hasNumber) charsetSize += 10;
+                if (hasSymbol) charsetSize += 32;
+                if (charsetSize === 0) return;
 
-                const t = translations[currentLang];
-                let color, label;
-                if (strength < 40) {
-                    color = '#ef4444';
-                    label = t.strengthWeak;
-                } else if (strength < 70) {
-                    color = '#f59e0b';
-                    label = t.strengthModerate;
-                } else if (strength < 90) {
-                    color = '#3b82f6';
-                    label = t.strengthStrong;
-                } else {
-                    color = '#22c55e';
-                    label = t.strengthVeryStrong;
+                // Base entropy in bits
+                let entropy = password.length * Math.log2(charsetSize);
+
+                // Penalise repeated characters (>30% repeats)
+                const counts = {};
+                for (const c of password) counts[c] = (counts[c] || 0) + 1;
+                const maxRepeat = Math.max(...Object.values(counts));
+                if (maxRepeat / password.length > 0.3) entropy *= 0.75;
+
+                // Penalise sequential runs (abc, 123, cba, 321)
+                let seqPenalty = 0;
+                for (let i = 0; i < password.length - 2; i++) {
+                    const a = password.charCodeAt(i), b = password.charCodeAt(i+1), c = password.charCodeAt(i+2);
+                    if ((b-a === 1 && c-b === 1) || (a-b === 1 && b-c === 1)) seqPenalty++;
                 }
+                if (seqPenalty > 0) entropy *= Math.max(0.5, 1 - seqPenalty * 0.08);
 
-                strengthFill.style.width = strength + '%';
+                // Map entropy to 0-100 score (28 bits = 0, 90 bits = 100)
+                const score = Math.min(100, Math.max(0, (entropy - 28) / 62 * 100));
+
+                let color, label;
+                if (score < 25)       { color = '#ef4444'; label = t.strengthWeak; }
+                else if (score < 50)  { color = '#f59e0b'; label = t.strengthModerate; }
+                else if (score < 75)  { color = '#3b82f6'; label = t.strengthStrong; }
+                else                  { color = '#22c55e'; label = t.strengthVeryStrong; }
+
+                strengthFill.style.width = score + '%';
                 strengthFill.style.backgroundColor = color;
                 strengthText.textContent = label;
                 strengthText.style.color = color;
+
+                // Weak password warning
+                const warning = document.getElementById('strength-warning');
+                if (score < 25) {
+                    warning.textContent = t.strengthWarning;
+                    warning.style.display = 'block';
+                } else {
+                    warning.style.display = 'none';
+                }
             }
 
             aiBtn.addEventListener('click', async function () {
@@ -1281,7 +1321,10 @@
                     faq3A: 'For most accounts, 16+ characters with a mix of uppercase, lowercase, numbers, and symbols is excellent. For high-value accounts like banking or email, aim for 20+ characters.',
                     faq4Q: 'Why use a passphrase instead of a random password?',
                     faq4A: 'Passphrases are longer and easier to remember while still being very secure. Use AI Mode to generate a memorable passphrase tailored to your context.',
-                    footerTagline: 'Free secure password generator'
+                    footerTagline: 'Free secure password generator',
+                    aiCopyBtn: 'Copy Password', copied: 'Copied!',
+                    noAmbiguousLabel: 'Exclude ambiguous (0Ol1I)',
+                    strengthWarning: 'This password is too weak. Increase length or add more character types.'
                 },
                 de: {
                     title: 'Sicherer Passwort-Generator',
@@ -1320,7 +1363,10 @@
                     faq3A: 'Für die meisten Konten sind 16+ Zeichen mit einer Mischung aus Groß- und Kleinbuchstaben, Zahlen und Symbolen ausgezeichnet. Für wichtige Konten wie Banking oder E-Mail empfehlen sich 20+ Zeichen.',
                     faq4Q: 'Warum eine Passphrase statt eines zufälligen Passworts?',
                     faq4A: 'Passphrasen sind länger und leichter zu merken und trotzdem sehr sicher. Nutze den KI-Modus, um eine einprägsame Passphrase für deinen Kontext zu erstellen.',
-                    footerTagline: 'Kostenloser sicherer Passwort-Generator'
+                    footerTagline: 'Kostenloser sicherer Passwort-Generator',
+                    aiCopyBtn: 'Passwort kopieren', copied: 'Kopiert!',
+                    noAmbiguousLabel: 'Mehrdeutige Zeichen ausschließen (0Ol1I)',
+                    strengthWarning: 'Dieses Passwort ist zu schwach. Erhöhe die Länge oder füge mehr Zeichentypen hinzu.'
                 },
                 fr: {
                     title: 'Générateur de mots de passe sécurisé',
@@ -1359,7 +1405,10 @@
                     faq3A: 'Pour la plupart des comptes, 16+ caractères avec un mélange de majuscules, minuscules, chiffres et symboles est excellent. Pour les comptes importants, visez 20+ caractères.',
                     faq4Q: 'Pourquoi utiliser une phrase de passe ?',
                     faq4A: 'Les phrases de passe sont plus longues et plus faciles à retenir tout en étant très sécurisées. Utilisez le mode IA pour en générer une adaptée à votre contexte.',
-                    footerTagline: 'Générateur de mots de passe gratuit et sécurisé'
+                    footerTagline: 'Générateur de mots de passe gratuit et sécurisé',
+                    aiCopyBtn: 'Copier le mot de passe', copied: 'Copié !',
+                    noAmbiguousLabel: 'Exclure les caractères ambigus (0Ol1I)',
+                    strengthWarning: 'Ce mot de passe est trop faible. Augmentez la longueur ou ajoutez plus de types de caractères.'
                 },
                 es: {
                     title: 'Generador de contraseñas seguro',
@@ -1398,7 +1447,10 @@
                     faq3A: 'Para la mayoría de cuentas, 16+ caracteres con mayúsculas, minúsculas, números y símbolos es excelente. Para cuentas importantes como banco o email, apunta a 20+ caracteres.',
                     faq4Q: '¿Por qué usar una frase de contraseña?',
                     faq4A: 'Las frases de contraseña son más largas y fáciles de recordar siendo muy seguras. Usa el modo IA para generar una memorable adaptada a tu contexto.',
-                    footerTagline: 'Generador de contraseñas seguro y gratuito'
+                    footerTagline: 'Generador de contraseñas seguro y gratuito',
+                    aiCopyBtn: 'Copiar contraseña', copied: '¡Copiado!',
+                    noAmbiguousLabel: 'Excluir ambiguos (0Ol1I)',
+                    strengthWarning: 'Esta contraseña es demasiado débil. Aumenta la longitud o añade más tipos de caracteres.'
                 },
                 it: {
                     title: 'Generatore di password sicure',
@@ -1437,7 +1489,10 @@
                     faq3A: 'Per la maggior parte degli account, 16+ caratteri con maiuscole, minuscole, numeri e simboli è eccellente. Per account importanti come banca o email, punta a 20+ caratteri.',
                     faq4Q: 'Perché usare una passphrase?',
                     faq4A: 'Le passphrase sono più lunghe e facili da ricordare pur essendo molto sicure. Usa la modalità IA per generarne una memorabile adatta al tuo contesto.',
-                    footerTagline: 'Generatore di password sicuro e gratuito'
+                    footerTagline: 'Generatore di password sicuro e gratuito',
+                    aiCopyBtn: 'Copia password', copied: 'Copiato!',
+                    noAmbiguousLabel: 'Escludi ambigui (0Ol1I)',
+                    strengthWarning: 'Questa password è troppo debole. Aumenta la lunghezza o aggiungi più tipi di caratteri.'
                 },
                 pt: {
                     title: 'Gerador de senhas seguro',
@@ -1476,7 +1531,10 @@
                     faq3A: 'Para a maioria das contas, 16+ caracteres com maiúsculas, minúsculas, números e símbolos é excelente. Para contas importantes como banco ou e-mail, use 20+ caracteres.',
                     faq4Q: 'Por que usar uma frase de senha?',
                     faq4A: 'Frases de senha são mais longas e fáceis de lembrar e ainda muito seguras. Use o modo IA para gerar uma memorável adaptada ao seu contexto.',
-                    footerTagline: 'Gerador de senhas seguro e gratuito'
+                    footerTagline: 'Gerador de senhas seguro e gratuito',
+                    aiCopyBtn: 'Copiar senha', copied: 'Copiado!',
+                    noAmbiguousLabel: 'Excluir ambíguos (0Ol1I)',
+                    strengthWarning: 'Esta senha é muito fraca. Aumente o comprimento ou adicione mais tipos de caracteres.'
                 },
                 nl: {
                     title: 'Veilige wachtwoordgenerator',
@@ -1515,7 +1573,10 @@
                     faq3A: 'Voor de meeste accounts is 16+ tekens met een mix van hoofd- en kleine letters, cijfers en symbolen uitstekend. Voor belangrijke accounts zoals bank of e-mail: 20+ tekens.',
                     faq4Q: 'Waarom een wachtwoordzin gebruiken?',
                     faq4A: 'Wachtwoordzinnen zijn langer en makkelijker te onthouden terwijl ze nog steeds erg veilig zijn. Gebruik de AI-modus om er een op maat te genereren.',
-                    footerTagline: 'Gratis veilige wachtwoordgenerator'
+                    footerTagline: 'Gratis veilige wachtwoordgenerator',
+                    aiCopyBtn: 'Wachtwoord kopiëren', copied: 'Gekopieerd!',
+                    noAmbiguousLabel: 'Dubbelzinnige tekens uitsluiten (0Ol1I)',
+                    strengthWarning: 'Dit wachtwoord is te zwak. Vergroot de lengte of voeg meer tekentypen toe.'
                 },
                 pl: {
                     title: 'Bezpieczny generator haseł',
@@ -1554,7 +1615,10 @@
                     faq3A: 'Dla większości kont 16+ znaków z mieszanką wielkich i małych liter, cyfr i symboli jest doskonałe. Dla ważnych kont jak bank czy e-mail: 20+ znaków.',
                     faq4Q: 'Dlaczego używać hasła frazowego?',
                     faq4A: 'Hasła frazowe są dłuższe i łatwiejsze do zapamiętania, a jednocześnie bardzo bezpieczne. Użyj trybu AI, aby wygenerować dopasowane hasło frazowe.',
-                    footerTagline: 'Darmowy bezpieczny generator haseł'
+                    footerTagline: 'Darmowy bezpieczny generator haseł',
+                    aiCopyBtn: 'Kopiuj hasło', copied: 'Skopiowano!',
+                    noAmbiguousLabel: 'Wyklucz niejednoznaczne (0Ol1I)',
+                    strengthWarning: 'To hasło jest zbyt słabe. Zwiększ długość lub dodaj więcej typów znaków.'
                 },
                 ru: {
                     title: 'Безопасный генератор паролей',
@@ -1593,7 +1657,10 @@
                     faq3A: 'Для большинства аккаунтов отлично подходят 16+ символов с заглавными, строчными буквами, цифрами и символами. Для важных аккаунтов используйте 20+ символов.',
                     faq4Q: 'Зачем использовать парольную фразу?',
                     faq4A: 'Парольные фразы длиннее и легче запоминаются, при этом оставаясь очень надёжными. Используйте режим ИИ для создания запоминающейся фразы под ваш контекст.',
-                    footerTagline: 'Бесплатный безопасный генератор паролей'
+                    footerTagline: 'Бесплатный безопасный генератор паролей',
+                    aiCopyBtn: 'Скопировать пароль', copied: 'Скопировано!',
+                    noAmbiguousLabel: 'Исключить неоднозначные (0Ol1I)',
+                    strengthWarning: 'Этот пароль слишком слабый. Увеличьте длину или добавьте больше типов символов.'
                 }
             };
 
@@ -1649,6 +1716,8 @@
                 document.getElementById('faq-4-a').textContent = t.faq4A;
 
                 document.getElementById('footer-tagline').textContent = t.footerTagline;
+                document.getElementById('no-ambiguous-label').textContent = t.noAmbiguousLabel;
+                document.getElementById('ai-copy-btn-text').textContent = t.aiCopyBtn;
 
                 langSelect.value = lang;
 
@@ -1657,8 +1726,28 @@
 
 
 
-            // Regen btn
-            document.getElementById('regen-btn').addEventListener('click', generatePassword);
+            // AI copy btn
+            document.getElementById('ai-copy-btn').addEventListener('click', function () {
+                const pwd = aiPassword.textContent.replace(/^>\s*/, '');
+                if (!pwd) return;
+                const btnText = document.getElementById('ai-copy-btn-text');
+                navigator.clipboard.writeText(pwd).then(function () {
+                    document.getElementById('ai-copy-btn').style.background = 'var(--green)';
+                    document.getElementById('ai-copy-btn').style.color = '#fff';
+                    btnText.textContent = translations[currentLang].copied || 'Copied!';
+                    setTimeout(() => {
+                        document.getElementById('ai-copy-btn').style.background = '';
+                        document.getElementById('ai-copy-btn').style.color = '';
+                        btnText.textContent = translations[currentLang].aiCopyBtn;
+                    }, 2000);
+                }).catch(function () {
+                    const ta = document.createElement('textarea');
+                    ta.value = pwd; document.body.appendChild(ta); ta.select();
+                    document.execCommand('copy'); document.body.removeChild(ta);
+                    btnText.textContent = translations[currentLang].copied || 'Copied!';
+                    setTimeout(() => { btnText.textContent = translations[currentLang].aiCopyBtn; }, 2000);
+                });
+            });
             // Tab switching
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
