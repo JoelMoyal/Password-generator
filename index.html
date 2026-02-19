@@ -239,32 +239,25 @@
             50% { opacity: 0.3; }
         }
 
-        .lang-icons { display: flex; gap: 6px; }
-
-        .lang-icon {
-            width: 36px;
-            height: 28px;
-            cursor: pointer;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            color: var(--text-3);
-            font-weight: bold;
-            font-size: 12px;
+        .lang-select {
+            background: var(--surface-2);
+            color: var(--text-2);
             border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 12px;
             font-family: inherit;
-            transition: all 0.2s;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            height: 28px;
+            transition: border-color 0.2s, color 0.2s;
         }
 
-        .lang-icon.active {
-            background: var(--blue);
-            color: #fff;
+        .lang-select:hover, .lang-select:focus {
             border-color: var(--blue);
+            color: var(--blue);
         }
-
-        .lang-icon:hover:not(.active) { border-color: var(--blue); color: var(--blue); }
 
         /* ── NAV ── */
         .nav {
@@ -773,10 +766,17 @@
                 <span class="nav-logo-text">pwa<span class="logo-accent">security</span></span>
                 <span class="nav-logo-badge">Free</span>
             </a>
-            <div class="lang-icons">
-                <div class="lang-icon active" id="lang-en">EN</div>
-                <div class="lang-icon" id="lang-de">DE</div>
-            </div>
+            <select id="lang-select" class="lang-select">
+                <option value="en">🌐 EN</option>
+                <option value="de">DE</option>
+                <option value="fr">FR</option>
+                <option value="es">ES</option>
+                <option value="it">IT</option>
+                <option value="pt">PT</option>
+                <option value="nl">NL</option>
+                <option value="pl">PL</option>
+                <option value="ru">RU</option>
+            </select>
         </div>
     </nav>
     <section class="hero">
@@ -1011,8 +1011,7 @@
             const copyBtnText = document.getElementById('copy-btn-text');
             const strengthFill = document.getElementById('strength-fill');
             const strengthText = document.getElementById('strength-text');
-            const langEn = document.getElementById('lang-en');
-            const langDe = document.getElementById('lang-de');
+            const langSelect = document.getElementById('lang-select');
             const aiBtn = document.getElementById('ai-btn');
             const aiInput = document.getElementById('ai-input');
             const aiResult = document.getElementById('ai-result');
@@ -1126,19 +1125,20 @@
                 const varietyCount = [hasUpper, hasLower, hasNumber, hasSymbol].filter(Boolean).length;
                 strength += varietyCount * 15;
 
+                const t = translations[currentLang];
                 let color, label;
                 if (strength < 40) {
                     color = '#ef4444';
-                    label = currentLang === 'en' ? 'WEAK' : 'SCHWACH';
+                    label = t.strengthWeak;
                 } else if (strength < 70) {
                     color = '#f59e0b';
-                    label = currentLang === 'en' ? 'MODERATE' : 'MITTEL';
+                    label = t.strengthModerate;
                 } else if (strength < 90) {
                     color = '#3b82f6';
-                    label = currentLang === 'en' ? 'STRONG' : 'STARK';
+                    label = t.strengthStrong;
                 } else {
                     color = '#22c55e';
-                    label = currentLang === 'en' ? 'VERY STRONG' : 'SEHR STARK';
+                    label = t.strengthVeryStrong;
                 }
 
                 strengthFill.style.width = strength + '%';
@@ -1173,9 +1173,7 @@
                     aiResult.classList.add('visible');
                 } catch (err) {
                     aiPassword.textContent = '';
-                    aiExplanation.textContent = currentLang === 'en'
-                        ? '[ERROR] Could not reach AI. Make sure the Workers AI binding is enabled in Cloudflare Pages settings.'
-                        : '[FEHLER] KI nicht erreichbar. Bitte Workers AI-Bindung in Cloudflare Pages aktivieren.';
+                    aiExplanation.textContent = translations[currentLang].aiError;
                     aiResult.classList.add('visible');
                 } finally {
                     aiLoading.classList.remove('visible');
@@ -1201,7 +1199,9 @@
                     aiPlaceholder: 'e.g. a password for my bank account that I can remember',
                     aiBtn: 'Generate with AI',
                     aiLoading: 'Generating...',
-                    aiSecurityNote: 'Your description is used only to generate the password and is never stored or memorized by the AI.'
+                    aiSecurityNote: 'Your description is used only to generate the password and is never stored or memorized by the AI.',
+                    strengthWeak: 'WEAK', strengthModerate: 'MODERATE', strengthStrong: 'STRONG', strengthVeryStrong: 'VERY STRONG',
+                    aiError: '[ERROR] Could not reach AI. Make sure the Workers AI binding is enabled in Cloudflare Pages settings.'
                 },
                 de: {
                     title: 'Sicherer Passwort-Generator',
@@ -1220,7 +1220,156 @@
                     aiPlaceholder: 'z.B. ein Passwort für mein Bankkonto, das ich mir merken kann',
                     aiBtn: 'Mit KI generieren',
                     aiLoading: 'Generiere...',
-                    aiSecurityNote: 'Deine Beschreibung wird nur zur Passwortgenerierung verwendet und wird von der KI weder gespeichert noch gemerkt.'
+                    aiSecurityNote: 'Deine Beschreibung wird nur zur Passwortgenerierung verwendet und wird von der KI weder gespeichert noch gemerkt.',
+                    strengthWeak: 'SCHWACH', strengthModerate: 'MITTEL', strengthStrong: 'STARK', strengthVeryStrong: 'SEHR STARK',
+                    aiError: '[FEHLER] KI nicht erreichbar. Bitte Workers AI-Bindung in Cloudflare Pages aktivieren.'
+                },
+                fr: {
+                    title: 'Générateur de mots de passe sécurisé',
+                    subtitle: 'Des mots de passe forts et uniques générés instantanément dans votre navigateur. Rien ne quitte jamais votre appareil.',
+                    manualLabel: 'MODE MANUEL',
+                    aiLabel: 'MODE IA',
+                    lengthLabel: 'Longueur du mot de passe :',
+                    includeLabel: 'Inclure :',
+                    uppercaseLabel: 'Majuscules (A-Z)',
+                    lowercaseLabel: 'Minuscules (a-z)',
+                    numbersLabel: 'Chiffres (0-9)',
+                    symbolsLabel: 'Caractères spéciaux (!@#$%^&*)',
+                    generateBtn: 'Générer un mot de passe',
+                    copyBtn: 'Copier',
+                    aiInputLabel: 'Décrivez ce dont vous avez besoin :',
+                    aiPlaceholder: 'ex. un mot de passe pour mon compte bancaire dont je peux me souvenir',
+                    aiBtn: "Générer avec l'IA",
+                    aiLoading: 'Génération...',
+                    aiSecurityNote: "Votre description est utilisée uniquement pour générer le mot de passe et n'est jamais stockée ni mémorisée par l'IA.",
+                    strengthWeak: 'FAIBLE', strengthModerate: 'MOYEN', strengthStrong: 'FORT', strengthVeryStrong: 'TRÈS FORT',
+                    aiError: "[ERREUR] Impossible d'atteindre l'IA. Assurez-vous que la liaison Workers AI est activée dans les paramètres Cloudflare Pages."
+                },
+                es: {
+                    title: 'Generador de contraseñas seguro',
+                    subtitle: 'Contraseñas fuertes y únicas generadas instantáneamente en tu navegador. Nada sale nunca de tu dispositivo.',
+                    manualLabel: 'MODO MANUAL',
+                    aiLabel: 'MODO IA',
+                    lengthLabel: 'Longitud de la contraseña:',
+                    includeLabel: 'Incluir:',
+                    uppercaseLabel: 'Letras mayúsculas (A-Z)',
+                    lowercaseLabel: 'Letras minúsculas (a-z)',
+                    numbersLabel: 'Números (0-9)',
+                    symbolsLabel: 'Caracteres especiales (!@#$%^&*)',
+                    generateBtn: 'Generar contraseña',
+                    copyBtn: 'Copiar',
+                    aiInputLabel: 'Describe lo que necesitas:',
+                    aiPlaceholder: 'ej. una contraseña para mi cuenta bancaria que pueda recordar',
+                    aiBtn: 'Generar con IA',
+                    aiLoading: 'Generando...',
+                    aiSecurityNote: 'Tu descripción se usa solo para generar la contraseña y nunca es almacenada ni memorizada por la IA.',
+                    strengthWeak: 'DÉBIL', strengthModerate: 'MODERADA', strengthStrong: 'FUERTE', strengthVeryStrong: 'MUY FUERTE',
+                    aiError: '[ERROR] No se pudo conectar con la IA. Asegúrate de que el binding de Workers AI esté habilitado en la configuración de Cloudflare Pages.'
+                },
+                it: {
+                    title: 'Generatore di password sicure',
+                    subtitle: 'Password forti e uniche generate istantaneamente nel tuo browser. Nulla lascia mai il tuo dispositivo.',
+                    manualLabel: 'MODALITÀ MANUALE',
+                    aiLabel: 'MODALITÀ IA',
+                    lengthLabel: 'Lunghezza password:',
+                    includeLabel: 'Includi:',
+                    uppercaseLabel: 'Lettere maiuscole (A-Z)',
+                    lowercaseLabel: 'Lettere minuscole (a-z)',
+                    numbersLabel: 'Numeri (0-9)',
+                    symbolsLabel: 'Caratteri speciali (!@#$%^&*)',
+                    generateBtn: 'Genera password',
+                    copyBtn: 'Copia',
+                    aiInputLabel: 'Descrivi di cosa hai bisogno:',
+                    aiPlaceholder: 'es. una password per il mio conto bancario che posso ricordare',
+                    aiBtn: 'Genera con IA',
+                    aiLoading: 'Generazione...',
+                    aiSecurityNote: "La tua descrizione viene usata solo per generare la password e non viene mai memorizzata dall'IA.",
+                    strengthWeak: 'DEBOLE', strengthModerate: 'MODERATA', strengthStrong: 'FORTE', strengthVeryStrong: 'MOLTO FORTE',
+                    aiError: "[ERRORE] Impossibile raggiungere l'IA. Assicurati che il binding Workers AI sia abilitato nelle impostazioni di Cloudflare Pages."
+                },
+                pt: {
+                    title: 'Gerador de senhas seguro',
+                    subtitle: 'Senhas fortes e únicas geradas instantaneamente no seu navegador. Nada nunca sai do seu dispositivo.',
+                    manualLabel: 'MODO MANUAL',
+                    aiLabel: 'MODO IA',
+                    lengthLabel: 'Comprimento da senha:',
+                    includeLabel: 'Incluir:',
+                    uppercaseLabel: 'Letras maiúsculas (A-Z)',
+                    lowercaseLabel: 'Letras minúsculas (a-z)',
+                    numbersLabel: 'Números (0-9)',
+                    symbolsLabel: 'Caracteres especiais (!@#$%^&*)',
+                    generateBtn: 'Gerar senha',
+                    copyBtn: 'Copiar',
+                    aiInputLabel: 'Descreva o que você precisa:',
+                    aiPlaceholder: 'ex. uma senha para minha conta bancária que eu possa lembrar',
+                    aiBtn: 'Gerar com IA',
+                    aiLoading: 'Gerando...',
+                    aiSecurityNote: 'Sua descrição é usada apenas para gerar a senha e nunca é armazenada ou memorizada pela IA.',
+                    strengthWeak: 'FRACA', strengthModerate: 'MODERADA', strengthStrong: 'FORTE', strengthVeryStrong: 'MUITO FORTE',
+                    aiError: '[ERRO] Não foi possível alcançar a IA. Certifique-se de que o binding Workers AI está habilitado nas configurações do Cloudflare Pages.'
+                },
+                nl: {
+                    title: 'Veilige wachtwoordgenerator',
+                    subtitle: 'Sterke, unieke wachtwoorden direct gegenereerd in uw browser. Niets verlaat ooit uw apparaat.',
+                    manualLabel: 'HANDMATIGE MODUS',
+                    aiLabel: 'AI-MODUS',
+                    lengthLabel: 'Wachtwoordlengte:',
+                    includeLabel: 'Inclusief:',
+                    uppercaseLabel: 'Hoofdletters (A-Z)',
+                    lowercaseLabel: 'Kleine letters (a-z)',
+                    numbersLabel: 'Cijfers (0-9)',
+                    symbolsLabel: 'Speciale tekens (!@#$%^&*)',
+                    generateBtn: 'Wachtwoord genereren',
+                    copyBtn: 'Kopiëren',
+                    aiInputLabel: 'Beschrijf wat je nodig hebt:',
+                    aiPlaceholder: 'bijv. een wachtwoord voor mijn bankrekening dat ik kan onthouden',
+                    aiBtn: 'Genereren met AI',
+                    aiLoading: 'Genereren...',
+                    aiSecurityNote: 'Uw beschrijving wordt alleen gebruikt om het wachtwoord te genereren en wordt nooit opgeslagen of onthouden door de AI.',
+                    strengthWeak: 'ZWAK', strengthModerate: 'MATIG', strengthStrong: 'STERK', strengthVeryStrong: 'ZEER STERK',
+                    aiError: '[FOUT] Kan de AI niet bereiken. Zorg ervoor dat de Workers AI-binding is ingeschakeld in de Cloudflare Pages-instellingen.'
+                },
+                pl: {
+                    title: 'Bezpieczny generator haseł',
+                    subtitle: 'Silne, unikalne hasła generowane natychmiast w Twojej przeglądarce. Nic nigdy nie opuszcza Twojego urządzenia.',
+                    manualLabel: 'TRYB RĘCZNY',
+                    aiLabel: 'TRYB AI',
+                    lengthLabel: 'Długość hasła:',
+                    includeLabel: 'Uwzględnij:',
+                    uppercaseLabel: 'Wielkie litery (A-Z)',
+                    lowercaseLabel: 'Małe litery (a-z)',
+                    numbersLabel: 'Cyfry (0-9)',
+                    symbolsLabel: 'Znaki specjalne (!@#$%^&*)',
+                    generateBtn: 'Generuj hasło',
+                    copyBtn: 'Kopiuj',
+                    aiInputLabel: 'Opisz, czego potrzebujesz:',
+                    aiPlaceholder: 'np. hasło do mojego konta bankowego, które mogę zapamiętać',
+                    aiBtn: 'Generuj z AI',
+                    aiLoading: 'Generowanie...',
+                    aiSecurityNote: 'Twój opis jest używany tylko do wygenerowania hasła i nigdy nie jest przechowywany ani zapamiętywany przez AI.',
+                    strengthWeak: 'SŁABE', strengthModerate: 'ŚREDNIE', strengthStrong: 'SILNE', strengthVeryStrong: 'BARDZO SILNE',
+                    aiError: '[BŁĄD] Nie można połączyć się z AI. Upewnij się, że powiązanie Workers AI jest włączone w ustawieniach Cloudflare Pages.'
+                },
+                ru: {
+                    title: 'Безопасный генератор паролей',
+                    subtitle: 'Надёжные уникальные пароли, созданные мгновенно в вашем браузере. Ничто никогда не покидает ваше устройство.',
+                    manualLabel: 'РУЧНОЙ РЕЖИМ',
+                    aiLabel: 'РЕЖИМ ИИ',
+                    lengthLabel: 'Длина пароля:',
+                    includeLabel: 'Включить:',
+                    uppercaseLabel: 'Заглавные буквы (A-Z)',
+                    lowercaseLabel: 'Строчные буквы (a-z)',
+                    numbersLabel: 'Цифры (0-9)',
+                    symbolsLabel: 'Специальные символы (!@#$%^&*)',
+                    generateBtn: 'Создать пароль',
+                    copyBtn: 'Копировать',
+                    aiInputLabel: 'Опишите, что вам нужно:',
+                    aiPlaceholder: 'напр. пароль для банковского счёта, который я смогу запомнить',
+                    aiBtn: 'Создать с помощью ИИ',
+                    aiLoading: 'Создание...',
+                    aiSecurityNote: 'Ваше описание используется только для генерации пароля и никогда не сохраняется и не запоминается ИИ.',
+                    strengthWeak: 'СЛАБЫЙ', strengthModerate: 'УМЕРЕННЫЙ', strengthStrong: 'СИЛЬНЫЙ', strengthVeryStrong: 'ОЧЕНЬ СИЛЬНЫЙ',
+                    aiError: '[ОШИБКА] Не удалось подключиться к ИИ. Убедитесь, что привязка Workers AI включена в настройках Cloudflare Pages.'
                 }
             };
 
@@ -1245,13 +1394,7 @@
                 document.getElementById('ai-loading').textContent = t.aiLoading;
                 document.getElementById('ai-security-note-text').textContent = t.aiSecurityNote;
 
-                if (lang === 'en') {
-                    langEn.classList.add('active');
-                    langDe.classList.remove('active');
-                } else {
-                    langEn.classList.remove('active');
-                    langDe.classList.add('active');
-                }
+                langSelect.value = lang;
 
                 if (strengthText.textContent) updateStrengthMeter(passwordDisplay.textContent);
             }
@@ -1269,10 +1412,9 @@
                     document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
                 });
             });
-            langEn.addEventListener('click', () => setLanguage('en'));
-            langDe.addEventListener('click', () => setLanguage('de'));
-            const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-            setLanguage(browserLang.startsWith('de') ? 'de' : 'en');
+            langSelect.addEventListener('change', () => setLanguage(langSelect.value));
+            const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase().split('-')[0];
+            setLanguage(translations[browserLang] ? browserLang : 'en');
 
             const nav = document.getElementById('main-nav');
             window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 10), { passive: true });
