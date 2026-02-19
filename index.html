@@ -1243,7 +1243,8 @@
             });
             langEn.addEventListener('click', () => setLanguage('en'));
             langDe.addEventListener('click', () => setLanguage('de'));
-            setLanguage('en');
+            const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+            setLanguage(browserLang.startsWith('de') ? 'de' : 'en');
 
             const nav = document.getElementById('main-nav');
             window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 10), { passive: true });
