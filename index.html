@@ -629,6 +629,47 @@
             color: var(--text-2);
             line-height: 1.6;
         }
+
+        /* ── FAQ SECTION ── */
+        .faq-section {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 96px 24px;
+        }
+        .faq-list {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        details.faq-item {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        details[open].faq-item { border-color: var(--border-h); }
+        details.faq-item summary {
+            padding: 18px 20px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            background: var(--bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            color: var(--text-1);
+        }
+        details.faq-item summary::-webkit-details-marker { display: none; }
+        details.faq-item summary::after { content: '+'; font-size: 18px; color: var(--text-3); font-weight: 400; }
+        details[open].faq-item summary::after { content: '\2212'; }
+        .faq-answer {
+            padding: 0 20px 18px;
+            font-size: 14px;
+            color: var(--text-2);
+            background: var(--bg);
+            line-height: 1.7;
+        }
     </style>
 </head>
 <body>
@@ -824,6 +865,32 @@
             </div>
         </div>
     </section>
+
+    <section class="faq-section">
+        <div class="section-center">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-title">Common questions</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>Is this password generator truly secure?</summary>
+                    <p class="faq-answer">Yes. All passwords are generated using the Web Crypto API directly in your browser. No data is ever sent to a server, and the randomness is cryptographically strong.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Does AI Mode store my prompts or passwords?</summary>
+                    <p class="faq-answer">No. Your AI prompts are sent only to the Cloudflare Workers AI endpoint to generate a response. Nothing is logged or stored on our end.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How long should my password be?</summary>
+                    <p class="faq-answer">For most accounts, 16+ characters with a mix of uppercase, lowercase, numbers, and symbols is excellent. For high-value accounts like banking or email, aim for 20+ characters.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Why use a passphrase instead of a random password?</summary>
+                    <p class="faq-answer">Passphrases are longer and easier to remember while still being very secure. Use AI Mode to generate a memorable passphrase tailored to your context.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
 
 
     <script>
