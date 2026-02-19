@@ -129,28 +129,8 @@
             min-height: 70px;
         }
 
-        .checkbox-group {
-            margin-top: 5px;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
         input[type="checkbox"] {
-            margin-right: 10px;
-            width: 16px;
-            height: 16px;
             accent-color: var(--blue);
-            cursor: pointer;
-        }
-
-        .checkbox-item label {
-            margin-bottom: 0;
-            font-size: 13px;
-            font-weight: normal;
             cursor: pointer;
         }
 
@@ -398,7 +378,7 @@
 
         @media (pointer: coarse) {
             input[type="checkbox"] { width: 20px; height: 20px; }
-            button, .copy-btn, .checkbox-item { min-height: 44px; }
+            button, .option-item { min-height: 44px; }
         }
 
         /* ── TABS ── */
@@ -511,6 +491,45 @@
             letter-spacing: 2px;
             margin-bottom: 12px;
         }
+
+        /* ── OPTIONS GRID ── */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .option-item:hover { border-color: var(--border-h); background: var(--surface-2); }
+        .option-item input { pointer-events: none; accent-color: var(--blue); width: 16px; height: 16px; }
+        .option-item span { font-size: 13px; color: var(--text-2); }
+        .regen-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--blue);
+            color: var(--blue);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 16px;
+            margin-top: 0;
+            display: block;
+        }
+        .regen-btn:hover { background: rgba(59,130,246,0.1); }
     </style>
 </head>
 <body>
@@ -560,27 +579,25 @@
                 <input type="range" id="length" min="8" max="128" value="16">
             </div>
 
-            <div class="form-group">
-                <label id="include-label">Include:</label>
-                <div class="checkbox-group">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="uppercase" checked>
-                        <label for="uppercase" id="uppercase-label">Uppercase Letters (A-Z)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="lowercase" checked>
-                        <label for="lowercase" id="lowercase-label">Lowercase Letters (a-z)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="numbers" checked>
-                        <label for="numbers" id="numbers-label">Numbers (0-9)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="symbols" checked>
-                        <label for="symbols" id="symbols-label">Special Characters (!@#$%^&*)</label>
-                    </div>
-                </div>
+            <div class="options-grid">
+                <label class="option-item" for="uppercase">
+                    <input type="checkbox" id="uppercase" checked>
+                    <span id="uppercase-label">Uppercase A-Z</span>
+                </label>
+                <label class="option-item" for="lowercase">
+                    <input type="checkbox" id="lowercase" checked>
+                    <span id="lowercase-label">Lowercase a-z</span>
+                </label>
+                <label class="option-item" for="numbers">
+                    <input type="checkbox" id="numbers" checked>
+                    <span id="numbers-label">Numbers 0-9</span>
+                </label>
+                <label class="option-item" for="symbols">
+                    <input type="checkbox" id="symbols" checked>
+                    <span id="symbols-label">Symbols !@#$</span>
+                </label>
             </div>
+            <button class="regen-btn" id="regen-btn">Regenerate Password</button>
 
             <div class="pw-row">
                 <div class="pw-display" id="password-display">waiting for input...</div>
@@ -891,6 +908,9 @@
             }
 
 
+
+            // Regen btn
+            document.getElementById('regen-btn').addEventListener('click', generatePassword);
             // Tab switching
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
