@@ -530,6 +530,35 @@
             display: block;
         }
         .regen-btn:hover { background: rgba(59,130,246,0.1); }
+
+        /* ── TRUST STRIP ── */
+        .trust-strip {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 16px 16px;
+        }
+        .trust-inner {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            text-align: center;
+        }
+        .trust-item {
+            padding: 16px 12px;
+            border-right: 1px solid var(--border);
+        }
+        .trust-item:last-child { border-right: none; }
+        .trust-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-1);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .trust-sub {
+            font-size: 11px;
+            color: var(--text-3);
+        }
     </style>
 </head>
 <body>
@@ -666,7 +695,24 @@
                     </a>
                 </div>
             </div>
-        </div></div></div>
+        </div>
+        <div class="trust-strip">
+            <div class="trust-inner">
+                <div class="trust-item">
+                    <span class="trust-title">Browser-Only</span>
+                    <span class="trust-sub">Zero server contact</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-title">No Account</span>
+                    <span class="trust-sub">100% free</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-title">AI-Powered</span>
+                    <span class="trust-sub">Natural language mode</span>
+                </div>
+            </div>
+        </div>
+    </div>
     </section>
 
     <script>
