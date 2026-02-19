@@ -330,45 +330,7 @@
             box-shadow: 0 32px 72px rgba(0,0,0,0.55);
         }
 
-        .footer {
-            margin-top: 28px;
-            text-align: center;
-            padding: 14px 0 0;
-            border-top: 1px solid var(--border);
-            font-size: 12px;
-            color: var(--text-3);
-        }
 
-        .footer-name {
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 10px;
-        }
-
-        .social-link {
-            color: var(--text-3);
-            text-decoration: none;
-            transition: color 0.2s;
-            display: flex;
-            align-items: center;
-            font-size: 12px;
-        }
-
-        .social-link:hover {
-            color: var(--text-1);
-        }
-
-        .social-icon {
-            width: 16px;
-            height: 16px;
-            margin-right: 5px;
-        }
 
         @media (max-width: 480px) {
             .wrapper { padding: 10px; }
@@ -670,6 +632,50 @@
             background: var(--bg);
             line-height: 1.7;
         }
+
+        /* ── SITE FOOTER ── */
+        .site-footer {
+            padding: 48px 24px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-brand {
+            font-size: 13px;
+            color: var(--text-3);
+        }
+        .footer-brand strong {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-2);
+            display: block;
+            margin-bottom: 3px;
+        }
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+        .social-link {
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+        }
+        .social-link:hover { color: var(--text-1); }
+        .social-icon {
+            width: 15px;
+            height: 15px;
+        }
     </style>
 </head>
 <body>
@@ -779,33 +785,7 @@
             </div>
             </div>
 
-            <div class="footer">
-                <div class="footer-name">Joël Moyal</div>
-                <div class="social-links">
-                    <a href="https://nl.linkedin.com/in/joel-moyal" target="_blank" class="social-link">
-                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        LinkedIn
-                    </a>
-                    <a href="https://github.com/joelmoyal" target="_blank" class="social-link">
-                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                        </svg>
-                        GitHub
-                    </a>
-                    <a href="https://joelmoyal.com" target="_blank" class="social-link">
-                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="2" y1="12" x2="22" y2="12"></line>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                        </svg>
-                        Portfolio
-                    </a>
-                </div>
-            </div>
+
         </div>
         <div class="trust-strip">
             <div class="trust-inner">
@@ -890,6 +870,40 @@
             </div>
         </div>
     </section>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <strong>Joël Moyal</strong>
+                Free secure password generator
+            </div>
+            <div class="social-links">
+                <a href="https://nl.linkedin.com/in/joel-moyal" target="_blank" class="social-link">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/joelmoyal" target="_blank" class="social-link">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    GitHub
+                </a>
+                <a href="https://joelmoyal.com" target="_blank" class="social-link">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    Portfolio
+                </a>
+            </div>
+        </div>
+    </footer>
+
 
 
 
