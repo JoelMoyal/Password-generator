@@ -351,6 +351,35 @@
             border-radius: 4px; padding: 1px 7px;
         }
 
+        /* ── HERO ── */
+        .hero {
+            background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(59,130,246,0.13), transparent 70%);
+            padding: 80px 24px 48px; text-align: center;
+        }
+        .hero-eyebrow {
+            display: inline-block; font-size: 11px; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: var(--blue); margin-bottom: 20px;
+        }
+        h1.hero-title {
+            font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800;
+            color: var(--text-1); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px;
+        }
+        h1.hero-title .accent {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-sub {
+            font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--text-2);
+            max-width: 480px; margin: 0 auto 40px; line-height: 1.7;
+        }
+        .tool-wrap { max-width: 660px; margin: 0 auto; }
+        .tool-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 16px 16px 0 0; padding: 28px;
+            box-shadow: 0 32px 72px rgba(0,0,0,0.55);
+        }
+
         .footer {
             margin-top: 28px;
             text-align: center;
@@ -422,10 +451,11 @@
             </div>
         </div>
     </nav>
-    <div class="wrapper">
-        <div class="container">
-            <h1 id="title">Secure Password Generator</h1>
-            <div class="subtitle" id="subtitle">[ SYSTEM READY ]</div>
+    <section class="hero">
+        <p class="hero-eyebrow">Free · No Account · Browser-Only</p>
+        <h1 class="hero-title" id="title">Generate Passwords You Can <span class="accent">Actually Trust</span></h1>
+        <p class="hero-sub" id="subtitle">Strong, unique passwords generated instantly in your browser. Nothing ever leaves your device.</p>
+    <div class="tool-wrap"><div class="tool-card">
 
             <!-- Manual mode -->
             <div class="section-label" id="manual-label">MANUAL MODE</div>
@@ -513,8 +543,8 @@
                     </a>
                 </div>
             </div>
-        </div>
-    </div>
+        </div></div></div>
+    </section>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
