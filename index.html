@@ -283,7 +283,6 @@
             background: var(--surface-2); border: 1px solid var(--border);
             border-radius: 6px; padding: 2px 10px; min-width: 42px; text-align: center;
         }
-        .slider-wrap { position: relative; margin-bottom: 20px; }
         input[type="range"] {
             -webkit-appearance: none; appearance: none;
             width: 100%; height: 6px; border-radius: 6px; outline: none;
@@ -676,6 +675,48 @@
             width: 15px;
             height: 15px;
         }
+
+        /* ── SLIDER BUBBLE ── */
+        .slider-bubble {
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%);
+            background: var(--blue);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 7px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s, left 0.04s;
+            box-shadow: 0 0 0 4px rgba(59,130,246,0.2);
+            z-index: 10;
+        }
+        .slider-bubble::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: var(--blue);
+        }
+        .slider-wrap { position: relative; margin-bottom: 20px; padding-top: 24px; }
+        .slider-wrap.dragging .slider-bubble { opacity: 1; }
+        .slider-wrap.dragging input[type="range"] { height: 8px; }
+        input[type="range"] { transition: height 0.15s; }
+        .slider-wrap.dragging input[type="range"]::-webkit-slider-thumb {
+            transform: scale(1.35);
+            box-shadow: 0 0 0 10px rgba(59,130,246,0.2);
+        }
+        @keyframes valPop {
+            0%   { transform: scale(1); }
+            40%  { transform: scale(1.25); border-color: var(--blue); }
+            100% { transform: scale(1); }
+        }
+        .slider-val { transition: color 0.2s; }
+        .slider-val.pop { animation: valPop 0.25s ease; }
     </style>
 </head>
 <body>
@@ -722,6 +763,7 @@
                 <span class="slider-val" id="length-val">16</span>
             </div>
             <div class="slider-wrap" id="slider-wrap">
+                <div class="slider-bubble" id="slider-bubble">16</div>
                 <input type="range" id="length" min="8" max="128" value="16">
             </div>
 
@@ -915,6 +957,7 @@
             const numbersCheckbox = document.getElementById('numbers');
             const symbolsCheckbox = document.getElementById('symbols');
             const slider    = document.getElementById('length');
+            const sliderBubble = document.getElementById('slider-bubble');
             const sliderVal = document.getElementById('length-val');
             const generateBtn = document.getElementById('generate-btn');
             const passwordDisplay = document.getElementById('password-display');
@@ -940,10 +983,29 @@
 
             function syncSlider() {
                 const min = +slider.min, max = +slider.max, val = +slider.value;
-                slider.style.setProperty('--p', ((val-min)/(max-min)*100) + '%');
+                const pct = (val - min) / (max - min) * 100;
+                slider.style.setProperty('--p', pct + '%');
+                // Pop animation on sliderVal
+                sliderVal.classList.remove('pop');
+                void sliderVal.offsetWidth; // reflow
+                sliderVal.classList.add('pop');
                 sliderVal.textContent = val;
+                // Position bubble
+                const trackW = slider.getBoundingClientRect().width;
+                const thumbW = 22;
+                const leftPx = (pct / 100) * (trackW - thumbW) + thumbW / 2;
+                sliderBubble.style.left = leftPx + 'px';
+                sliderBubble.textContent = val;
             }
             slider.addEventListener('input', () => { syncSlider(); generatePassword(); });
+
+            // Slider drag state
+            const sliderWrap = document.getElementById('slider-wrap');
+            slider.addEventListener('mousedown', () => sliderWrap.classList.add('dragging'));
+            slider.addEventListener('touchstart', () => sliderWrap.classList.add('dragging'), { passive: true });
+            window.addEventListener('mouseup', () => sliderWrap.classList.remove('dragging'));
+            window.addEventListener('touchend', () => sliderWrap.classList.remove('dragging'));
+
             syncSlider();
 
             generateBtn.addEventListener('click', generatePassword);
