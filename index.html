@@ -138,15 +138,17 @@
             background-color: var(--blue);
             color: #fff;
             border: none;
-            padding: 12px 20px;
+            padding: 12px 16px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: clamp(12px, 3vw, 14px);
             font-family: inherit;
             display: block;
             width: 100%;
             margin-top: 16px;
             transition: background-color 0.2s;
+            white-space: normal;
+            word-break: break-word;
         }
 
         button:hover {
@@ -496,13 +498,15 @@
             color: var(--blue);
             border-radius: 8px;
             padding: 10px 16px;
-            font-size: 13px;
+            font-size: clamp(11px, 3vw, 13px);
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
             margin-bottom: 16px;
             margin-top: 0;
             display: block;
+            white-space: normal;
+            word-break: break-word;
         }
         .regen-btn:hover { background: rgba(59,130,246,0.1); }
 
@@ -1220,7 +1224,7 @@
                     const response = await fetch('/api/generate', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ description })
+                        body: JSON.stringify({ description, lang: currentLang })
                     });
 
                     if (!response.ok) throw new Error('API error');

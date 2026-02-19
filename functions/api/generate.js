@@ -1,10 +1,11 @@
 export async function onRequestPost(context) {
     const { request, env } = context;
 
-    let description;
+    let description, lang;
     try {
         const body = await request.json();
         description = body.description;
+        lang = body.lang || 'en';
     } catch {
         return new Response(JSON.stringify({ error: 'Invalid request body' }), {
             status: 400,
@@ -35,13 +36,17 @@ export async function onRequestPost(context) {
         });
     }
 
+    const langNames = { en:'English', de:'German', fr:'French', es:'Spanish', it:'Italian', pt:'Portuguese', nl:'Dutch', pl:'Polish', ru:'Russian' };
+    const replyLang = langNames[lang] || 'English';
+
     const systemPrompt = `You are a password generator assistant. The user will describe what they need a password for.
 Generate a strong, secure password or passphrase tailored to their description.
 - If they want something memorable, use a passphrase like "Purple-Elephant-Runs-42!"
 - If they want maximum security, use a random mix of uppercase, lowercase, numbers, and symbols
 - Always aim for at least 16 characters
+- Write the explanation in ${replyLang}. The explanation should be 1-2 sentences describing why this password is strong and how it fits the user's needs.
 - Respond ONLY with valid JSON in this exact format, nothing else:
-{"password":"<the password>","explanation":"<one sentence explaining why this fits their needs>"}`;
+{"password":"<the password>","explanation":"<1-2 sentence explanation in ${replyLang}>"}`;
 
     try {
         const result = await env.AI.run('@cf/meta/llama-3-8b-instruct', {
@@ -49,7 +54,7 @@ Generate a strong, secure password or passphrase tailored to their description.
                 { role: 'system', content: systemPrompt },
                 { role: 'user', content: description.trim() }
             ],
-            max_tokens: 200
+            max_tokens: 300
         });
 
         const rawText = result.response || '';
