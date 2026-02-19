@@ -417,48 +417,52 @@
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
 
-        /* ── PW ROW / COPY ── */
-        .pw-row {
-            display: flex;
-            gap: 10px;
-            align-items: stretch;
-            margin-bottom: 12px;
-        }
+        /* ── PASSWORD DISPLAY ── */
         .pw-display {
-            flex: 1;
+            width: 100%;
             font-family: 'Courier New', Courier, monospace;
             font-size: 15px;
             background: var(--bg);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 13px 16px;
+            padding: 14px 16px;
             color: var(--text-1);
             word-break: break-all;
-            min-height: 50px;
+            min-height: 52px;
             display: flex;
             align-items: center;
+            margin-bottom: 10px;
+            letter-spacing: 0.03em;
         }
-        .icon-btn {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            border-radius: 10px;
+        .action-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .btn-new-pw {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 7px;
+            padding: 11px 14px;
+            background: transparent;
+            border: 1px solid var(--blue);
+            border-radius: 8px;
+            color: var(--blue);
+            font-size: clamp(12px, 3vw, 13px);
+            font-weight: 600;
             cursor: pointer;
-            color: var(--text-2);
-            transition: background 0.2s, color 0.2s, border-color 0.2s;
-            padding: 0;
-            margin: 0;
-            width: 46px;
+            font-family: inherit;
+            transition: background 0.2s;
+            white-space: normal;
+            word-break: break-word;
+            margin-top: 0;
         }
-        .icon-btn:hover { background: var(--border); color: var(--text-1); border-color: var(--border-h); }
-        .icon-btn svg { width: 18px; height: 18px; stroke: currentColor; }
+        .btn-new-pw:hover { background: rgba(59,130,246,0.1); }
+        .btn-new-pw svg { width: 15px; height: 15px; stroke: currentColor; flex-shrink: 0; }
         .copy-btn-full {
-            width: 100%;
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -884,27 +888,22 @@
                     <span id="no-ambiguous-label">Exclude ambiguous (0Ol1I)</span>
                 </label>
             </div>
-            <div class="pw-row">
-                <div class="pw-display" id="password-display">waiting for input...</div>
-                <button class="icon-btn" id="generate-btn" title="Generate new password">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="23 4 23 10 17 10"/>
-                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
-                    </svg>
-                </button>
-            </div>
+            <div class="pw-display" id="password-display"></div>
             <div class="strength-track">
                 <div class="strength-fill" id="strength-fill"></div>
             </div>
             <div class="strength-label" id="strength-text"></div>
-            <div id="strength-warning" style="display:none; font-size:12px; color:#ef4444; margin: 4px 0 8px; padding: 6px 10px; background: rgba(239,68,68,0.08); border-radius:6px; border-left: 3px solid #ef4444;"></div>
-            <button class="copy-btn-full" id="copy-btn-full">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                </svg>
-                <span id="copy-btn-text">Copy Password</span>
-            </button>
+            <div id="strength-warning" style="display:none; font-size:12px; color:#ef4444; margin: 4px 0 0; padding: 6px 10px; background: rgba(239,68,68,0.08); border-radius:6px; border-left: 3px solid #ef4444;"></div>
+            <div class="action-row">
+                <button class="btn-new-pw" id="generate-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                    <span id="generate-btn-text">New Password</span>
+                </button>
+                <button class="copy-btn-full" id="copy-btn-full">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span id="copy-btn-text">Copy Password</span>
+                </button>
+            </div>
             </div>
             <div class="tab-panel" id="panel-ai">
             <!-- AI mode -->
@@ -1322,6 +1321,7 @@
                     faq4Q: 'Why use a passphrase instead of a random password?',
                     faq4A: 'Passphrases are longer and easier to remember while still being very secure. Use AI Mode to generate a memorable passphrase tailored to your context.',
                     footerTagline: 'Free secure password generator',
+                    newPasswordBtn: 'New Password',
                     aiCopyBtn: 'Copy Password', copied: 'Copied!',
                     noAmbiguousLabel: 'Exclude ambiguous (0Ol1I)',
                     strengthWarning: 'This password is too weak. Increase length or add more character types.'
@@ -1364,6 +1364,7 @@
                     faq4Q: 'Warum eine Passphrase statt eines zufälligen Passworts?',
                     faq4A: 'Passphrasen sind länger und leichter zu merken und trotzdem sehr sicher. Nutze den KI-Modus, um eine einprägsame Passphrase für deinen Kontext zu erstellen.',
                     footerTagline: 'Kostenloser sicherer Passwort-Generator',
+                    newPasswordBtn: 'Neues Passwort',
                     aiCopyBtn: 'Passwort kopieren', copied: 'Kopiert!',
                     noAmbiguousLabel: 'Mehrdeutige Zeichen ausschließen (0Ol1I)',
                     strengthWarning: 'Dieses Passwort ist zu schwach. Erhöhe die Länge oder füge mehr Zeichentypen hinzu.'
@@ -1406,6 +1407,7 @@
                     faq4Q: 'Pourquoi utiliser une phrase de passe ?',
                     faq4A: 'Les phrases de passe sont plus longues et plus faciles à retenir tout en étant très sécurisées. Utilisez le mode IA pour en générer une adaptée à votre contexte.',
                     footerTagline: 'Générateur de mots de passe gratuit et sécurisé',
+                    newPasswordBtn: 'Nouveau mot de passe',
                     aiCopyBtn: 'Copier le mot de passe', copied: 'Copié !',
                     noAmbiguousLabel: 'Exclure les caractères ambigus (0Ol1I)',
                     strengthWarning: 'Ce mot de passe est trop faible. Augmentez la longueur ou ajoutez plus de types de caractères.'
@@ -1448,6 +1450,7 @@
                     faq4Q: '¿Por qué usar una frase de contraseña?',
                     faq4A: 'Las frases de contraseña son más largas y fáciles de recordar siendo muy seguras. Usa el modo IA para generar una memorable adaptada a tu contexto.',
                     footerTagline: 'Generador de contraseñas seguro y gratuito',
+                    newPasswordBtn: 'Nueva contraseña',
                     aiCopyBtn: 'Copiar contraseña', copied: '¡Copiado!',
                     noAmbiguousLabel: 'Excluir ambiguos (0Ol1I)',
                     strengthWarning: 'Esta contraseña es demasiado débil. Aumenta la longitud o añade más tipos de caracteres.'
@@ -1490,6 +1493,7 @@
                     faq4Q: 'Perché usare una passphrase?',
                     faq4A: 'Le passphrase sono più lunghe e facili da ricordare pur essendo molto sicure. Usa la modalità IA per generarne una memorabile adatta al tuo contesto.',
                     footerTagline: 'Generatore di password sicuro e gratuito',
+                    newPasswordBtn: 'Nuova password',
                     aiCopyBtn: 'Copia password', copied: 'Copiato!',
                     noAmbiguousLabel: 'Escludi ambigui (0Ol1I)',
                     strengthWarning: 'Questa password è troppo debole. Aumenta la lunghezza o aggiungi più tipi di caratteri.'
@@ -1532,6 +1536,7 @@
                     faq4Q: 'Por que usar uma frase de senha?',
                     faq4A: 'Frases de senha são mais longas e fáceis de lembrar e ainda muito seguras. Use o modo IA para gerar uma memorável adaptada ao seu contexto.',
                     footerTagline: 'Gerador de senhas seguro e gratuito',
+                    newPasswordBtn: 'Nova senha',
                     aiCopyBtn: 'Copiar senha', copied: 'Copiado!',
                     noAmbiguousLabel: 'Excluir ambíguos (0Ol1I)',
                     strengthWarning: 'Esta senha é muito fraca. Aumente o comprimento ou adicione mais tipos de caracteres.'
@@ -1574,6 +1579,7 @@
                     faq4Q: 'Waarom een wachtwoordzin gebruiken?',
                     faq4A: 'Wachtwoordzinnen zijn langer en makkelijker te onthouden terwijl ze nog steeds erg veilig zijn. Gebruik de AI-modus om er een op maat te genereren.',
                     footerTagline: 'Gratis veilige wachtwoordgenerator',
+                    newPasswordBtn: 'Nieuw wachtwoord',
                     aiCopyBtn: 'Wachtwoord kopiëren', copied: 'Gekopieerd!',
                     noAmbiguousLabel: 'Dubbelzinnige tekens uitsluiten (0Ol1I)',
                     strengthWarning: 'Dit wachtwoord is te zwak. Vergroot de lengte of voeg meer tekentypen toe.'
@@ -1616,6 +1622,7 @@
                     faq4Q: 'Dlaczego używać hasła frazowego?',
                     faq4A: 'Hasła frazowe są dłuższe i łatwiejsze do zapamiętania, a jednocześnie bardzo bezpieczne. Użyj trybu AI, aby wygenerować dopasowane hasło frazowe.',
                     footerTagline: 'Darmowy bezpieczny generator haseł',
+                    newPasswordBtn: 'Nowe hasło',
                     aiCopyBtn: 'Kopiuj hasło', copied: 'Skopiowano!',
                     noAmbiguousLabel: 'Wyklucz niejednoznaczne (0Ol1I)',
                     strengthWarning: 'To hasło jest zbyt słabe. Zwiększ długość lub dodaj więcej typów znaków.'
@@ -1658,6 +1665,7 @@
                     faq4Q: 'Зачем использовать парольную фразу?',
                     faq4A: 'Парольные фразы длиннее и легче запоминаются, при этом оставаясь очень надёжными. Используйте режим ИИ для создания запоминающейся фразы под ваш контекст.',
                     footerTagline: 'Бесплатный безопасный генератор паролей',
+                    newPasswordBtn: 'Новый пароль',
                     aiCopyBtn: 'Скопировать пароль', copied: 'Скопировано!',
                     noAmbiguousLabel: 'Исключить неоднозначные (0Ol1I)',
                     strengthWarning: 'Этот пароль слишком слабый. Увеличьте длину или добавьте больше типов символов.'
@@ -1718,6 +1726,7 @@
                 document.getElementById('footer-tagline').textContent = t.footerTagline;
                 document.getElementById('no-ambiguous-label').textContent = t.noAmbiguousLabel;
                 document.getElementById('ai-copy-btn-text').textContent = t.aiCopyBtn;
+                document.getElementById('generate-btn-text').textContent = t.newPasswordBtn;
 
                 langSelect.value = lang;
 
