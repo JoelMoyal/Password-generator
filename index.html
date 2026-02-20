@@ -826,15 +826,29 @@
             padding: 100px 24px 90px;
         }
         .articles-section .section-eyebrow { color: var(--blue); }
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+        .articles-scroll-wrap {
+            position: relative;
             margin-top: 2.5rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
+        .articles-scroll-wrap::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 0; bottom: 0;
+            width: 72px;
+            background: linear-gradient(to right, transparent, var(--bg));
+            pointer-events: none;
+            border-radius: 0 16px 16px 0;
+        }
+        .articles-grid {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 4px;
+        }
+        .articles-grid::-webkit-scrollbar { display: none; }
         .article-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -846,6 +860,8 @@
             backdrop-filter: blur(20px);
             transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
             border-top-width: 2px;
+            flex: 0 0 290px;
+            scroll-snap-align: start;
         }
         .article-card:hover { border-color: var(--border-h); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
         .articles-grid .article-card:nth-child(1) { border-top-color: rgba(91,156,246,0.5); }
@@ -894,17 +910,6 @@
             color: var(--text-3);
             font-style: italic;
         }
-        .article-card-extra { display: none; }
-        .articles-toggle { display: flex; justify-content: center; margin-top: 20px; }
-        .articles-toggle-btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: transparent; border: 1px solid var(--border); border-radius: 99px;
-            padding: 9px 22px; font-size: 13px; font-weight: 600; color: var(--text-2);
-            cursor: pointer; transition: color 0.2s, border-color 0.2s; font-family: inherit;
-        }
-        .articles-toggle-btn:hover { color: var(--text-1); border-color: rgba(255,255,255,0.2); }
-        .articles-toggle-btn svg { transition: transform 0.3s; }
-        .articles-toggle-btn.open svg { transform: rotate(180deg); }
 
         /* ── FAQ SECTION ── */
         .faq-section {
@@ -1569,9 +1574,9 @@
             <span class="section-eyebrow">From the Blog</span>
             <h2 class="section-title">Security guides worth reading</h2>
             <p class="section-sub">Practical, no-fluff articles on staying secure in an age of AI, data breaches, and constant credential theft.</p>
-            <div class="articles-grid">
+            <div class="articles-scroll-wrap"><div class="articles-grid">
 
-                <a class="article-card" href="/memorize-passwords.html" style="text-decoration:none;display:block;cursor:pointer;">
+                <a class="article-card" href="/memorize-passwords.html" style="text-decoration:none;cursor:pointer;">
                     <div class="article-card-meta">
                         <span class="article-badge badge-category">Memory &amp; Security</span>
                         <span class="article-read-time">~6 min read</span>
@@ -1581,7 +1586,7 @@
                     <div class="article-card-cta">Read article →</div>
                 </a>
 
-                <a class="article-card" href="/ai-prompt-security.html" style="text-decoration:none;display:block;cursor:pointer;">
+                <a class="article-card" href="/ai-prompt-security.html" style="text-decoration:none;cursor:pointer;">
                     <div class="article-card-meta">
                         <span class="article-badge badge-category" style="background:rgba(167,139,250,0.15);color:var(--purple);">AI Safety</span>
                         <span class="article-read-time">~6 min read</span>
@@ -1591,7 +1596,7 @@
                     <div class="article-card-cta">Read article →</div>
                 </a>
 
-                <a class="article-card article-card-extra" href="/password-reuse.html" style="text-decoration:none;cursor:pointer;">
+                <a class="article-card" href="/password-reuse.html" style="text-decoration:none;cursor:pointer;">
                     <div class="article-card-meta">
                         <span class="article-badge badge-category" style="background:rgba(248,113,113,0.15);color:var(--red);">Threat Basics</span>
                         <span class="article-read-time">~5 min read</span>
@@ -1601,7 +1606,7 @@
                     <div class="article-card-cta">Read article →</div>
                 </a>
 
-                <a class="article-card article-card-extra" href="/password-length-2026.html" style="text-decoration:none;cursor:pointer;">
+                <a class="article-card" href="/password-length-2026.html" style="text-decoration:none;cursor:pointer;">
                     <div class="article-card-meta">
                         <span class="article-badge badge-category" style="background:rgba(52,208,104,0.15);color:var(--green);">Password Basics</span>
                         <span class="article-read-time">~5 min read</span>
@@ -1611,7 +1616,7 @@
                     <div class="article-card-cta">Read article →</div>
                 </a>
 
-                <a class="article-card article-card-extra" href="/password-hall-of-shame.html" style="text-decoration:none;cursor:pointer;">
+                <a class="article-card" href="/password-hall-of-shame.html" style="text-decoration:none;cursor:pointer;">
                     <div class="article-card-meta">
                         <span class="article-badge badge-category" style="background:rgba(251,191,36,0.15);color:var(--amber);">Case Studies</span>
                         <span class="article-read-time">~7 min read</span>
@@ -1621,28 +1626,9 @@
                     <div class="article-card-cta">Read article →</div>
                 </a>
 
-            </div>
-            <div class="articles-toggle">
-                <button class="articles-toggle-btn" id="articles-toggle-btn">
-                    <span id="articles-toggle-text">Show 3 more articles</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-            </div>
+            </div></div>
         </div>
     </section>
-    <script>
-    (function() {
-        var btn = document.getElementById('articles-toggle-btn');
-        var label = document.getElementById('articles-toggle-text');
-        var extras = document.querySelectorAll('.article-card-extra');
-        btn.addEventListener('click', function() {
-            var isOpen = btn.classList.contains('open');
-            extras.forEach(function(el) { el.style.display = isOpen ? 'none' : 'flex'; });
-            btn.classList.toggle('open', !isOpen);
-            label.textContent = isOpen ? 'Show 3 more articles' : 'Show less';
-        });
-    })();
-    </script>
 
     <section class="faq-section">
         <div class="section-center">
