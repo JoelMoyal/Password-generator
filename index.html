@@ -2115,7 +2115,11 @@
             }
 
             document.querySelectorAll('.mode-btn').forEach(btn =>
-                btn.addEventListener('click', () => setMode(btn.dataset.mode)));
+                btn.addEventListener('click', () => {
+                    var isMobile = window.matchMedia('(max-width: 768px)').matches;
+                    if (!isMobile && btn.dataset.mode === currentMode) return; // desktop: no-op
+                    setMode(btn.dataset.mode);
+                }));
 
             // Override generate button to dispatch to correct mode
             generateBtn.removeEventListener('click', generatePassword);
@@ -3271,13 +3275,18 @@
                     setTimeout(() => { btnText.textContent = translations[currentLang].aiCopyBtn; }, 2000);
                 });
             });
-            // Tab switching
+            // Tab switching — on desktop the active tab can never be closed
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
+                    var isMobile = window.matchMedia('(max-width: 768px)').matches;
+                    var isActive = btn.classList.contains('active');
+                    if (isActive && !isMobile) return; // desktop: no-op
                     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-                    btn.classList.add('active');
-                    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+                    if (!isActive || !isMobile) {
+                        btn.classList.add('active');
+                        document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+                    }
                 });
             });
             langSelect.addEventListener('change', () => setLanguage(langSelect.value));
