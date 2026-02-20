@@ -5,7 +5,7 @@
 **Live site → [pwasecurity.org](https://pwasecurity.org)**
 
 <p align="center">
-  <img width="600" alt="pwasecurity password generator screenshot" src="https://github.com/user-attachments/assets/75bff39b-d87f-4441-aac0-40f321428e27" />
+  <img width="400" alt="pwasecurity password generator — AI Mode" src="https://github.com/user-attachments/assets/d0c5c4f9-830d-4c8c-81cc-3fc844bd082b" />
   <br/>
   <sub>Random · Passphrase · PIN · AI Mode — all running in your browser</sub>
 </p>
