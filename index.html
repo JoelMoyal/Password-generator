@@ -601,6 +601,7 @@
         }
 
         /* ── OPTIONS GRID ── */
+        .easy-say-note { font-size: 11px; color: var(--text-3); padding: 4px 0 6px 26px; }
         .options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1304,7 +1305,12 @@
                         <input type="checkbox" id="no-ambiguous">
                         <span id="no-ambiguous-label">Exclude ambiguous (0Ol1I)</span>
                     </label>
+                    <label class="option-item" for="easy-say" style="grid-column: 1 / -1;">
+                        <input type="checkbox" id="easy-say">
+                        <span>Easy to say (pronounceable)</span>
+                    </label>
                 </div>
+                <p class="easy-say-note" id="easy-say-note" style="display:none">Generates CVC pseudo-words joined with hyphens (e.g. <em>bok-ril-fas-27</em>). Length auto-set to 20+ for security.</p>
             </div>
 
             <!-- Passphrase mode panel -->
@@ -1755,6 +1761,8 @@
             const numbersCheckbox = document.getElementById('numbers');
             const symbolsCheckbox = document.getElementById('symbols');
             const noAmbiguousCheckbox = document.getElementById('no-ambiguous');
+            const easySayCheckbox = document.getElementById('easy-say');
+            const easySayNote = document.getElementById('easy-say-note');
             const ambiguous = new Set('0Ol1I|{}[]()\\/`\'"');
             const slider    = document.getElementById('length');
             const sliderBubble = document.getElementById('slider-bubble');
@@ -1821,7 +1829,29 @@
                 return val % max;
             }
 
+            function generatePronounceable(length) {
+                const V = ['a','e','i','o','u'];
+                const C = ['b','c','d','f','g','h','j','k','m','n','p','r','s','t','v','w','y'];
+                const syllables = [];
+                while (syllables.join('').length < length) {
+                    syllables.push(C[secureRandInt(C.length)] + V[secureRandInt(V.length)] + C[secureRandInt(C.length)]);
+                }
+                const num = String(secureRandInt(90) + 10);
+                currentPassword = syllables.join('') + num;
+                passwordDisplay.textContent = syllables.join('-') + '-' + num;
+                document.getElementById('strength-track-wrap').style.display = '';
+                updateStrengthMeter(currentPassword);
+                addToHistory(currentPassword, 'pronounceable');
+            }
+
+            easySayCheckbox.addEventListener('change', function () {
+                easySayNote.style.display = this.checked ? '' : 'none';
+                if (this.checked && +slider.value < 20) { slider.value = 20; syncSlider(); }
+                generatePassword();
+            });
+
             function generatePassword() {
+                if (easySayCheckbox.checked) { generatePronounceable(Math.max(+slider.value, 20)); return; }
                 const length = +slider.value;
 
                 if (!uppercaseCheckbox.checked && !lowercaseCheckbox.checked &&
