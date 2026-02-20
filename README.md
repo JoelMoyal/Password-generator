@@ -1,120 +1,113 @@
-# Secure Password Generator
+# pwasecurity — Password Generator
 
-A modern, multilingual, client-side password generator that creates strong, secure passwords with customizable options.
+> Free, private, browser-only password generator. No account. No server. Nothing leaves your device.
 
-<img width="525" alt="ç" src="https://github.com/user-attachments/assets/75bff39b-d87f-4441-aac0-40f321428e27" />
+**Live site → [pwasecurity.org](https://pwasecurity.org)**
 
-## 🌟 Features‚
+<img width="525" alt="pwasecurity password generator screenshot" src="https://github.com/user-attachments/assets/75bff39b-d87f-4441-aac0-40f321428e27" />
 
-- **Strong Password Generation**: Create secure passwords with customizable length and character sets
-- **Multilingual Support**: Available in 2 languages:
-  - 🇺🇸 English
-  - 🇩🇪 German
-- **Password Strength Meter**: Visual indicator of password security
-- **Copy to Clipboard**: One-click copying for easy use
-- **Client-Side Only**: All password generation happens in your browser - no data is sent to any server
-- **Mobile Responsive**: Works seamlessly on all device sizes
-- **Customization Options**:
-  - Uppercase letters (A-Z)
-  - Lowercase letters (a-z)
-  - Numbers (0-9)
-  - Special characters (!@#$%^&*)
+---
 
-## 🚀 Demo
+## What it does
 
-Try the live demo: [Secure Password Generator]([https://joelMoyal.github.io/password-generator/](https://pwasecurity.org/))
+Three generation modes, all running entirely in your browser:
 
-## 💻 Technologies Used
+| Mode | Description |
+|------|-------------|
+| **Random** | Cryptographically secure character-based passwords up to 128 chars |
+| **Passphrase** | Word-list passphrases with custom separators, capitalization, and appended numbers |
+| **PIN** | Numeric PINs from 4 to 12 digits |
+| **AI Mode** | Describe what you need in plain English — Cloudflare Workers AI returns a suggestion |
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
-- CSS Grid & Flexbox
-- Mobile-first responsive design
+---
 
-## 📋 How to Use
+## Features
 
-1. Select your preferred language from the language toggles
-2. Set the desired password length (8-128 characters)
-3. Choose which types of characters to include
-4. Click "Generate Password"
-5. Copy your new secure password with the copy button
+- **Web Crypto API** — uses `crypto.getRandomValues()`, not `Math.random()`
+- **Entropy-based strength meter** — 4-level rating with bit-count calculation
+- **Password history** — last 5 passwords, reveal/hide + copy per entry
+- **Exclude ambiguous characters** — removes `0`, `O`, `l`, `1`, `I` etc.
+- **Easy to say** — pronounceable CVC-syllable passwords
+- **Copy with feedback** — button turns green, resets after 2 s
+- **9 languages** — EN, DE, FR, ES, IT, PT, NL, PL, RU
+- **Mobile-first** — responsive down to small phones, touch-optimised
+- **Single file** — all HTML, CSS, and JS in one `index.html`, zero build step
 
-## 🛠️ Installation
+---
 
-To run this project locally:
+## Security model
+
+All password generation runs locally. There is no server, no database, no analytics.
+
+The **one exception** is AI Mode: your text prompt is sent to Cloudflare Workers AI (Meta Llama model) to generate a suggestion. Don't include real passwords, API keys, or personal data in the prompt.
+
+---
+
+## Languages
+
+| Code | Language   |
+|------|------------|
+| `en` | English    |
+| `de` | German     |
+| `fr` | French     |
+| `es` | Spanish    |
+| `it` | Italian    |
+| `pt` | Portuguese |
+| `nl` | Dutch      |
+| `pl` | Polish     |
+| `ru` | Russian    |
+
+To add a language, copy any language block inside the `translations` object in `index.html` and translate the values.
+
+---
+
+## Run locally
+
+No build process or dependencies required.
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/password-generator.git
-
-# Navigate to the project folder
-cd password-generator
-
-# Open the HTML file in your browser
-open index.html  # on macOS
-# or
-start index.html  # on Windows
+git clone https://github.com/JoelMoyal/Password-generator.git
+cd Password-generator
+open index.html       # macOS
+start index.html      # Windows
 ```
 
-No build process or dependencies required!
+---
 
-## 🔒 Security
+## Deploy
 
-- All password generation happens in the browser
-- No passwords are stored or transmitted
-- Uses cryptographically secure random number generation
-- Enforces minimum security standards (8+ characters, mixed character types)
+The site is hosted on **Cloudflare Pages** and auto-deploys on every push to `main`. Any static host works — it's a single HTML file.
 
-## 🌐 Internationalization
+---
 
-The password generator supports two languages with proper translations for all elements:
+## Stack
 
-- English (default)
-- German
+- Vanilla HTML, CSS, JavaScript
+- Web Crypto API (`crypto.getRandomValues`)
+- Cloudflare Pages (hosting)
+- Cloudflare Workers AI (AI Mode only)
 
-To add additional languages, modify the `translations` object in the JavaScript code.
+---
 
-## 📱 Mobile Support
+## Contributing
 
-The interface is fully responsive and optimized for:
-- Desktop browsers
-- Tablets
-- Mobile phones
-- Touch interfaces
+1. Fork the repo
+2. Create a branch: `git checkout -b my-feature`
+3. Commit your changes
+4. Open a pull request
 
-## 🤝 Contributing
+---
 
-Contributions are welcome! Here's how you can help:
+## Author
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b new-feature`
-3. Make your changes
-4. Commit your changes: `git commit -m 'Add some feature'`
-5. Push to the branch: `git push origin new-feature`
-6. Submit a pull request
+**Joël Moyal**
 
-### Ideas for Contributions
-
-- Add more languages
-- Implement additional password strength rules
-- Add password pattern options (pronounceable, memorable, etc.)
-- Create a browser extension version
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👤 Author
-
-Joël Moyal
-
-- LinkedIn: [Joël Moyal](https://www.linkedin.com/in/joel-moyal)
-- GitHub: [joelmoyal](https://github.com/joelmoyal)
 - Website: [joelmoyal.com](https://joelmoyal.com)
+- GitHub: [@JoelMoyal](https://github.com/JoelMoyal)
+- LinkedIn: [Joël Moyal](https://www.linkedin.com/in/joel-moyal)
 
-## 🙏 Acknowledgments
+---
 
-- Icons provided by [Lucide Icons](https://lucide.dev/)
-- Language selection inspired by various multilingual applications
-- Password strength algorithm based on common security best practices
+## License
+
+MIT — see [LICENSE](LICENSE)
