@@ -855,6 +855,108 @@
             .icon-btn { min-height: 44px; min-width: 44px; }
             .copy-btn-full { min-height: 44px; }
         }
+
+        /* ── MODE BAR ── */
+        .mode-bar {
+            display: flex; gap: 4px; margin-bottom: 18px;
+            background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px; padding: 3px;
+        }
+        .mode-btn {
+            flex: 1; padding: 7px 10px; border-radius: 7px; border: none;
+            background: transparent; color: var(--text-3); font-size: 12px;
+            font-weight: 600; cursor: pointer; transition: background 0.18s, color 0.18s;
+            font-family: inherit; margin: 0; white-space: nowrap;
+        }
+        .mode-btn:hover { background: rgba(255,255,255,0.05); color: var(--text-2); }
+        .mode-btn.active {
+            background: rgba(255,255,255,0.09); color: var(--text-1);
+            box-shadow: 0 1px 6px rgba(0,0,0,0.35);
+        }
+        .mode-panel { display: none; }
+        .mode-panel.active { display: block; }
+
+        /* ── PASSPHRASE CONTROLS ── */
+        .phrase-controls { margin-bottom: 14px; }
+        .phrase-ctrl-row {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 12px; margin-bottom: 10px;
+        }
+        .phrase-ctrl-label { font-size: 13px; color: var(--text-2); font-weight: 500; white-space: nowrap; }
+        .sep-select {
+            background: rgba(0,0,0,0.3); color: var(--text-1);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+            padding: 5px 10px; font-size: 12px; font-family: inherit;
+            cursor: pointer; outline: none; backdrop-filter: blur(8px);
+            transition: border-color 0.2s;
+        }
+        .sep-select:hover, .sep-select:focus { border-color: rgba(59,130,246,0.4); }
+        .phrase-toggle-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+        /* ── PIN CONTROLS ── */
+        .pin-header { font-size: 13px; color: var(--text-2); font-weight: 500; margin-bottom: 12px; }
+        .pin-length-group { display: flex; gap: 8px; margin-bottom: 10px; }
+        .pin-len-btn {
+            flex: 1; padding: 12px 8px; border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.04); color: var(--text-2);
+            font-size: 15px; font-weight: 700; cursor: pointer;
+            font-family: inherit; transition: background 0.18s, color 0.18s, border-color 0.18s;
+            margin: 0; backdrop-filter: blur(8px);
+        }
+        .pin-len-btn:hover { background: rgba(255,255,255,0.08); color: var(--text-1); }
+        .pin-len-btn.active {
+            background: rgba(59,130,246,0.14); border-color: rgba(59,130,246,0.45);
+            color: var(--blue); box-shadow: 0 0 14px rgba(59,130,246,0.12);
+        }
+        .pin-info-text {
+            font-size: 12px; color: var(--text-3); text-align: center;
+            padding: 6px; margin-bottom: 8px; min-height: 20px;
+        }
+
+        /* ── HISTORY ── */
+        .history-wrap { max-width: 660px; margin: 10px auto 0; }
+        .history-details > summary {
+            display: flex; align-items: center; gap: 8px; padding: 12px 18px;
+            cursor: pointer; list-style: none;
+            background: rgba(14,20,42,0.5); backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.07); border-radius: 12px;
+            font-size: 13px; font-weight: 600; color: var(--text-2);
+            transition: background 0.2s, border-color 0.2s; user-select: none;
+        }
+        .history-details > summary:hover { background: rgba(14,20,42,0.7); border-color: rgba(255,255,255,0.12); }
+        .history-details[open] > summary { border-radius: 12px 12px 0 0; border-bottom-color: transparent; }
+        .history-details > summary::-webkit-details-marker { display: none; }
+        .hist-chevron { margin-left: auto; font-size: 11px; color: var(--text-3); transition: transform 0.2s; display: inline-block; }
+        .history-details[open] > summary .hist-chevron { transform: rotate(180deg); }
+        .history-count {
+            background: var(--blue); color: #fff; font-size: 10px; font-weight: 700;
+            padding: 1px 7px; border-radius: 99px; min-width: 20px; text-align: center;
+        }
+        .history-list {
+            background: rgba(6,10,20,0.7); backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.07); border-top: none;
+            border-radius: 0 0 12px 12px; overflow: hidden;
+        }
+        .history-entry {
+            display: flex; align-items: center; gap: 10px; padding: 11px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .history-entry:last-child { border-bottom: none; }
+        .history-pw {
+            flex: 1; font-family: 'Courier New', monospace; font-size: 13px;
+            color: var(--text-1); word-break: break-all; letter-spacing: 0.03em; min-width: 0;
+        }
+        .history-meta { font-size: 11px; color: var(--text-3); white-space: nowrap; flex-shrink: 0; padding-right: 4px; }
+        .history-copy-btn {
+            padding: 4px 10px; background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;
+            color: var(--text-2); font-size: 11px; font-weight: 600;
+            cursor: pointer; font-family: inherit; width: auto; margin: 0;
+            flex-shrink: 0; transition: background 0.15s, color 0.15s;
+        }
+        .history-copy-btn:hover { background: rgba(255,255,255,0.12); color: var(--text-1); }
+        .history-empty { padding: 20px; text-align: center; color: var(--text-3); font-size: 13px; }
     </style>
 </head>
 <body>
@@ -900,53 +1002,107 @@
                 </button>
             </div>
             <div class="tab-panel active" id="panel-manual">
-            <!-- Manual mode -->
-            <div class="section-label" id="manual-label">MANUAL MODE</div>
-
-            <div class="slider-row">
-                <span class="slider-label" id="length-label">Password Length</span>
-                <span class="slider-val" id="length-val">16</span>
-            </div>
-            <div class="slider-wrap" id="slider-wrap">
-                <div class="slider-bubble" id="slider-bubble">16</div>
-                <input type="range" id="length" min="8" max="128" value="16">
+            <!-- Mode bar -->
+            <div class="mode-bar">
+                <button class="mode-btn active" id="mode-btn-random" data-mode="random">Random</button>
+                <button class="mode-btn" id="mode-btn-passphrase" data-mode="passphrase">Passphrase</button>
+                <button class="mode-btn" id="mode-btn-pin" data-mode="pin">PIN</button>
             </div>
 
-            <div class="options-grid">
-                <label class="option-item" for="uppercase">
-                    <input type="checkbox" id="uppercase" checked>
-                    <span id="uppercase-label">Uppercase A-Z</span>
-                </label>
-                <label class="option-item" for="lowercase">
-                    <input type="checkbox" id="lowercase" checked>
-                    <span id="lowercase-label">Lowercase a-z</span>
-                </label>
-                <label class="option-item" for="numbers">
-                    <input type="checkbox" id="numbers" checked>
-                    <span id="numbers-label">Numbers 0-9</span>
-                </label>
-                <label class="option-item" for="symbols">
-                    <input type="checkbox" id="symbols" checked>
-                    <span id="symbols-label">Symbols !@#$</span>
-                </label>
-                <label class="option-item" for="no-ambiguous" style="grid-column: 1 / -1;">
-                    <input type="checkbox" id="no-ambiguous">
-                    <span id="no-ambiguous-label">Exclude ambiguous (0Ol1I)</span>
-                </label>
+            <!-- Random mode panel -->
+            <div class="mode-panel active" id="mode-panel-random">
+                <div class="slider-row">
+                    <span class="slider-label" id="length-label">Password Length</span>
+                    <span class="slider-val" id="length-val">16</span>
+                </div>
+                <div class="slider-wrap" id="slider-wrap">
+                    <div class="slider-bubble" id="slider-bubble">16</div>
+                    <input type="range" id="length" min="8" max="128" value="16">
+                </div>
+                <div class="options-grid">
+                    <label class="option-item" for="uppercase">
+                        <input type="checkbox" id="uppercase" checked>
+                        <span id="uppercase-label">Uppercase A-Z</span>
+                    </label>
+                    <label class="option-item" for="lowercase">
+                        <input type="checkbox" id="lowercase" checked>
+                        <span id="lowercase-label">Lowercase a-z</span>
+                    </label>
+                    <label class="option-item" for="numbers">
+                        <input type="checkbox" id="numbers" checked>
+                        <span id="numbers-label">Numbers 0-9</span>
+                    </label>
+                    <label class="option-item" for="symbols">
+                        <input type="checkbox" id="symbols" checked>
+                        <span id="symbols-label">Symbols !@#$</span>
+                    </label>
+                    <label class="option-item" for="no-ambiguous" style="grid-column: 1 / -1;">
+                        <input type="checkbox" id="no-ambiguous">
+                        <span id="no-ambiguous-label">Exclude ambiguous (0Ol1I)</span>
+                    </label>
+                </div>
             </div>
+
+            <!-- Passphrase mode panel -->
+            <div class="mode-panel" id="mode-panel-passphrase">
+                <div class="slider-row">
+                    <span class="slider-label" id="word-count-label">Word Count</span>
+                    <span class="slider-val" id="word-count-val">4</span>
+                </div>
+                <div class="slider-wrap" id="phrase-slider-wrap">
+                    <div class="slider-bubble" id="phrase-bubble">4</div>
+                    <input type="range" id="word-count" min="3" max="8" value="4">
+                </div>
+                <div class="phrase-controls">
+                    <div class="phrase-ctrl-row">
+                        <span class="phrase-ctrl-label" id="separator-label">Separator</span>
+                        <select class="sep-select" id="sep-select">
+                            <option value="-">Hyphen  -</option>
+                            <option value=".">Dot  .</option>
+                            <option value="_">Underscore  _</option>
+                            <option value=" ">Space</option>
+                            <option value="">None</option>
+                        </select>
+                    </div>
+                    <div class="phrase-toggle-row">
+                        <label class="option-item" for="phrase-capitalize">
+                            <input type="checkbox" id="phrase-capitalize" checked>
+                            <span id="capitalize-label">Capitalize</span>
+                        </label>
+                        <label class="option-item" for="phrase-append-num">
+                            <input type="checkbox" id="phrase-append-num" checked>
+                            <span id="append-num-label">Add number</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIN mode panel -->
+            <div class="mode-panel" id="mode-panel-pin">
+                <p class="pin-header" id="pin-length-label">PIN Length</p>
+                <div class="pin-length-group">
+                    <button class="pin-len-btn active" data-len="4">4</button>
+                    <button class="pin-len-btn" data-len="6">6</button>
+                    <button class="pin-len-btn" data-len="8">8</button>
+                    <button class="pin-len-btn" data-len="10">10</button>
+                </div>
+                <div class="pin-info-text" id="pin-info"></div>
+            </div>
+
+            <!-- Shared: display + strength + actions (all modes) -->
             <div class="pw-display" id="password-display"></div>
-            <div class="strength-track">
+            <div class="strength-track" id="strength-track-wrap">
                 <div class="strength-fill" id="strength-fill"></div>
             </div>
             <div class="strength-label" id="strength-text"></div>
             <div id="strength-warning" style="display:none; font-size:12px; color:#ef4444; margin: 4px 0 0; padding: 6px 10px; background: rgba(239,68,68,0.06); border-radius:8px; border: 1px solid rgba(239,68,68,0.2); backdrop-filter:blur(8px);"></div>
             <div class="action-row">
                 <button class="btn-new-pw" id="generate-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
                     <span id="generate-btn-text">New Password</span>
                 </button>
                 <button class="copy-btn-full" id="copy-btn-full">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                     <span id="copy-btn-text">Copy Password</span>
                 </button>
             </div>
@@ -997,6 +1153,21 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Session history panel -->
+    <div class="history-wrap">
+        <details class="history-details" id="history-details">
+            <summary>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="history-title">Recent (this session)</span>
+                <span class="history-count" id="history-count" style="display:none">0</span>
+                <span class="hist-chevron">▾</span>
+            </summary>
+            <div class="history-list" id="history-list">
+                <div class="history-empty" id="history-empty">No passwords generated yet</div>
+            </div>
+        </details>
     </div>
     </section>
 
@@ -1106,6 +1277,71 @@
 
 
     <script>
+        // Curated ~430-word list for passphrase generation
+        const WORDS = [
+            'able','acid','aged','also','area','army','away','baby','back','ball','band','bank','barn','base',
+            'bath','beam','bean','bear','beat','beef','bell','best','bill','bird','bite','blue','bold','bolt',
+            'bond','bone','book','boom','born','bowl','burn','calm','camp','cane','card','care','cart','case',
+            'cash','cast','cave','cell','chip','city','clan','clay','clip','club','coal','coat','code','coin',
+            'cold','come','cone','cool','cord','core','corn','cost','crew','crop','cube','cure','dale','dark',
+            'dart','data','date','dawn','deal','dear','deck','deep','deer','desk','disk','dock','dome','door',
+            'dove','down','draw','drop','drum','duck','dune','dusk','dust','duty','earn','east','edge','epic',
+            'even','exam','face','fact','fair','fall','fame','farm','fast','fate','feat','feel','fell','felt',
+            'fern','file','fill','film','find','fire','fish','flag','flat','flip','flow','foam','fold','folk',
+            'fond','food','foot','ford','form','fort','four','free','fuel','full','fund','fuse','gain','gate',
+            'gaze','gear','gift','give','glad','glow','glue','goal','gold','gone','good','gown','grab','gray',
+            'grew','grim','grip','grow','gulf','gust','half','hall','halt','hand','hang','hard','hare','haze',
+            'head','heal','heat','heel','helm','help','here','hero','hide','high','hill','hint','hold','hole',
+            'home','hood','hook','hope','horn','host','hour','huge','hull','hunt','hurt','idle','iris','iron',
+            'isle','jade','jazz','jest','join','joke','jump','just','keen','keep','kick','kind','king','knee',
+            'knew','lake','lamp','land','lane','lark','last','late','lead','leaf','lean','leap','left','lend',
+            'lens','life','lift','lime','line','link','lion','list','live','load','lock','loft','lone','long',
+            'look','loop','loss','loud','love','luck','lure','made','mane','mark','mast','maze','meal','mean',
+            'meet','melt','mild','milk','mill','mine','mint','mist','mode','moon','more','moss','most','move',
+            'much','muse','must','nail','near','neck','need','nest','next','nice','node','norm','note','oath',
+            'open','oval','over','pace','pact','page','paid','palm','park','part','past','path','peak','pear',
+            'peel','peer','pine','pipe','plan','play','plot','plow','pole','pool','port','pose','post','pour',
+            'prey','prop','pull','pure','push','rail','rain','rake','ramp','rank','rare','read','real','reef',
+            'rent','rest','rice','rich','ride','rise','risk','road','roam','roar','rock','role','roll','roof',
+            'root','rope','rose','ruin','rule','rush','rust','safe','sage','sail','salt','same','sand','save',
+            'seal','seam','seed','seek','seem','self','send','shed','ship','shoe','shop','shot','show','silk',
+            'sing','sink','site','size','skip','slim','slow','snap','snow','soar','soil','sole','song','sort',
+            'soul','span','spin','spot','star','stay','stem','step','stir','stop','surf','swan','swim','tail',
+            'tale','talk','tall','tame','task','team','tear','tell','term','test','tide','till','time','tiny',
+            'toll','tone','tool','town','trek','trim','true','tube','tune','turn','type','vale','vast','veil',
+            'vein','view','vine','void','volt','wade','wake','walk','wall','wand','ward','warm','wave','wear',
+            'well','west','wide','wild','will','wind','wing','wire','wish','wolf','wood','wool','word','work',
+            'wrap','wren','yard','year','zeal','zero','zone','ache','acme','acre','aide','airy','aloe','alto',
+            'apex','arch','arts','avid','axle','bale','bane','bard','bark','bask','bead','beak','beer','bees',
+            'berg','bind','bins','blot','boar','bode','bogs','boon','boot','boss','bout','brag','brew','brim',
+            'brow','bulb','bull','bunk','bush','buoy','byte','cage','calf','calm','cask','chad','clam','claw',
+            'clog','clot','coil','comb','cope','cram','crest','curl','curt','dab','dank','darn','dash','daze',
+            'deft','dice','dike','dill','dire','dove','drip','dump','dupe','earl','ease','echo','elan','elf',
+            'elk','emu','etch','euro','evil','expo','fawn','fend','fife','fizz','flaw','flea','flex','floe',
+            'flop','foal','fore','foxy','fray','frog','funk','fury','fuzz','gale','gall','gape','garb','gasp',
+            'geld','gems','glee','glob','gore','gosh','gram','grin','groan','guise','guru','hack','hail','ham',
+            'hasp','heft','hemp','herd','hive','hoax','hob','hock','hoof','howl','hub','hue','hulk','husk',
+            'hymn','icon','imp','inch','ivy','jab','jag','jeer','jolt','jot','jowl','junk','kelp','kept','kern',
+            'knack','knave','knob','knot','lame','lard','laud','lava','laze','leek','lemon','lever','limp',
+            'lint','lore','lull','lunge','lure','lurk','lynx','mace','mare','mead','meek','mesa','mire','monk',
+            'moat','molt','musk','myth','nave','newt','nook','nude','numb','nymph','opal','orb','orca','otter',
+            'oven','page','pang','pave','pawn','pelt','petal','pike','pilot','plum','plume','pod','poll','pomp',
+            'pond','pore','puff','pulp','puma','punt','pyre','quail','quartz','quest','quill','quirk','raft',
+            'raze','reel','rein','rime','rind','robe','rook','rout','rube','ruby','rune','ruse','sage','sash',
+            'scamp','scan','scone','scorn','scout','scowl','scythe','serf','shag','shard','shark','shin','shun',
+            'sieve','silt','skew','skiff','skull','skunk','slate','sleet','slime','slug','smirk','smog','snag',
+            'snare','sneak','snout','soak','sod','sop','spade','spark','spat','speck','spit','spoke','spore',
+            'spout','sprig','spunk','spur','stag','stale','stalk','stash','stave','steel','steed','stench',
+            'stern','stiff','sting','stink','stomp','stout','stove','straw','stray','strut','stub','stud',
+            'stuff','stump','stung','swamp','sway','swept','swift','swine','swoop','sword','syrup','tabby',
+            'tack','talon','tang','tart','taunt','tawny','teak','teal','temp','tempo','thorn','throb','thud',
+            'thug','thyme','tick','tilt','toad','tome','tonic','totem','trace','tract','trap','trawl','tread',
+            'trend','tress','tripe','trod','tromp','trout','truck','trump','trunk','truss','tuck','tuft','twig',
+            'tyke','ulcer','umber','undo','urge','vale','vamp','vat','veil','venom','vent','verb','verge',
+            'vicar','vigor','viper','visa','vise','vow','waft','wail','wasp','weld','whim','whip','whir','wick',
+            'wisp','woe','woke','womb','wring','wrist','yak','yarn','yawn','yoke','yore','zest','zinc','zip'
+        ];
+
         document.addEventListener('DOMContentLoaded', function () {
             const lengthInput = document.getElementById('length');
             const uppercaseCheckbox = document.getElementById('uppercase');
@@ -1132,6 +1368,10 @@
             const aiLoading = document.getElementById('ai-loading');
 
             let currentLang = 'en';
+            let currentMode = 'random';
+            let currentPinLen = 4;
+            let currentPassword = '';
+            const pwHistory = [];
 
             const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             const lowercase = 'abcdefghijklmnopqrstuvwxyz';
@@ -1165,7 +1405,6 @@
 
             syncSlider();
 
-            generateBtn.addEventListener('click', generatePassword);
             document.querySelectorAll('#uppercase,#lowercase,#numbers,#symbols,#no-ambiguous').forEach(cb => cb.addEventListener('change', generatePassword));
 
             function secureRandInt(max) {
@@ -1205,8 +1444,11 @@
                 }
 
                 password = shuffleString(password);
+                currentPassword = password;
                 passwordDisplay.textContent = password;
+                document.getElementById('strength-track-wrap').style.display = '';
                 updateStrengthMeter(password);
+                addToHistory(password, (+slider.value) + '-char password');
             }
 
             function shuffleString(string) {
@@ -1218,22 +1460,208 @@
                 return array.join('');
             }
 
+            // ── PASSPHRASE SLIDER ──
+            const phraseSlider = document.getElementById('word-count');
+            const phraseValEl  = document.getElementById('word-count-val');
+            const phraseBubble = document.getElementById('phrase-bubble');
+            const phraseWrap   = document.getElementById('phrase-slider-wrap');
+
+            function syncPhraseSlider() {
+                const min = +phraseSlider.min, max = +phraseSlider.max, val = +phraseSlider.value;
+                const pct = (val - min) / (max - min) * 100;
+                phraseSlider.style.setProperty('--p', pct + '%');
+                phraseValEl.classList.remove('pop');
+                void phraseValEl.offsetWidth;
+                phraseValEl.classList.add('pop');
+                phraseValEl.textContent = val;
+                const trackW = phraseSlider.getBoundingClientRect().width;
+                phraseBubble.style.left = ((pct / 100) * (trackW - 22) + 11) + 'px';
+                phraseBubble.textContent = val;
+            }
+            phraseSlider.addEventListener('input', () => { syncPhraseSlider(); generatePassphrase(); });
+            phraseSlider.addEventListener('mousedown', () => phraseWrap.classList.add('dragging'));
+            phraseSlider.addEventListener('touchstart', () => phraseWrap.classList.add('dragging'), { passive: true });
+
+            // ── PASSPHRASE GENERATOR ──
+            function generatePassphrase() {
+                const count = +phraseSlider.value;
+                const sep   = document.getElementById('sep-select').value;
+                const doCap = document.getElementById('phrase-capitalize').checked;
+                const doNum = document.getElementById('phrase-append-num').checked;
+                const words = Array.from({ length: count }, () => {
+                    const w = WORDS[secureRandInt(WORDS.length)];
+                    return doCap ? w[0].toUpperCase() + w.slice(1) : w;
+                });
+                if (doNum) words.push(String(secureRandInt(90) + 10));
+                const phrase = words.join(sep);
+                currentPassword = phrase;
+                passwordDisplay.textContent = phrase;
+                document.getElementById('strength-track-wrap').style.display = '';
+                updatePhraseStrength(count, doNum);
+                addToHistory(phrase, count + '-word passphrase');
+            }
+
+            function updatePhraseStrength(wordCount, hasNum) {
+                const t = translations[currentLang];
+                let entropy = wordCount * Math.log2(WORDS.length);
+                if (hasNum) entropy += Math.log2(90);
+                const score = Math.min(100, Math.max(0, (entropy - 28) / 62 * 100));
+                let color, label;
+                if (score < 25)      { color = '#ef4444'; label = t.strengthWeak; }
+                else if (score < 50) { color = '#f59e0b'; label = t.strengthModerate; }
+                else if (score < 75) { color = '#3b82f6'; label = t.strengthStrong; }
+                else                 { color = '#22c55e'; label = t.strengthVeryStrong; }
+                strengthFill.style.width  = score + '%';
+                strengthFill.style.backgroundColor = color;
+                strengthText.textContent  = label;
+                strengthText.style.color  = color;
+                document.getElementById('strength-warning').style.display = 'none';
+            }
+
+            document.getElementById('sep-select').addEventListener('change', generatePassphrase);
+            document.getElementById('phrase-capitalize').addEventListener('change', generatePassphrase);
+            document.getElementById('phrase-append-num').addEventListener('change', generatePassphrase);
+
+            // ── PIN GENERATOR ──
+            function generatePin() {
+                const len = currentPinLen;
+                let pin = '';
+                for (let i = 0; i < len; i++) pin += secureRandInt(10);
+                currentPassword = pin;
+                // Space-group for readability (display only — copy uses raw)
+                const fmt = pin.match(/.{1,3}/g).join('\u2009');
+                passwordDisplay.textContent = fmt;
+                // Hide strength bar, show combination count
+                document.getElementById('strength-track-wrap').style.display = 'none';
+                strengthText.textContent = '';
+                document.getElementById('strength-warning').style.display = 'none';
+                const combos = Math.pow(10, len).toLocaleString();
+                document.getElementById('pin-info').textContent = len + '-digit PIN · ' + combos + ' combinations';
+                addToHistory(pin, len + '-digit PIN');
+            }
+
+            document.querySelectorAll('.pin-len-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentPinLen = +btn.dataset.len;
+                    document.querySelectorAll('.pin-len-btn').forEach(b => b.classList.toggle('active', b === btn));
+                    generatePin();
+                });
+            });
+
+            // ── MODE SWITCHER ──
+            function setMode(mode) {
+                currentMode = mode;
+                document.querySelectorAll('.mode-btn').forEach(b =>
+                    b.classList.toggle('active', b.dataset.mode === mode));
+                document.querySelectorAll('.mode-panel').forEach(p =>
+                    p.classList.toggle('active', p.id === 'mode-panel-' + mode));
+                const t = translations[currentLang];
+                if (mode === 'random') {
+                    document.getElementById('generate-btn-text').textContent = t.newPasswordBtn;
+                    document.getElementById('copy-btn-text').textContent = t.aiCopyBtn || 'Copy Password';
+                    generatePassword();
+                } else if (mode === 'passphrase') {
+                    document.getElementById('generate-btn-text').textContent = t.newPhraseBtn || 'New Passphrase';
+                    document.getElementById('copy-btn-text').textContent = t.copyPhraseBtn || 'Copy Passphrase';
+                    syncPhraseSlider();
+                    generatePassphrase();
+                } else if (mode === 'pin') {
+                    document.getElementById('generate-btn-text').textContent = t.newPinBtn || 'New PIN';
+                    document.getElementById('copy-btn-text').textContent = t.copyPinBtn || 'Copy PIN';
+                    generatePin();
+                }
+            }
+
+            document.querySelectorAll('.mode-btn').forEach(btn =>
+                btn.addEventListener('click', () => setMode(btn.dataset.mode)));
+
+            // Override generate button to dispatch to correct mode
+            generateBtn.removeEventListener('click', generatePassword);
+            generateBtn.addEventListener('click', () => {
+                if (currentMode === 'random') generatePassword();
+                else if (currentMode === 'passphrase') generatePassphrase();
+                else if (currentMode === 'pin') generatePin();
+            });
+
+            // ── HISTORY ──
+            function escHtml(s) {
+                return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+            }
+
+            function addToHistory(password, label) {
+                pwHistory.unshift({ password, label });
+                if (pwHistory.length > 5) pwHistory.pop();
+                renderHistory();
+            }
+
+            function renderHistory() {
+                const list = document.getElementById('history-list');
+                const countEl = document.getElementById('history-count');
+                const t = translations[currentLang];
+                if (pwHistory.length === 0) {
+                    list.innerHTML = '<div class="history-empty">' + escHtml(t.historyEmpty || 'No passwords generated yet') + '</div>';
+                    countEl.style.display = 'none';
+                    return;
+                }
+                countEl.style.display = '';
+                countEl.textContent = pwHistory.length;
+                list.innerHTML = pwHistory.map((item, i) =>
+                    '<div class="history-entry">' +
+                    '<div class="history-pw">' + escHtml(item.password) + '</div>' +
+                    '<div class="history-meta">' + escHtml(item.label) + '</div>' +
+                    '<button class="history-copy-btn" data-idx="' + i + '">' + escHtml(t.copyBtn || 'Copy') + '</button>' +
+                    '</div>'
+                ).join('');
+                list.querySelectorAll('.history-copy-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const pwd = pwHistory[+btn.dataset.idx].password;
+                        const orig = btn.textContent;
+                        navigator.clipboard.writeText(pwd).then(() => {
+                            btn.textContent = t.copied || 'Copied!';
+                            setTimeout(() => { btn.textContent = t.copyBtn || 'Copy'; }, 1500);
+                        }).catch(() => {
+                            const ta = document.createElement('textarea');
+                            ta.value = pwd; document.body.appendChild(ta); ta.select();
+                            document.execCommand('copy'); document.body.removeChild(ta);
+                            btn.textContent = t.copied || 'Copied!';
+                            setTimeout(() => { btn.textContent = t.copyBtn || 'Copy'; }, 1500);
+                        });
+                    });
+                });
+            }
+
+            function getCopyBtnLabel() {
+                const t = translations[currentLang];
+                if (currentMode === 'passphrase') return t.copyPhraseBtn || 'Copy Passphrase';
+                if (currentMode === 'pin') return t.copyPinBtn || 'Copy PIN';
+                return t.aiCopyBtn || 'Copy Password';
+            }
+
             copyBtn.addEventListener('click', function () {
-                const password = passwordDisplay.textContent;
-                navigator.clipboard.writeText(password).then(function () {
+                const pwd = currentPassword;
+                if (!pwd) return;
+                navigator.clipboard.writeText(pwd).then(function () {
                     copyBtn.style.background = 'var(--green)';
-                    copyBtnText.textContent = 'Copied!';
-                    setTimeout(() => { copyBtn.style.background = ''; copyBtnText.textContent = 'Copy Password'; }, 2000);
+                    copyBtn.style.boxShadow = '0 4px 20px rgba(34,197,94,0.35)';
+                    copyBtnText.textContent = translations[currentLang].copied || 'Copied!';
+                    setTimeout(() => {
+                        copyBtn.style.background = '';
+                        copyBtn.style.boxShadow = '';
+                        copyBtnText.textContent = getCopyBtnLabel();
+                    }, 2000);
                 }).catch(function () {
                     const textarea = document.createElement('textarea');
-                    textarea.value = password;
+                    textarea.value = pwd;
                     document.body.appendChild(textarea);
                     textarea.select();
                     document.execCommand('copy');
                     document.body.removeChild(textarea);
                     copyBtn.style.background = 'var(--green)';
-                    copyBtnText.textContent = 'Copied!';
-                    setTimeout(() => { copyBtn.style.background = ''; copyBtnText.textContent = 'Copy Password'; }, 2000);
+                    copyBtnText.textContent = translations[currentLang].copied || 'Copied!';
+                    setTimeout(() => {
+                        copyBtn.style.background = '';
+                        copyBtnText.textContent = getCopyBtnLabel();
+                    }, 2000);
                 });
             });
 
@@ -1315,9 +1743,12 @@
                     if (!response.ok) throw new Error('API error');
 
                     const data = await response.json();
-                    aiPassword.textContent = '> ' + (data.password || '');
+                    const aiPwd = data.password || '';
+                    currentPassword = aiPwd;
+                    aiPassword.textContent = '> ' + aiPwd;
                     aiExplanation.textContent = data.explanation || '';
                     aiResult.classList.add('visible');
+                    if (aiPwd) addToHistory(aiPwd, 'AI');
                 } catch (err) {
                     aiPassword.textContent = '';
                     aiExplanation.textContent = translations[currentLang].aiError;
@@ -1370,7 +1801,14 @@
                     newPasswordBtn: 'New Password',
                     aiCopyBtn: 'Copy Password', copied: 'Copied!',
                     noAmbiguousLabel: 'Exclude ambiguous (0Ol1I)',
-                    strengthWarning: 'This password is too weak. Increase length or add more character types.'
+                    strengthWarning: 'This password is too weak. Increase length or add more character types.',
+                    modeRandom: 'Random', modePassphrase: 'Passphrase', modePin: 'PIN',
+                    wordCountLabel: 'Word Count', separatorLabel: 'Separator',
+                    capitalizeLabel: 'Capitalize', appendNumLabel: 'Add number',
+                    pinLengthLabel: 'PIN Length',
+                    historyTitle: 'Recent (this session)', historyEmpty: 'No passwords generated yet',
+                    newPhraseBtn: 'New Passphrase', newPinBtn: 'New PIN',
+                    copyPhraseBtn: 'Copy Passphrase', copyPinBtn: 'Copy PIN'
                 },
                 de: {
                     title: 'Sicherer Passwort-Generator',
@@ -1413,7 +1851,14 @@
                     newPasswordBtn: 'Neues Passwort',
                     aiCopyBtn: 'Passwort kopieren', copied: 'Kopiert!',
                     noAmbiguousLabel: 'Mehrdeutige Zeichen ausschließen (0Ol1I)',
-                    strengthWarning: 'Dieses Passwort ist zu schwach. Erhöhe die Länge oder füge mehr Zeichentypen hinzu.'
+                    strengthWarning: 'Dieses Passwort ist zu schwach. Erhöhe die Länge oder füge mehr Zeichentypen hinzu.',
+                    modeRandom: 'Zufällig', modePassphrase: 'Passphrase', modePin: 'PIN',
+                    wordCountLabel: 'Wortanzahl', separatorLabel: 'Trennzeichen',
+                    capitalizeLabel: 'Großschreiben', appendNumLabel: 'Nummer anhängen',
+                    pinLengthLabel: 'PIN-Länge',
+                    historyTitle: 'Zuletzt (diese Sitzung)', historyEmpty: 'Noch kein Verlauf',
+                    newPhraseBtn: 'Neue Passphrase', newPinBtn: 'Neue PIN',
+                    copyPhraseBtn: 'Passphrase kopieren', copyPinBtn: 'PIN kopieren'
                 },
                 fr: {
                     title: 'Générateur de mots de passe sécurisé',
@@ -1456,7 +1901,14 @@
                     newPasswordBtn: 'Nouveau mot de passe',
                     aiCopyBtn: 'Copier le mot de passe', copied: 'Copié !',
                     noAmbiguousLabel: 'Exclure les caractères ambigus (0Ol1I)',
-                    strengthWarning: 'Ce mot de passe est trop faible. Augmentez la longueur ou ajoutez plus de types de caractères.'
+                    strengthWarning: 'Ce mot de passe est trop faible. Augmentez la longueur ou ajoutez plus de types de caractères.',
+                    modeRandom: 'Aléatoire', modePassphrase: 'Phrase secrète', modePin: 'PIN',
+                    wordCountLabel: 'Nombre de mots', separatorLabel: 'Séparateur',
+                    capitalizeLabel: 'Majuscules', appendNumLabel: 'Ajouter un chiffre',
+                    pinLengthLabel: 'Longueur du PIN',
+                    historyTitle: 'Récent (cette session)', historyEmpty: 'Pas encore d\'historique',
+                    newPhraseBtn: 'Nouvelle phrase secrète', newPinBtn: 'Nouveau PIN',
+                    copyPhraseBtn: 'Copier la phrase', copyPinBtn: 'Copier le PIN'
                 },
                 es: {
                     title: 'Generador de contraseñas seguro',
@@ -1499,7 +1951,14 @@
                     newPasswordBtn: 'Nueva contraseña',
                     aiCopyBtn: 'Copiar contraseña', copied: '¡Copiado!',
                     noAmbiguousLabel: 'Excluir ambiguos (0Ol1I)',
-                    strengthWarning: 'Esta contraseña es demasiado débil. Aumenta la longitud o añade más tipos de caracteres.'
+                    strengthWarning: 'Esta contraseña es demasiado débil. Aumenta la longitud o añade más tipos de caracteres.',
+                    modeRandom: 'Aleatorio', modePassphrase: 'Frase clave', modePin: 'PIN',
+                    wordCountLabel: 'Número de palabras', separatorLabel: 'Separador',
+                    capitalizeLabel: 'Capitalizar', appendNumLabel: 'Añadir número',
+                    pinLengthLabel: 'Longitud del PIN',
+                    historyTitle: 'Reciente (esta sesión)', historyEmpty: 'Sin historial aún',
+                    newPhraseBtn: 'Nueva frase clave', newPinBtn: 'Nuevo PIN',
+                    copyPhraseBtn: 'Copiar frase', copyPinBtn: 'Copiar PIN'
                 },
                 it: {
                     title: 'Generatore di password sicure',
@@ -1542,7 +2001,14 @@
                     newPasswordBtn: 'Nuova password',
                     aiCopyBtn: 'Copia password', copied: 'Copiato!',
                     noAmbiguousLabel: 'Escludi ambigui (0Ol1I)',
-                    strengthWarning: 'Questa password è troppo debole. Aumenta la lunghezza o aggiungi più tipi di caratteri.'
+                    strengthWarning: 'Questa password è troppo debole. Aumenta la lunghezza o aggiungi più tipi di caratteri.',
+                    modeRandom: 'Casuale', modePassphrase: 'Passphrase', modePin: 'PIN',
+                    wordCountLabel: 'Numero di parole', separatorLabel: 'Separatore',
+                    capitalizeLabel: 'Capitalizza', appendNumLabel: 'Aggiungi numero',
+                    pinLengthLabel: 'Lunghezza PIN',
+                    historyTitle: 'Recente (questa sessione)', historyEmpty: 'Nessuna cronologia',
+                    newPhraseBtn: 'Nuova passphrase', newPinBtn: 'Nuovo PIN',
+                    copyPhraseBtn: 'Copia passphrase', copyPinBtn: 'Copia PIN'
                 },
                 pt: {
                     title: 'Gerador de senhas seguro',
@@ -1585,7 +2051,14 @@
                     newPasswordBtn: 'Nova senha',
                     aiCopyBtn: 'Copiar senha', copied: 'Copiado!',
                     noAmbiguousLabel: 'Excluir ambíguos (0Ol1I)',
-                    strengthWarning: 'Esta senha é muito fraca. Aumente o comprimento ou adicione mais tipos de caracteres.'
+                    strengthWarning: 'Esta senha é muito fraca. Aumente o comprimento ou adicione mais tipos de caracteres.',
+                    modeRandom: 'Aleatória', modePassphrase: 'Frase secreta', modePin: 'PIN',
+                    wordCountLabel: 'Número de palavras', separatorLabel: 'Separador',
+                    capitalizeLabel: 'Capitalizar', appendNumLabel: 'Adicionar número',
+                    pinLengthLabel: 'Comprimento do PIN',
+                    historyTitle: 'Recente (esta sessão)', historyEmpty: 'Sem histórico ainda',
+                    newPhraseBtn: 'Nova frase secreta', newPinBtn: 'Novo PIN',
+                    copyPhraseBtn: 'Copiar frase', copyPinBtn: 'Copiar PIN'
                 },
                 nl: {
                     title: 'Veilige wachtwoordgenerator',
@@ -1628,7 +2101,14 @@
                     newPasswordBtn: 'Nieuw wachtwoord',
                     aiCopyBtn: 'Wachtwoord kopiëren', copied: 'Gekopieerd!',
                     noAmbiguousLabel: 'Dubbelzinnige tekens uitsluiten (0Ol1I)',
-                    strengthWarning: 'Dit wachtwoord is te zwak. Vergroot de lengte of voeg meer tekentypen toe.'
+                    strengthWarning: 'Dit wachtwoord is te zwak. Vergroot de lengte of voeg meer tekentypen toe.',
+                    modeRandom: 'Willekeurig', modePassphrase: 'Wachtzin', modePin: 'PIN',
+                    wordCountLabel: 'Aantal woorden', separatorLabel: 'Scheidingsteken',
+                    capitalizeLabel: 'Hoofdletters', appendNumLabel: 'Cijfer toevoegen',
+                    pinLengthLabel: 'PIN-lengte',
+                    historyTitle: 'Recent (deze sessie)', historyEmpty: 'Nog geen geschiedenis',
+                    newPhraseBtn: 'Nieuwe wachtzin', newPinBtn: 'Nieuwe PIN',
+                    copyPhraseBtn: 'Wachtzin kopiëren', copyPinBtn: 'PIN kopiëren'
                 },
                 pl: {
                     title: 'Bezpieczny generator haseł',
@@ -1671,7 +2151,14 @@
                     newPasswordBtn: 'Nowe hasło',
                     aiCopyBtn: 'Kopiuj hasło', copied: 'Skopiowano!',
                     noAmbiguousLabel: 'Wyklucz niejednoznaczne (0Ol1I)',
-                    strengthWarning: 'To hasło jest zbyt słabe. Zwiększ długość lub dodaj więcej typów znaków.'
+                    strengthWarning: 'To hasło jest zbyt słabe. Zwiększ długość lub dodaj więcej typów znaków.',
+                    modeRandom: 'Losowe', modePassphrase: 'Hasło zdaniowe', modePin: 'PIN',
+                    wordCountLabel: 'Liczba słów', separatorLabel: 'Separator',
+                    capitalizeLabel: 'Wielkie litery', appendNumLabel: 'Dodaj numer',
+                    pinLengthLabel: 'Długość PIN',
+                    historyTitle: 'Ostatnie (ta sesja)', historyEmpty: 'Brak historii',
+                    newPhraseBtn: 'Nowe hasło zdaniowe', newPinBtn: 'Nowy PIN',
+                    copyPhraseBtn: 'Kopiuj hasło zdaniowe', copyPinBtn: 'Kopiuj PIN'
                 },
                 ru: {
                     title: 'Безопасный генератор паролей',
@@ -1714,7 +2201,14 @@
                     newPasswordBtn: 'Новый пароль',
                     aiCopyBtn: 'Скопировать пароль', copied: 'Скопировано!',
                     noAmbiguousLabel: 'Исключить неоднозначные (0Ol1I)',
-                    strengthWarning: 'Этот пароль слишком слабый. Увеличьте длину или добавьте больше типов символов.'
+                    strengthWarning: 'Этот пароль слишком слабый. Увеличьте длину или добавьте больше типов символов.',
+                    modeRandom: 'Случайный', modePassphrase: 'Кодовая фраза', modePin: 'PIN',
+                    wordCountLabel: 'Количество слов', separatorLabel: 'Разделитель',
+                    capitalizeLabel: 'Заглавные', appendNumLabel: 'Добавить цифру',
+                    pinLengthLabel: 'Длина PIN',
+                    historyTitle: 'Недавние (эта сессия)', historyEmpty: 'История пуста',
+                    newPhraseBtn: 'Новая фраза', newPinBtn: 'Новый PIN',
+                    copyPhraseBtn: 'Копировать фразу', copyPinBtn: 'Копировать PIN'
                 }
             };
 
@@ -1772,11 +2266,48 @@
                 document.getElementById('footer-tagline').textContent = t.footerTagline;
                 document.getElementById('no-ambiguous-label').textContent = t.noAmbiguousLabel;
                 document.getElementById('ai-copy-btn-text').textContent = t.aiCopyBtn;
-                document.getElementById('generate-btn-text').textContent = t.newPasswordBtn;
+
+                // Mode-specific button labels
+                if (currentMode === 'random') {
+                    document.getElementById('generate-btn-text').textContent = t.newPasswordBtn;
+                    document.getElementById('copy-btn-text').textContent = t.aiCopyBtn || 'Copy Password';
+                } else if (currentMode === 'passphrase') {
+                    document.getElementById('generate-btn-text').textContent = t.newPhraseBtn || 'New Passphrase';
+                    document.getElementById('copy-btn-text').textContent = t.copyPhraseBtn || 'Copy Passphrase';
+                } else if (currentMode === 'pin') {
+                    document.getElementById('generate-btn-text').textContent = t.newPinBtn || 'New PIN';
+                    document.getElementById('copy-btn-text').textContent = t.copyPinBtn || 'Copy PIN';
+                }
+
+                // Mode bar labels
+                document.getElementById('mode-btn-random').textContent = t.modeRandom || 'Random';
+                document.getElementById('mode-btn-passphrase').textContent = t.modePassphrase || 'Passphrase';
+                document.getElementById('mode-btn-pin').textContent = t.modePin || 'PIN';
+
+                // Passphrase panel labels
+                document.getElementById('word-count-label').textContent = t.wordCountLabel || 'Word Count';
+                document.getElementById('separator-label').textContent = t.separatorLabel || 'Separator';
+                document.getElementById('capitalize-label').textContent = t.capitalizeLabel || 'Capitalize';
+                document.getElementById('append-num-label').textContent = t.appendNumLabel || 'Add number';
+
+                // PIN panel labels
+                document.getElementById('pin-length-label').textContent = t.pinLengthLabel || 'PIN Length';
+
+                // History labels
+                document.getElementById('history-title').textContent = t.historyTitle || 'Recent (this session)';
+                if (pwHistory.length === 0) {
+                    const emptyEl = document.getElementById('history-empty');
+                    if (emptyEl) emptyEl.textContent = t.historyEmpty || 'No passwords generated yet';
+                } else {
+                    renderHistory();
+                }
 
                 langSelect.value = lang;
 
-                if (strengthText.textContent) updateStrengthMeter(passwordDisplay.textContent);
+                if (strengthText.textContent) {
+                    if (currentMode === 'random') updateStrengthMeter(passwordDisplay.textContent);
+                    else if (currentMode === 'passphrase') updatePhraseStrength(+phraseSlider.value, document.getElementById('phrase-append-num').checked);
+                }
             }
 
 
