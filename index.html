@@ -786,6 +786,9 @@
             user-select: none;
             letter-spacing: -4px;
         }
+        /* summary acts as a plain block on desktop */
+        .guide-block-summary { list-style: none; display: block; cursor: default; }
+        .guide-block-summary::-webkit-details-marker { display: none; }
         .guide-block-icon {
             width: 40px;
             height: 40px;
@@ -1116,6 +1119,22 @@
 
             /* Feature cards */
             .feature-card { padding: 22px 20px; }
+
+            /* Guide blocks — accordion on mobile */
+            .guide-block { padding: 1.1rem 1.25rem; }
+            .guide-block-summary {
+                display: flex; align-items: center; gap: 12px;
+                cursor: pointer; position: relative; padding-right: 28px;
+            }
+            .guide-block-summary::after {
+                content: '+'; position: absolute; right: 0;
+                font-size: 20px; color: var(--text-3); font-weight: 300; line-height: 1;
+            }
+            details[open].guide-block .guide-block-summary::after { content: '\2212'; }
+            .guide-block-summary .guide-block-icon { margin-bottom: 0; flex-shrink: 0; }
+            .guide-block-summary .guide-block-title { margin-bottom: 0; font-size: 15px; }
+            .guide-block-body { margin-top: 1rem; }
+            .guide-rules { margin-top: 0.5rem; }
 
             /* FAQ */
             details.faq-item summary { padding: 18px 20px; font-size: 14px; }
@@ -1553,48 +1572,56 @@
             <p class="section-sub">Understanding the science behind strong credentials helps you make smarter decisions — not just for this tool, but for every account you own.</p>
             <div class="guide-blocks">
 
-                <div class="guide-block" data-num="01">
-                    <div class="guide-block-icon gi-amber">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-                        </svg>
-                    </div>
-                    <div class="guide-block-title">The cost of a weak password</div>
+                <details class="guide-block" open data-num="01">
+                    <summary class="guide-block-summary">
+                        <div class="guide-block-icon gi-amber">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                        </div>
+                        <div class="guide-block-title">The cost of a weak password</div>
+                    </summary>
                     <p class="guide-block-body">Over 15 billion stolen credentials are currently circulating in breach databases online. Attackers run automated scripts — called credential stuffing — that test leaked username/password pairs against hundreds of services in seconds. If you reuse a password from any breached site, every other account sharing that password is effectively compromised. A weak or reused password is not just a minor risk; it is an open door.</p>
-                </div>
+                </details>
 
-                <div class="guide-block" data-num="02">
-                    <div class="guide-block-icon gi-blue">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2"/>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                        </svg>
-                    </div>
-                    <div class="guide-block-title">Anatomy of a strong password</div>
+                <details class="guide-block" open data-num="02">
+                    <summary class="guide-block-summary">
+                        <div class="guide-block-icon gi-blue">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        <div class="guide-block-title">Anatomy of a strong password</div>
+                    </summary>
                     <p class="guide-block-body">Length beats complexity every time. A 20-character lowercase passphrase is exponentially harder to crack than an 8-character mix of symbols. What matters most is entropy — the number of possible combinations an attacker must try. Each additional character multiplies the search space. Aim for at least 16 characters; use uppercase, lowercase, digits, and symbols when the site allows them; and never include predictable patterns like your name, birth year, or "123".</p>
-                </div>
+                </details>
 
-                <div class="guide-block" data-num="03">
-                    <div class="guide-block-icon gi-purple">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="12 2 2 7 12 22 22 7 12 2"/>
-                            <line x1="12" y1="22" x2="12" y2="7"/>
-                            <polyline points="2 7 12 12 22 7"/>
-                        </svg>
-                    </div>
-                    <div class="guide-block-title">Passphrases vs random strings</div>
+                <details class="guide-block" open data-num="03">
+                    <summary class="guide-block-summary">
+                        <div class="guide-block-icon gi-purple">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 2 7 12 22 22 7 12 2"/>
+                                <line x1="12" y1="22" x2="12" y2="7"/>
+                                <polyline points="2 7 12 12 22 7"/>
+                            </svg>
+                        </div>
+                        <div class="guide-block-title">Passphrases vs random strings</div>
+                    </summary>
                     <p class="guide-block-body">A random 16-character string like <code style="font-size:11px;color:var(--text-3)">xK7!mP2#qL9$wR4@</code> is extremely secure but nearly impossible to memorise. A four-word passphrase like <code style="font-size:11px;color:var(--text-3)">correct-horse-battery-staple</code> is just as strong (over 44 bits of entropy) yet far easier to remember. Use a random password for accounts stored in a password manager, and a passphrase for anything you need to type from memory — like your manager's master password or your device login.</p>
-                </div>
+                </details>
 
-                <div class="guide-block" data-num="04">
-                    <div class="guide-block-icon gi-green">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="9 11 12 14 22 4"/>
-                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                        </svg>
-                    </div>
-                    <div class="guide-block-title">The golden rules</div>
+                <details class="guide-block" open data-num="04">
+                    <summary class="guide-block-summary">
+                        <div class="guide-block-icon gi-green">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 11 12 14 22 4"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                            </svg>
+                        </div>
+                        <div class="guide-block-title">The golden rules</div>
+                    </summary>
                     <p class="guide-block-body">Following these five habits eliminates the vast majority of password-related account takeovers:</p>
                     <ul class="guide-rules">
                         <li>Use a unique password for every account — no reuse, ever</li>
@@ -1603,7 +1630,7 @@
                         <li>Enable two-factor authentication (2FA) wherever possible</li>
                         <li>Never share passwords via chat, email, or SMS</li>
                     </ul>
-                </div>
+                </details>
 
             </div>
         </div>
@@ -2921,6 +2948,13 @@
                 });
             }
         })();
+    </script>
+    <script>
+        if (window.matchMedia('(max-width: 768px)').matches) {
+            document.querySelectorAll('details.guide-block').forEach(function(d) {
+                d.removeAttribute('open');
+            });
+        }
     </script>
 </body>
 </html>
