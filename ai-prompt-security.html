@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Prompt Security: What You Should Never Share With an AI | pwasecurity</title>
-    <meta name="description" content="AI assistants feel private, but your prompts may be retained, reviewed, or used for training. Learn exactly what to keep out of your AI conversations.">
+    <meta name="description" content="AI assistants feel private, but your prompts can be stored, reviewed, or used for training. Learn exactly what to keep out of your AI conversations.">
     <link rel="canonical" href="https://pwasecurity.org/ai-prompt-security.html">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <meta name="theme-color" content="#060a14">
@@ -12,7 +12,7 @@
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://pwasecurity.org/ai-prompt-security.html">
     <meta property="og:title" content="AI Prompt Security: What You Should Never Share With an AI">
-    <meta property="og:description" content="AI assistants feel private, but your prompts may be retained, reviewed, or used for training. Learn exactly what to keep out of your AI conversations.">
+    <meta property="og:description" content="AI assistants feel private, but your prompts can be stored, reviewed, or used for training. Learn exactly what to keep out of your AI conversations.">
     <meta property="og:site_name" content="pwasecurity">
 
     <style>
@@ -70,6 +70,25 @@
         .never-list li:last-child { border-bottom: none; }
         .never-label { font-size: 13px; font-weight: 700; color: var(--red); flex-shrink: 0; width: 180px; }
 
+        /* Checklist box */
+        .checklist-box { background: rgba(91,156,246,0.06); border: 1px solid rgba(91,156,246,0.18); border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+        .checklist-box h3 { margin: 0 0 14px; font-size: 0.95rem; color: var(--text-1); }
+        .checklist-box ul { list-style: none; padding: 0; margin: 0; }
+        .checklist-box li { display: flex; gap: 10px; align-items: baseline; padding: 5px 0; font-size: 0.93rem; color: var(--text-2); margin: 0; }
+        .checklist-box li::before { content: "☐"; color: var(--blue); flex-shrink: 0; font-size: 0.9rem; }
+
+        /* CTA strip */
+        .cta-strip { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+        .cta-item { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; text-decoration: none; transition: border-color 0.2s; }
+        .cta-item:hover { border-color: rgba(91,156,246,0.4); }
+        .cta-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .cta-icon.green { background: rgba(52,208,104,0.12); color: var(--green); }
+        .cta-icon.blue { background: rgba(91,156,246,0.12); color: var(--blue); }
+        .cta-icon.amber { background: rgba(251,191,36,0.12); color: var(--amber); }
+        .cta-text { display: flex; flex-direction: column; }
+        .cta-title { font-size: 13px; font-weight: 700; color: var(--text-1); }
+        .cta-sub { font-size: 12px; color: var(--text-3); }
+
         /* Footer */
         .article-footer { margin-top: 72px; padding-top: 36px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
         .footer-back { font-size: 13px; color: var(--text-3); text-decoration: none; display: flex; align-items: center; gap: 6px; }
@@ -92,42 +111,44 @@
 
         <div class="article-meta">
             <span class="badge badge-category">AI Safety</span>
-            <span class="read-time">~5 min read</span>
+            <span class="read-time">~6 min read</span>
             <span class="article-date">February 2026</span>
         </div>
 
         <h1 class="article-title">AI Prompt Security: What You Should Never Share With an AI</h1>
 
-        <p class="article-intro">AI assistants have become part of daily work: drafting emails, writing code, summarizing documents, generating passwords. They feel conversational and private, like thinking out loud. They aren't. What you type into an AI prompt may be stored, reviewed by employees, used to train future models, or exposed in a future data breach. This article covers exactly what to keep out of your prompts — and how to get the help you need without the risk.</p>
+        <p class="article-intro">AI assistants have become part of daily work: drafting emails, writing code, summarizing documents, generating passwords. They feel conversational and private, like thinking out loud. They aren't. What you type into an AI prompt can be stored for months or years, reviewed by employees, or used to improve future models. This article covers exactly what to keep out of your prompts and how to get the help you need without the risk.</p>
 
         <h2>What actually happens to your prompts</h2>
 
-        <p>When you send a message to an AI assistant, it travels to a server operated by the AI company — OpenAI, Anthropic, Google, Meta, or whichever provider the product uses. What happens next depends on the company's data policy, which is often long, ambiguous, and subject to change.</p>
+        <p>When you send a message to an AI assistant, it travels to a server operated by the AI company: OpenAI, Anthropic, Google, Meta, or whichever provider the product uses. What happens next depends on the company's data policy, which is often long, ambiguous, and subject to change.</p>
 
-        <p>In practice, this means your prompts may be:</p>
+        <p>In practice, your prompts may be:</p>
 
         <ul>
-            <li><strong>Stored for an indefinite period</strong> — to improve safety systems, investigate abuse, or train future models</li>
-            <li><strong>Reviewed by human employees</strong> — most AI companies reserve the right to have staff read conversations for safety and quality purposes</li>
-            <li><strong>Used for model training</strong> — unless you explicitly opt out, and even then, policies vary</li>
-            <li><strong>Subject to legal disclosure</strong> — subpoenas, law enforcement requests, or regulatory inquiries can surface stored conversations</li>
-            <li><strong>Exposed in a data breach</strong> — AI companies are high-value targets; breaches have already occurred at several providers</li>
+            <li><strong>Stored for months or years</strong>, depending on your account tier and the product's current policy</li>
+            <li><strong>Reviewed by human employees</strong> for safety, quality, and policy enforcement</li>
+            <li><strong>Used to improve future models</strong>, unless you explicitly opt out (and opt-out coverage varies)</li>
+            <li><strong>Subject to legal disclosure</strong> via subpoenas, law enforcement requests, or regulatory inquiries</li>
+            <li><strong>At risk in a data breach.</strong> These services are high-value targets. Assume breaches are possible and plan accordingly.</li>
         </ul>
 
         <div class="callout amber">
-            <p><strong>Important:</strong> Enterprise tiers and API access often have stronger privacy protections than consumer products. If you're using a free consumer product, assume your prompts are retained by default.</p>
+            <p><strong>Consumer vs. enterprise:</strong> Enterprise and API plans often have stronger privacy defaults than consumer chat products, but you still need to read the policy for your specific product. Don't assume enterprise protection if you're on a free or personal tier.</p>
         </div>
 
         <h2>What you should never include in an AI prompt</h2>
 
+        <p>These categories cover the most common and most damaging leaks.</p>
+
         <ul class="never-list">
             <li>
                 <span class="never-label">Passwords &amp; credentials</span>
-                <span>Never paste a password, PIN, or passphrase into an AI chat — not to "check if it's strong", not to ask for variations, not as an example. If the conversation is stored, your credential is stored. Generate passwords in a browser-local tool instead.</span>
+                <span>Never paste a password, PIN, or passphrase into an AI chat. Not to "check if it's strong", not to ask for variations, not as an example. If the conversation is stored, your credential is stored. Generate passwords in a browser-local tool instead.</span>
             </li>
             <li>
                 <span class="never-label">API keys &amp; tokens</span>
-                <span>API keys, OAuth tokens, private keys, and secrets for any service. Developers frequently paste these accidentally when sharing error messages or code snippets. Treat any key as compromised the moment it leaves your machine — revoke it and rotate immediately.</span>
+                <span>API keys, OAuth tokens, private keys, and service secrets. Developers paste these accidentally all the time when sharing error messages or code snippets. Treat any key as compromised the moment it leaves your machine. Revoke and rotate immediately.</span>
             </li>
             <li>
                 <span class="never-label">Personal ID numbers</span>
@@ -135,27 +156,43 @@
             </li>
             <li>
                 <span class="never-label">Financial data</span>
-                <span>Credit card numbers, bank account details, IBAN codes, CVVs. Even partial numbers combined with other context can be dangerous if they appear in training data or a breach.</span>
+                <span>Credit card numbers, bank account details, IBAN codes, CVVs. Even partial numbers combined with other context can be dangerous if they appear in stored data or a breach.</span>
             </li>
             <li>
                 <span class="never-label">Medical records</span>
-                <span>Health conditions, prescriptions, test results, therapy notes. Medical data carries legal protection in most jurisdictions for good reason — it is highly sensitive and frequently targeted.</span>
+                <span>Health conditions, prescriptions, test results, therapy notes. Medical data carries legal protection in most jurisdictions for good reason. It is highly sensitive and frequently targeted.</span>
             </li>
             <li>
                 <span class="never-label">Confidential business data</span>
-                <span>Unreleased product plans, M&amp;A details, client lists, internal financial figures, proprietary source code. Your employer's confidential information belongs to your employer, and pasting it into a third-party AI is often a direct policy violation — as several employees at major companies have discovered publicly.</span>
+                <span>Unreleased product plans, M&amp;A details, client lists, internal financial figures, proprietary source code. Pasting this into a third-party AI is often a direct policy violation, as several employees at major companies have discovered publicly.</span>
             </li>
             <li>
                 <span class="never-label">Other people's data</span>
-                <span>Personal details about others — colleagues, clients, patients — shared without their consent. Even if you anonymize names, contextual details can be re-identifying. Data protection laws in many countries apply to how you handle others' personal information, regardless of where you process it.</span>
+                <span>Personal details about colleagues, clients, or patients shared without their consent. Even anonymized names can be re-identifying when combined with other context. Data protection laws in many countries apply regardless of where you process the data.</span>
             </li>
+        </ul>
+
+        <h3>What counts as PII context?</h3>
+
+        <p>Readers often miss subtler identifiers. Beyond names and ID numbers, avoid including: your bank name, your employer's name, your email address or username, your city or location, client names, and account numbers of any kind. These details seem harmless individually. Combined, they create a profile.</p>
+
+        <h2>The real leak is logs, files, and pasted code</h2>
+
+        <p>Most credential leaks in AI prompts don't happen when someone intentionally shares a secret. They happen when someone pastes a log file, a config snippet, or a chunk of code that silently contains a key or token.</p>
+
+        <p>Before pasting anything into an AI, do three things:</p>
+
+        <ul>
+            <li><strong>Scan for tokens, keys, URLs with embedded credentials, and email addresses.</strong> Look for patterns like <code>sk-</code>, <code>Bearer </code>, <code>Authorization:</code>, or anything that looks like a long alphanumeric string.</li>
+            <li><strong>Redact first.</strong> Replace keys with <code>[REDACTED]</code> and emails with <code>user@example.com</code> before sending.</li>
+            <li><strong>Rotate any key that may have been exposed.</strong> If you're not sure whether a key was included, treat it as compromised and generate a new one.</li>
         </ul>
 
         <h2>The specific risk with AI password generation</h2>
 
-        <p>AI-powered password generators — including the AI Mode on this site — are useful for creating memorable, context-specific passwords. But they introduce a network request that local generators don't: your text description is sent to a remote server.</p>
+        <p>AI-powered password generators, including the AI Mode on this site, are useful for creating memorable, context-specific passwords. But they introduce a network request that local generators don't: your text description is sent to a remote server.</p>
 
-        <p>This creates a concrete rule: <strong>describe what you need the password for in generic terms, never include the actual password, account credentials, or personally identifying context.</strong></p>
+        <p>The rule: <strong>describe what you need the password for in generic terms. Never include the actual password, your username, your account name, or the institution's name.</strong></p>
 
         <div class="callout red">
             <p><strong>Bad prompt:</strong> "Generate a new password for my Chase bank account — my current one is BlueSky2024! and my username is john.smith@gmail.com"</p>
@@ -165,25 +202,59 @@
             <p><strong>Good prompt:</strong> "Generate a strong, memorable password for a banking site — something I can type easily but wouldn't guess"</p>
         </div>
 
-        <p>The good prompt gets you what you need. The bad prompt hands a third-party server your existing credentials, username, and institution. If you prefer to avoid the network request entirely, use the Random or Passphrase mode — both generate passwords entirely inside your browser with no data sent anywhere.</p>
+        <p>The good prompt gets you what you need. The bad prompt hands a third-party server your existing credentials, username, and institution. If you'd rather avoid the network request entirely, use Random or Passphrase mode. Both generate passwords entirely inside your browser with no data sent anywhere.</p>
 
         <h2>How to use AI safely</h2>
 
-        <p>None of this means AI tools are unusable — they're genuinely powerful. It means using them with the same discretion you'd apply to any external service.</p>
+        <p>None of this means AI tools are unusable. They're genuinely powerful. It means applying the same discretion you'd use with any external service.</p>
 
         <ul>
-            <li><strong>Anonymize before pasting.</strong> Replace real names, company names, account numbers, and identifying details with placeholders before sending text to an AI. "Client X" and "Company A" are fine; real names are not.</li>
+            <li><strong>Anonymize before pasting.</strong> Replace real names, company names, account numbers, and identifying details with placeholders. "Client X" and "Company A" are fine. Real names are not.</li>
             <li><strong>Read the privacy policy of the specific product you're using.</strong> Consumer chatbots and enterprise API access have very different terms. Know which one you're on.</li>
-            <li><strong>Use local tools for sensitive operations.</strong> Password generation, encryption, and any processing of credentials should happen locally — in your browser or on your machine — not via a third-party AI.</li>
+            <li><strong>Use local tools for sensitive operations.</strong> Password generation and any processing of credentials should happen locally, in your browser or on your machine, not via a third-party AI.</li>
             <li><strong>Opt out of training data use where available.</strong> Most major AI providers offer this in account settings. It's not a guarantee, but it reduces the scope of retention.</li>
-            <li><strong>Treat the AI like a smart colleague in a shared office.</strong> You'd ask that colleague to help you draft an email or debug code. You wouldn't read them your PIN number.</li>
+            <li><strong>Treat the AI like a smart colleague in a shared office.</strong> You'd ask that colleague to help draft an email or debug code. You wouldn't read them your PIN.</li>
         </ul>
 
-        <h2>The bottom line</h2>
+        <h2>Quick checklist before you paste</h2>
 
-        <p>AI assistants are tools with access to servers you don't control, run by companies with privacy policies you probably haven't read. The information you send them is only as private as those policies guarantee — and those guarantees have limits.</p>
+        <div class="checklist-box">
+            <h3>Run through this before sending anything sensitive:</h3>
+            <ul>
+                <li>No passwords, PINs, or passphrases in the prompt</li>
+                <li>No API keys, tokens, or secrets (check pasted code and logs)</li>
+                <li>No real names, email addresses, usernames, or account numbers</li>
+                <li>No bank names, employers, or client names for context</li>
+                <li>No medical details, ID numbers, or financial data</li>
+                <li>Used opt-out for training data in account settings</li>
+                <li>On an enterprise or API plan if handling work-sensitive data</li>
+            </ul>
+        </div>
 
-        <p>Keep credentials, identity documents, financial data, and other people's personal information out of AI prompts. Use generic descriptions for context-specific requests. For operations that require real sensitive data — like generating a secure password — use a tool that runs entirely in your browser.</p>
+        <h2>What to do instead</h2>
+
+        <p>For anything involving real credentials or sensitive data, use tools that never leave your device.</p>
+
+        <div class="cta-strip">
+            <a href="/?mode=random" class="cta-item">
+                <div class="cta-icon green">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="cta-text">
+                    <span class="cta-title">Generate locally — Random or Passphrase mode</span>
+                    <span class="cta-sub">No network request. Password never leaves your browser.</span>
+                </div>
+            </a>
+            <a href="/?mode=ai" class="cta-item">
+                <div class="cta-icon amber">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <div class="cta-text">
+                    <span class="cta-title">AI Mode safety rules</span>
+                    <span class="cta-sub">Use generic descriptions only. Never include real credentials or account names.</span>
+                </div>
+            </a>
+        </div>
 
         <div class="article-footer">
             <a href="/" class="footer-back">
