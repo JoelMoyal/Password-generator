@@ -1184,6 +1184,11 @@
             background: var(--blue); color: #fff; font-size: 10px; font-weight: 700;
             padding: 1px 7px; border-radius: 99px; min-width: 20px; text-align: center;
         }
+        .history-clear-btn { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.25);
+          border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--red);
+          cursor: pointer; padding: 6px 14px; display: flex; align-items: center; gap: 5px;
+          transition: background 0.2s, border-color 0.2s; margin: 10px auto 4px; }
+        .history-clear-btn:hover { background: rgba(248,113,113,0.18); border-color: rgba(248,113,113,0.5); }
         .history-list {
             background: rgba(6,10,20,0.7); backdrop-filter: blur(16px);
             border: 1px solid rgba(255,255,255,0.07); border-top: none;
@@ -1426,6 +1431,10 @@
             <div class="history-list" id="history-list">
                 <div class="history-empty" id="history-empty">No passwords generated yet</div>
             </div>
+            <button class="history-clear-btn" id="history-clear-btn" title="Clear history">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                Clear history
+            </button>
         </details>
     </div>
     </section>
@@ -2042,6 +2051,12 @@
                     });
                 });
             }
+
+            document.getElementById('history-clear-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                pwHistory.length = 0;
+                renderHistory();
+            });
 
             function getCopyBtnLabel() {
                 const t = translations[currentLang];
