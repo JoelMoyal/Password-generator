@@ -2157,12 +2157,21 @@
                     '<button class="history-copy-btn" data-idx="' + i + '">' + escHtml(t.copyBtn || 'Copy') + '</button>' +
                     '</div>'
                 ).join('');
-                // Reveal toggle — click eye btn or the blurred text itself
+                // Reveal toggle — only one entry visible at a time
                 function toggleReveal(idx) {
-                    const pwEl  = list.querySelector('.history-pw[data-idx="' + idx + '"]');
+                    const pwEl   = list.querySelector('.history-pw[data-idx="' + idx + '"]');
                     const eyeBtn = list.querySelector('.history-reveal-btn[data-idx="' + idx + '"]');
-                    const revealed = pwEl.classList.toggle('revealed');
-                    eyeBtn.innerHTML = revealed ? SVG_EYE_OFF : SVG_EYE;
+                    const willReveal = !pwEl.classList.contains('revealed');
+                    // Hide all others first
+                    list.querySelectorAll('.history-pw.revealed').forEach(function(el) {
+                        el.classList.remove('revealed');
+                        const btn = list.querySelector('.history-reveal-btn[data-idx="' + el.dataset.idx + '"]');
+                        if (btn) btn.innerHTML = SVG_EYE;
+                    });
+                    if (willReveal) {
+                        pwEl.classList.add('revealed');
+                        eyeBtn.innerHTML = SVG_EYE_OFF;
+                    }
                 }
                 list.querySelectorAll('.history-reveal-btn').forEach(btn =>
                     btn.addEventListener('click', () => toggleReveal(+btn.dataset.idx)));
