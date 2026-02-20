@@ -946,7 +946,15 @@
         .history-pw {
             flex: 1; font-family: 'Courier New', monospace; font-size: 13px;
             color: var(--text-1); word-break: break-all; letter-spacing: 0.03em; min-width: 0;
+            filter: blur(5px); transition: filter 0.2s; cursor: pointer; user-select: none;
         }
+        .history-pw.revealed { filter: none; user-select: text; cursor: default; }
+        .history-reveal-btn {
+            padding: 4px 5px; background: transparent; border: none;
+            color: var(--text-3); cursor: pointer; flex-shrink: 0;
+            display: flex; align-items: center; margin: 0; width: auto; transition: color 0.15s;
+        }
+        .history-reveal-btn:hover { color: var(--text-1); }
         .history-meta { font-size: 11px; color: var(--text-3); white-space: nowrap; flex-shrink: 0; padding-right: 4px; }
         .history-copy-btn {
             padding: 4px 10px; background: rgba(255,255,255,0.06);
@@ -1594,6 +1602,9 @@
                 renderHistory();
             }
 
+            const SVG_EYE     = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+            const SVG_EYE_OFF = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+
             function renderHistory() {
                 const list = document.getElementById('history-list');
                 const countEl = document.getElementById('history-count');
@@ -1607,15 +1618,28 @@
                 countEl.textContent = pwHistory.length;
                 list.innerHTML = pwHistory.map((item, i) =>
                     '<div class="history-entry">' +
-                    '<div class="history-pw">' + escHtml(item.password) + '</div>' +
+                    '<div class="history-pw" data-idx="' + i + '">' + escHtml(item.password) + '</div>' +
                     '<div class="history-meta">' + escHtml(item.label) + '</div>' +
+                    '<button class="history-reveal-btn" data-idx="' + i + '" title="Show/hide">' + SVG_EYE + '</button>' +
                     '<button class="history-copy-btn" data-idx="' + i + '">' + escHtml(t.copyBtn || 'Copy') + '</button>' +
                     '</div>'
                 ).join('');
+                // Reveal toggle — click eye btn or the blurred text itself
+                function toggleReveal(idx) {
+                    const pwEl  = list.querySelector('.history-pw[data-idx="' + idx + '"]');
+                    const eyeBtn = list.querySelector('.history-reveal-btn[data-idx="' + idx + '"]');
+                    const revealed = pwEl.classList.toggle('revealed');
+                    eyeBtn.innerHTML = revealed ? SVG_EYE_OFF : SVG_EYE;
+                }
+                list.querySelectorAll('.history-reveal-btn').forEach(btn =>
+                    btn.addEventListener('click', () => toggleReveal(+btn.dataset.idx)));
+                list.querySelectorAll('.history-pw').forEach(pwEl =>
+                    pwEl.addEventListener('click', () => {
+                        if (!pwEl.classList.contains('revealed')) toggleReveal(+pwEl.dataset.idx);
+                    }));
                 list.querySelectorAll('.history-copy-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
                         const pwd = pwHistory[+btn.dataset.idx].password;
-                        const orig = btn.textContent;
                         navigator.clipboard.writeText(pwd).then(() => {
                             btn.textContent = t.copied || 'Copied!';
                             setTimeout(() => { btn.textContent = t.copyBtn || 'Copy'; }, 1500);
