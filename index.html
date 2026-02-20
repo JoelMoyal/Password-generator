@@ -3334,8 +3334,16 @@
     </script>
     <script>
         if (window.matchMedia('(max-width: 768px)').matches) {
+            // Mobile: start collapsed
             document.querySelectorAll('details.guide-block').forEach(function(d) {
                 d.removeAttribute('open');
+            });
+        } else {
+            // Desktop: prevent collapsing — always stay open
+            document.querySelectorAll('details.guide-block > summary').forEach(function(s) {
+                s.addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
             });
         }
     </script>
