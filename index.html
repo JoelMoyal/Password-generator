@@ -1332,7 +1332,7 @@
     </nav>
     <section class="hero">
         <p class="hero-eyebrow">Free · No Account · Browser-Only</p>
-        <h1 class="hero-title" id="title"><span class="accent">AI</span> Password Generator</h1>
+        <h1 class="hero-title"><span class="accent">AI</span> <span id="title">Password Generator</span></h1>
         <p class="hero-sub" id="subtitle">Strong, unique passwords generated instantly in your browser. Nothing ever leaves your device.</p>
     <div class="tool-wrap"><div class="tool-card">
 
@@ -3101,7 +3101,7 @@
                 currentLang = lang;
                 document.documentElement.lang = lang;
                 const t = translations[lang];
-                document.getElementById('title').textContent = t.title;
+                document.getElementById('title').textContent = (t.title || '').replace(/^AI\s+/i, '');
                 document.getElementById('subtitle').textContent = t.subtitle;
                 document.getElementById('ai-label').textContent = t.aiLabel;
                 document.getElementById('length-label').textContent = t.lengthLabel;
