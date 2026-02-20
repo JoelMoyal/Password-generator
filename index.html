@@ -1379,7 +1379,7 @@
 
             <div class="ai-security-note">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <span id="ai-security-note-text">Your description is used only to generate the password and is never stored or memorized by the AI.</span>
+                <span id="ai-security-note-text">Your prompt is sent to Cloudflare Workers AI to generate a suggestion. Don't include real passwords or sensitive data.</span>
             </div>
 
             <div class="ai-loading" id="ai-loading">Generating...</div>
@@ -2190,7 +2190,7 @@
                     aiPlaceholder: 'e.g. a password for my bank account that I can remember',
                     aiBtn: 'Generate with AI',
                     aiLoading: 'Generating...',
-                    aiSecurityNote: 'Your description is used only to generate the password and is never stored or memorized by the AI.',
+                    aiSecurityNote: 'Your prompt is sent to Cloudflare Workers AI to generate a suggestion. Don\'t include real passwords or sensitive data.',
                     strengthWeak: 'WEAK', strengthModerate: 'MODERATE', strengthStrong: 'STRONG', strengthVeryStrong: 'VERY STRONG',
                     aiError: '[ERROR] Could not reach AI. Make sure the Workers AI binding is enabled in Cloudflare Pages settings.',
                     trust1Title: 'Browser-Only', trust1Sub: 'Zero server contact',
