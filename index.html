@@ -561,8 +561,9 @@
             cursor: pointer;
             font-family: inherit;
             transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-            white-space: normal;
-            word-break: break-word;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             margin-top: 0;
             backdrop-filter: blur(8px);
         }
