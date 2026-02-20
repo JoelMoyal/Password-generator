@@ -183,7 +183,7 @@
         <p>Before pasting anything into an AI, do three things:</p>
 
         <ul>
-            <li><strong>Scan for tokens, keys, URLs with embedded credentials, and email addresses.</strong> Look for patterns like <code>sk-</code>, <code>Bearer </code>, <code>Authorization:</code>, or anything that looks like a long alphanumeric string.</li>
+            <li><strong>Scan for tokens, keys, URLs with embedded credentials, and email addresses.</strong> Look for patterns like <code>Authorization:</code>, <code>Bearer</code>, <code>PRIVATE KEY</code>, <code>token=</code>, <code>api_key=</code>, or any long random-looking string.</li>
             <li><strong>Redact first.</strong> Replace keys with <code>[REDACTED]</code> and emails with <code>user@example.com</code> before sending.</li>
             <li><strong>Rotate any key that may have been exposed.</strong> If you're not sure whether a key was included, treat it as compromised and generate a new one.</li>
         </ul>
