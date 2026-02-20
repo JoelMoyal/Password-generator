@@ -19,6 +19,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pwasecurity.org/password-reuse.html</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pwasecurity.org/password-length-2026.html</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pwasecurity.org/password-hall-of-shame.html</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pwasecurity.org/privacy.html</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>yearly</changefreq>

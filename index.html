@@ -848,8 +848,11 @@
             border-top-width: 2px;
         }
         .article-card:hover { border-color: var(--border-h); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
-        .articles-grid .article-card:nth-child(1) { border-top-color: rgba(59,130,246,0.5); }
-        .articles-grid .article-card:nth-child(2) { border-top-color: rgba(59,130,246,0.5); }
+        .articles-grid .article-card:nth-child(1) { border-top-color: rgba(91,156,246,0.5); }
+        .articles-grid .article-card:nth-child(2) { border-top-color: rgba(167,139,250,0.5); }
+        .articles-grid .article-card:nth-child(3) { border-top-color: rgba(248,113,113,0.5); }
+        .articles-grid .article-card:nth-child(4) { border-top-color: rgba(52,208,104,0.5); }
+        .articles-grid .article-card:nth-child(5) { border-top-color: rgba(251,191,36,0.5); }
         .article-card-meta {
             display: flex;
             align-items: center;
@@ -1569,11 +1572,41 @@
 
                 <a class="article-card" href="/ai-prompt-security.html" style="text-decoration:none;display:block;cursor:pointer;">
                     <div class="article-card-meta">
-                        <span class="article-badge badge-category">AI Safety</span>
-                        <span class="article-read-time">~5 min read</span>
+                        <span class="article-badge badge-category" style="background:rgba(167,139,250,0.15);color:var(--purple);">AI Safety</span>
+                        <span class="article-read-time">~6 min read</span>
                     </div>
                     <div class="article-card-title">AI Prompt Security: What You Should Never Share With an AI</div>
-                    <p class="article-card-excerpt">AI assistants feel private, but your prompts may be retained, reviewed, or used for model training. This article breaks down what information is genuinely risky to include in AI prompts, and how to get the help you need without exposing sensitive data.</p>
+                    <p class="article-card-excerpt">AI assistants feel private, but your prompts can be stored, reviewed, or used for training. This article breaks down what's genuinely risky to include in AI prompts and how to get the help you need without exposing sensitive data.</p>
+                    <div class="article-card-cta">Read article →</div>
+                </a>
+
+                <a class="article-card" href="/password-reuse.html" style="text-decoration:none;display:block;cursor:pointer;">
+                    <div class="article-card-meta">
+                        <span class="article-badge badge-category" style="background:rgba(248,113,113,0.15);color:var(--red);">Threat Basics</span>
+                        <span class="article-read-time">~5 min read</span>
+                    </div>
+                    <div class="article-card-title">The One Password Mistake That Breaks Everything: Reuse</div>
+                    <p class="article-card-excerpt">Password reuse is how one small breach becomes twenty. Here's how credential stuffing works, why your "unique" variations don't help, and what to actually do.</p>
+                    <div class="article-card-cta">Read article →</div>
+                </a>
+
+                <a class="article-card" href="/password-length-2026.html" style="text-decoration:none;display:block;cursor:pointer;">
+                    <div class="article-card-meta">
+                        <span class="article-badge badge-category" style="background:rgba(52,208,104,0.15);color:var(--green);">Password Basics</span>
+                        <span class="article-read-time">~5 min read</span>
+                    </div>
+                    <div class="article-card-title">How Long Should a Password Be in 2026?</div>
+                    <p class="article-card-excerpt">The 8-character rule was written for 1990s hardware. Here's what password length actually means today, with a practical breakdown by account type and what current NIST guidance actually says.</p>
+                    <div class="article-card-cta">Read article →</div>
+                </a>
+
+                <a class="article-card" href="/password-hall-of-shame.html" style="text-decoration:none;display:block;cursor:pointer;">
+                    <div class="article-card-meta">
+                        <span class="article-badge badge-category" style="background:rgba(251,191,36,0.15);color:var(--amber);">Case Studies</span>
+                        <span class="article-read-time">~7 min read</span>
+                    </div>
+                    <div class="article-card-title">Password Hall of Shame: Real Weak Passwords in Real Systems</div>
+                    <p class="article-card-excerpt">Not roasting ordinary users. Roasting the systems that should have known better. Four real incidents where catastrophically weak credentials got past everyone responsible for security.</p>
                     <div class="article-card-cta">Read article →</div>
                 </a>
 
