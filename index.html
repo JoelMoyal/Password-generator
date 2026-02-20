@@ -722,6 +722,128 @@
             line-height: 1.6;
         }
 
+        /* ── GUIDE SECTION ── */
+        .guide-section {
+            padding: 96px 24px;
+        }
+        .guide-blocks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+        }
+        .guide-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            backdrop-filter: blur(20px);
+        }
+        .guide-block-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .guide-block-icon svg { width: 22px; height: 22px; }
+        .gi-amber { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.2); }
+        .gi-blue  { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.2); }
+        .gi-purple { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.2); }
+        .gi-green  { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.2); }
+        .guide-block-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-1);
+            margin-bottom: 0.6rem;
+        }
+        .guide-block-body {
+            font-size: 13px;
+            color: var(--text-2);
+            line-height: 1.75;
+        }
+        .guide-rules {
+            list-style: none;
+            margin-top: 0.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .guide-rules li { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+        .guide-rules li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+
+        /* ── ARTICLES SECTION ── */
+        .articles-section {
+            padding: 96px 24px;
+            background: rgba(14,20,42,0.3);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .article-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            backdrop-filter: blur(20px);
+            transition: border-color 0.2s;
+        }
+        .article-card:hover { border-color: var(--border-h); }
+        .article-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .article-badge {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+        .badge-category { background: rgba(59,130,246,0.15); color: var(--blue); }
+        .badge-soon { background: rgba(245,158,11,0.15); color: var(--amber); }
+        .article-read-time {
+            font-size: 11px;
+            color: var(--text-3);
+            margin-left: auto;
+        }
+        .article-card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-1);
+            line-height: 1.4;
+        }
+        .article-card-excerpt {
+            font-size: 13px;
+            color: var(--text-2);
+            line-height: 1.7;
+        }
+        .article-card-cta {
+            margin-top: auto;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-3);
+            font-style: italic;
+        }
+
         /* ── FAQ SECTION ── */
         .faq-section {
             background: rgba(14,20,42,0.3);
@@ -911,6 +1033,8 @@
         @media (max-width: 768px) {
             .features-grid { grid-template-columns: 1fr; }
             .trust-inner { grid-template-columns: 1fr; }
+            .guide-blocks { grid-template-columns: 1fr; }
+            .articles-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) {
             .options-grid { grid-template-columns: 1fr; }
@@ -1283,6 +1407,70 @@
         </div>
     </section>
 
+    <!-- ── PASSWORD SECURITY GUIDE ── -->
+    <section class="guide-section">
+        <div class="section-center">
+            <span class="section-eyebrow">Password Security Fundamentals</span>
+            <h2 class="section-title">What makes a password truly secure?</h2>
+            <p class="section-sub">Understanding the science behind strong credentials helps you make smarter decisions — not just for this tool, but for every account you own.</p>
+            <div class="guide-blocks">
+
+                <div class="guide-block">
+                    <div class="guide-block-icon gi-amber">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="guide-block-title">The cost of a weak password</div>
+                    <p class="guide-block-body">Over 15 billion stolen credentials are currently circulating in breach databases online. Attackers run automated scripts — called credential stuffing — that test leaked username/password pairs against hundreds of services in seconds. If you reuse a password from any breached site, every other account sharing that password is effectively compromised. A weak or reused password is not just a minor risk; it is an open door.</p>
+                </div>
+
+                <div class="guide-block">
+                    <div class="guide-block-icon gi-blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <div class="guide-block-title">Anatomy of a strong password</div>
+                    <p class="guide-block-body">Length beats complexity every time. A 20-character lowercase passphrase is exponentially harder to crack than an 8-character mix of symbols. What matters most is entropy — the number of possible combinations an attacker must try. Each additional character multiplies the search space. Aim for at least 16 characters; use uppercase, lowercase, digits, and symbols when the site allows them; and never include predictable patterns like your name, birth year, or "123".</p>
+                </div>
+
+                <div class="guide-block">
+                    <div class="guide-block-icon gi-purple">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 22 22 7 12 2"/>
+                            <line x1="12" y1="22" x2="12" y2="7"/>
+                            <polyline points="2 7 12 12 22 7"/>
+                        </svg>
+                    </div>
+                    <div class="guide-block-title">Passphrases vs random strings</div>
+                    <p class="guide-block-body">A random 16-character string like <code style="font-size:11px;color:var(--text-3)">xK7!mP2#qL9$wR4@</code> is extremely secure but nearly impossible to memorise. A four-word passphrase like <code style="font-size:11px;color:var(--text-3)">correct-horse-battery-staple</code> is just as strong (over 44 bits of entropy) yet far easier to remember. Use a random password for accounts stored in a password manager, and a passphrase for anything you need to type from memory — like your manager's master password or your device login.</p>
+                </div>
+
+                <div class="guide-block">
+                    <div class="guide-block-icon gi-green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 11 12 14 22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                    </div>
+                    <div class="guide-block-title">The golden rules</div>
+                    <p class="guide-block-body">Following these five habits eliminates the vast majority of password-related account takeovers:</p>
+                    <ul class="guide-rules">
+                        <li>Use a unique password for every account — no reuse, ever</li>
+                        <li>Make passwords at least 16 characters long</li>
+                        <li>Store them in a reputable password manager (Bitwarden, 1Password)</li>
+                        <li>Enable two-factor authentication (2FA) wherever possible</li>
+                        <li>Never share passwords via chat, email, or SMS</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <section class="faq-section">
         <div class="section-center">
             <span class="section-eyebrow" id="faq-eyebrow">FAQ</span>
@@ -1304,6 +1492,72 @@
                     <summary id="faq-4-q">Why use a passphrase instead of a random password?</summary>
                     <p class="faq-answer" id="faq-4-a">Passphrases are longer and easier to remember while still being very secure. Use AI Mode to generate a memorable passphrase tailored to your context.</p>
                 </details>
+                <details class="faq-item">
+                    <summary>What is the difference between a passphrase and a random password?</summary>
+                    <p class="faq-answer">A random password is a short, dense string of mixed characters (e.g. <code style="font-size:11px">xK7!mP2#</code>) designed to be stored in a password manager. A passphrase is a sequence of common words (e.g. <code style="font-size:11px">lamp-cloud-river-stone</code>) that is longer, easier to type, and still carries high entropy. Both approaches are secure when generated properly; the choice depends on whether you need to memorise the credential or rely on a manager.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I use the same password on multiple sites?</summary>
+                    <p class="faq-answer">No — and this is one of the most important rules in password security. When any service suffers a data breach, attackers immediately test the leaked credentials against thousands of other sites automatically. This attack is called credential stuffing. If you reuse a password, a single breach can cascade into dozens of compromised accounts. Use a unique, randomly generated password for every service, and let a password manager handle the storage.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What is entropy and why does it matter for passwords?</summary>
+                    <p class="faq-answer">Entropy, measured in bits, quantifies how unpredictable a password is. The higher the entropy, the more guesses an attacker must make to crack it. A random lowercase letter adds about 4.7 bits; adding uppercase, digits, and symbols to a 16-character password can reach 100+ bits — far beyond the reach of any current brute-force attack. The strength meter in this tool displays an entropy-based score so you can see the real security level of every password you generate.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What is a PIN and when should I use one instead of a password?</summary>
+                    <p class="faq-answer">A PIN (Personal Identification Number) is a short numeric code typically used to unlock a physical device or card rather than an online account. PINs are secure in that context because hardware enforces a limited number of attempts (usually 3–10) before locking. For online accounts, a PIN alone is too short and too guessable — use a full password or passphrase instead. Use the PIN generator here for device lock screens, bank cards, or any scenario where a numeric-only code is required.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How does AI Mode generate passwords — is it safe?</summary>
+                    <p class="faq-answer">AI Mode sends your plain-English description to a Cloudflare Workers AI endpoint (running Meta's Llama model). The AI interprets your request and suggests a password structure; the actual password is returned to your browser and is never logged or stored on any server. Your prompt itself is ephemeral — Cloudflare does not retain it after the response is sent. If you are concerned about privacy, use the standard Random or Passphrase mode, which generates passwords entirely inside your browser with no network requests at all.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Should I store my passwords in my browser?</summary>
+                    <p class="faq-answer">Browser-saved passwords are convenient but carry real risks: they are accessible to anyone with physical access to your unlocked device, synced across devices in ways you may not fully control, and potentially exposed if your browser account is compromised. A dedicated password manager (such as Bitwarden, 1Password, or KeePass) encrypts your vault with a master password that only you know, and most offer secure sharing, breach monitoring, and cross-platform access. For anything beyond casual accounts, a dedicated manager is strongly recommended.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What makes a password "weak" or easy to crack?</summary>
+                    <p class="faq-answer">A password is considered weak if it is short (under 12 characters), uses predictable patterns (sequential numbers, keyboard walks like "qwerty"), contains personal information (name, birthday, pet), or appears in common password lists. Attackers use dictionary attacks that test millions of known passwords and their variations in seconds. A password like "Summer2024!" looks complex but would fall immediately because it follows a pattern that is well-represented in attack dictionaries. Always generate passwords randomly rather than inventing them yourself.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How often should I change my passwords?</summary>
+                    <p class="faq-answer">Modern security guidance (from NIST and other bodies) has moved away from mandatory periodic changes. Changing passwords on a fixed schedule often leads to weak, predictable variations ("Password1" → "Password2"). Instead, change a password immediately when: you suspect it has been compromised, the service notifies you of a breach, you shared it with someone who no longer needs access, or you detect suspicious login activity. Use a service like Have I Been Pwned to check whether your email appears in known breach databases.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ARTICLES SECTION ── -->
+    <section class="articles-section">
+        <div class="section-center">
+            <span class="section-eyebrow">From the Blog</span>
+            <h2 class="section-title">Security guides worth reading</h2>
+            <p class="section-sub">Practical, no-fluff articles on staying secure in an age of AI, data breaches, and constant credential theft.</p>
+            <div class="articles-grid">
+
+                <div class="article-card">
+                    <div class="article-card-meta">
+                        <span class="article-badge badge-category">Memory &amp; Security</span>
+                        <span class="article-badge badge-soon">Coming Soon</span>
+                        <span class="article-read-time">~6 min read</span>
+                    </div>
+                    <div class="article-card-title">How to Memorize Strong Passwords Without Sacrificing Security</div>
+                    <p class="article-card-excerpt">Most people choose weak passwords because strong ones are impossible to remember. This guide explores techniques — from memory palaces to spaced repetition — that let you build and retain genuinely secure credentials for the accounts that matter most.</p>
+                    <div class="article-card-cta">Article coming soon — check back shortly.</div>
+                </div>
+
+                <div class="article-card">
+                    <div class="article-card-meta">
+                        <span class="article-badge badge-category">AI Safety</span>
+                        <span class="article-badge badge-soon">Coming Soon</span>
+                        <span class="article-read-time">~5 min read</span>
+                    </div>
+                    <div class="article-card-title">AI Prompt Security: What You Should Never Share With an AI</div>
+                    <p class="article-card-excerpt">AI assistants feel private, but your prompts may be retained, reviewed, or used for model training. This article breaks down what information is genuinely risky to include in AI prompts, and how to get the help you need without exposing sensitive data.</p>
+                    <div class="article-card-cta">Article coming soon — check back shortly.</div>
+                </div>
+
             </div>
         </div>
     </section>
