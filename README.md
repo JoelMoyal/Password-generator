@@ -35,7 +35,7 @@ Four generation modes:
 
 ## Features
 
-- **Web Crypto API** — uses `crypto.getRandomValues()`, not `Math.random()`
+- **Web Crypto API** — browser-native secure random generation
 - **Entropy-based strength meter** — 4-level rating with bit-count calculation
 - **Password history** — last 5 passwords, reveal/hide + copy per entry
 - **Exclude ambiguous characters** — removes `0`, `O`, `l`, `1`, `I` etc.
@@ -43,7 +43,7 @@ Four generation modes:
 - **Copy with feedback** — button turns green, resets after 2 s
 - **9 languages** — EN, DE, FR, ES, IT, PT, NL, PL, RU
 - **Mobile-first** — responsive down to small phones, touch-optimised
-- **Single file** — all HTML, CSS, and JS in one `index.html`, zero build step
+- **No install needed** — open in any browser, no setup required
 
 ---
 
