@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Secure Password Generator — Free & Private | pwasecurity</title>
 
     <!-- SEO -->
@@ -479,6 +479,8 @@
         @media (pointer: coarse) {
             input[type="checkbox"] { width: 20px; height: 20px; }
             button, .option-item { min-height: 44px; }
+            input[type="range"] { height: 10px; }
+            input[type="range"]::-webkit-slider-thumb { width: 28px; height: 28px; }
         }
 
         /* ── TABS ── */
@@ -1034,7 +1036,7 @@
         .cookie-btn-decline { background: rgba(255,255,255,0.06); color: var(--text-2); border: 1px solid rgba(255,255,255,0.09); }
         .cookie-btn-decline:hover { background: rgba(255,255,255,0.1); color: var(--text-1); }
         @media (max-width: 360px) {
-            .cookie-banner { right: 12px; left: 12px; width: auto; }
+            .cookie-banner { right: 12px; left: 12px; width: auto; bottom: max(12px, env(safe-area-inset-bottom)); }
         }
 
         /* ── SLIDER BUBBLE ── */
@@ -1088,19 +1090,82 @@
         }
         /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            .features-grid { grid-template-columns: 1fr; }
+            /* Grids → single column */
+            .features-grid { grid-template-columns: 1fr; gap: 14px; }
             .trust-inner { grid-template-columns: 1fr; }
             .guide-blocks { grid-template-columns: 1fr; }
             .articles-grid { grid-template-columns: 1fr; }
             .faq-section .section-center { grid-template-columns: 1fr; gap: 2rem; }
             .faq-header { position: static; }
+
+            /* Hero */
+            .hero { padding: 64px 20px 40px; }
+            .hero-sub { margin-bottom: 32px; font-size: 0.98rem; }
+
+            /* Tool card */
+            .tool-card { padding: 22px 18px; border-radius: 18px 18px 0 0; }
+
+            /* Section padding */
+            .features-section { padding: 72px 20px 60px; }
+            .guide-section    { padding: 72px 20px 60px; }
+            .articles-section { padding: 72px 20px 60px; }
+            .faq-section      { padding: 72px 20px 60px; }
+
+            /* Section text */
+            .section-sub { margin-bottom: 36px; font-size: 0.97rem; }
+
+            /* Feature cards */
+            .feature-card { padding: 22px 20px; }
+
+            /* FAQ */
+            details.faq-item summary { padding: 18px 20px; font-size: 14px; }
+            .faq-answer { padding: 14px 18px 18px; }
+
+            /* Nav */
+            .nav-logo-badge { display: none; }
+            .nav-inner { padding: 0 16px; }
+
+            /* Footer */
+            .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .site-footer { padding: 36px 20px; padding-bottom: max(36px, env(safe-area-inset-bottom)); }
+
+            /* Articles list rows — bigger tap target */
+            .article-row { padding: 15px 16px; gap: 10px; }
+            .article-row-meta { display: none; }
         }
+
         @media (max-width: 480px) {
             .options-grid { grid-template-columns: 1fr; }
+
+            /* Hero tighter on small phones */
+            .hero { padding: 48px 16px 32px; }
+            h1.hero-title { letter-spacing: -1px; }
+
+            /* Tool card */
+            .tool-card { padding: 18px 14px; }
+
+            /* Password display */
+            .pw-display { font-size: 13px; padding: 12px 14px; }
+
+            /* Action row — stack on very small screens */
+            .action-row { flex-direction: column; }
+            .btn-new-pw, .copy-btn-full { width: 100%; }
+            .copy-btn-full { margin-bottom: 12px; }
+
+            /* Trust strip — compact */
+            .trust-item { padding: 14px 12px; }
+
+            /* Article featured card */
+            .article-featured { padding: 1.25rem; }
+            .article-featured-title { font-size: 1.05rem; }
+            .article-featured-excerpt { font-size: 13px; }
         }
+
         @media (pointer: coarse) {
             .icon-btn { min-height: 44px; min-width: 44px; }
-            .copy-btn-full { min-height: 44px; }
+            .copy-btn-full { min-height: 48px; }
+            .btn-new-pw { min-height: 48px; }
+            .article-row { min-height: 52px; }
         }
 
         /* ── MODE BAR ── */
