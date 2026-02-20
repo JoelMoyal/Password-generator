@@ -1,6 +1,6 @@
 # pwasecurity — Password Generator
 
-> Free, private, browser-only password generator. No account. No server. Nothing leaves your device.
+> Free, private, browser-only password generator with built-in AI Mode. No account. No server. Nothing leaves your device.
 
 **Live site → [pwasecurity.org](https://pwasecurity.org)**
 
@@ -12,16 +12,24 @@
 
 ---
 
+## AI Mode
+
+Describe what you need in plain English and get a password suggestion back — powered by **Cloudflare Workers AI** (Meta Llama). No prompt engineering needed: just type something like *"16 chars, no symbols, for a banking app"* and the model returns a tailored suggestion with a brief explanation.
+
+> Note: AI Mode is the only feature that sends data off-device. Your text prompt goes to Cloudflare Workers AI. Don't include real passwords or sensitive data in the prompt.
+
+---
+
 ## What it does
 
-Three generation modes, all running entirely in your browser:
+Four generation modes:
 
 | Mode | Description |
 |------|-------------|
 | **Random** | Cryptographically secure character-based passwords up to 128 chars |
 | **Passphrase** | Word-list passphrases with custom separators, capitalization, and appended numbers |
 | **PIN** | Numeric PINs from 4 to 12 digits |
-| **AI Mode** | Describe what you need in plain English — Cloudflare Workers AI returns a suggestion |
+| **AI Mode** | Describe what you need — Cloudflare Workers AI returns a tailored suggestion |
 
 ---
 
@@ -41,9 +49,7 @@ Three generation modes, all running entirely in your browser:
 
 ## Security model
 
-All password generation runs locally. There is no server, no database, no analytics.
-
-The **one exception** is AI Mode: your text prompt is sent to Cloudflare Workers AI (Meta Llama model) to generate a suggestion. Don't include real passwords, API keys, or personal data in the prompt.
+All password generation runs locally using `crypto.getRandomValues()`. There is no server, no database, no analytics — except for AI Mode, which is covered above.
 
 ---
 
