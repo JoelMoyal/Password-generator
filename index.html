@@ -826,9 +826,30 @@
             padding: 100px 24px 90px;
         }
         .articles-section .section-eyebrow { color: var(--blue); }
+        .articles-controls {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-top: 1.75rem;
+        }
+        .articles-nav { display: flex; gap: 6px; }
+        .articles-nav-btn {
+            width: 34px; height: 34px; border-radius: 50%;
+            background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+            color: var(--text-2); cursor: pointer; font-size: 15px;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, border-color 0.2s, color 0.2s; line-height: 1;
+        }
+        .articles-nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.09); color: var(--text-1); border-color: rgba(255,255,255,0.2); }
+        .articles-nav-btn:disabled { opacity: 0.25; cursor: default; }
+        .articles-showall-btn {
+            background: transparent; border: 1px solid var(--border); border-radius: 99px;
+            padding: 6px 16px; font-size: 12px; font-weight: 600; color: var(--text-2);
+            cursor: pointer; font-family: inherit; transition: color 0.2s, border-color 0.2s;
+        }
+        .articles-showall-btn:hover { color: var(--text-1); border-color: rgba(255,255,255,0.2); }
+
         .articles-scroll-wrap {
             position: relative;
-            margin-top: 2.5rem;
+            margin-top: 1rem;
         }
         .articles-scroll-wrap::after {
             content: '';
@@ -837,8 +858,8 @@
             width: 72px;
             background: linear-gradient(to right, transparent, var(--bg));
             pointer-events: none;
-            border-radius: 0 16px 16px 0;
         }
+        .articles-scroll-wrap.show-all::after { display: none; }
         .articles-grid {
             display: flex;
             gap: 1.25rem;
@@ -849,6 +870,13 @@
             padding-bottom: 4px;
         }
         .articles-grid::-webkit-scrollbar { display: none; }
+        .articles-grid.show-all {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            overflow-x: visible;
+            scroll-snap-type: none;
+        }
+        .articles-grid.show-all .article-card { flex: unset; scroll-snap-align: none; }
         .article-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -1574,7 +1602,14 @@
             <span class="section-eyebrow">From the Blog</span>
             <h2 class="section-title">Security guides worth reading</h2>
             <p class="section-sub">Practical, no-fluff articles on staying secure in an age of AI, data breaches, and constant credential theft.</p>
-            <div class="articles-scroll-wrap"><div class="articles-grid">
+            <div class="articles-controls">
+                <div class="articles-nav">
+                    <button class="articles-nav-btn" id="articles-prev" aria-label="Previous">&#8592;</button>
+                    <button class="articles-nav-btn" id="articles-next" aria-label="Next">&#8594;</button>
+                </div>
+                <button class="articles-showall-btn" id="articles-showall">Show all</button>
+            </div>
+            <div class="articles-scroll-wrap" id="articles-wrap"><div class="articles-grid" id="articles-grid">
 
                 <a class="article-card" href="/memorize-passwords.html" style="text-decoration:none;cursor:pointer;">
                     <div class="article-card-meta">
@@ -1629,6 +1664,39 @@
             </div></div>
         </div>
     </section>
+    <script>
+    (function() {
+        var grid = document.getElementById('articles-grid');
+        var wrap = document.getElementById('articles-wrap');
+        var prevBtn = document.getElementById('articles-prev');
+        var nextBtn = document.getElementById('articles-next');
+        var showAllBtn = document.getElementById('articles-showall');
+        var STEP = 310;
+        var showAll = false;
+
+        function updateArrows() {
+            prevBtn.disabled = grid.scrollLeft <= 0;
+            nextBtn.disabled = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 2;
+        }
+        grid.addEventListener('scroll', updateArrows);
+        updateArrows();
+
+        prevBtn.addEventListener('click', function() {
+            grid.scrollBy({ left: -STEP, behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', function() {
+            grid.scrollBy({ left: STEP, behavior: 'smooth' });
+        });
+        showAllBtn.addEventListener('click', function() {
+            showAll = !showAll;
+            grid.classList.toggle('show-all', showAll);
+            wrap.classList.toggle('show-all', showAll);
+            showAllBtn.textContent = showAll ? 'Scroll view' : 'Show all';
+            prevBtn.style.visibility = showAll ? 'hidden' : '';
+            nextBtn.style.visibility = showAll ? 'hidden' : '';
+        });
+    })();
+    </script>
 
     <section class="faq-section">
         <div class="section-center">
