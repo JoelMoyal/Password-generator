@@ -4,7 +4,8 @@
 
 **Live site → [pwasecurity.org](https://pwasecurity.org)**
 
-<img width="525" alt="pwasecurity password generator screenshot" src="<img width="480" height="1040" alt="Secure Password Generator — Free   Private  pwasecurity" src="https://github.com/user-attachments/assets/1e0e1f93-0a36-4370-acd4-fdca1e2df125" />
+<img width="525" alt="pwasecurity password generator screenshot" src="<img width="480" height="1040" alt="Secure Password Generator — Free   Private  pwasecurity" src="<img width="480" height="959" alt="Secure Password Generator — Free   Private  pwasecurity 2" src="https://github.com/user-attachments/assets/d0c5c4f9-830d-4c8c-81cc-3fc844bd082b" />
+" />
 " />
 
 ---
