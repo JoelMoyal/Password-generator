@@ -39,8 +39,6 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="theme-color" content="#060a14">
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2353052637618024"
-     crossorigin="anonymous"></script>
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -3436,26 +3434,35 @@
     </div>
     <script>
         (function () {
-            const banner = document.getElementById('cookie-banner');
-            const consent = localStorage.getItem('cookie-consent');
-            if (consent) {
-                banner.classList.add('hidden');
-                if (consent === 'declined') pauseAds();
+            var banner = document.getElementById('cookie-banner');
+            var consent = localStorage.getItem('cookie-consent');
+
+            function loadAds() {
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2353052637618024';
+                s.crossOrigin = 'anonymous';
+                document.head.appendChild(s);
             }
+
+            if (consent === 'accepted') {
+                loadAds();
+                banner.classList.add('hidden');
+            } else if (consent === 'declined') {
+                banner.classList.add('hidden');
+            }
+            // No prior consent → show banner, don't load ads yet
+
             document.getElementById('cookie-accept').addEventListener('click', function () {
                 localStorage.setItem('cookie-consent', 'accepted');
                 banner.classList.add('hidden');
+                loadAds();
             });
             document.getElementById('cookie-decline').addEventListener('click', function () {
                 localStorage.setItem('cookie-consent', 'declined');
                 banner.classList.add('hidden');
-                pauseAds();
+                // Ads were never loaded — nothing to remove
             });
-            function pauseAds() {
-                document.querySelectorAll('ins.adsbygoogle, script[src*="adsbygoogle"]').forEach(function (el) {
-                    el.remove();
-                });
-            }
         })();
     </script>
     <script>
