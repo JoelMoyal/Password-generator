@@ -9,7 +9,11 @@
     <meta name="description" content="Generate strong, cryptographically secure passwords instantly — free, private, and 100% client-side. Random passwords, passphrases, and PINs with no tracking.">
     <meta name="keywords" content="password generator, secure password, random password, passphrase generator, PIN generator, strong password, free password generator">
     <meta name="author" content="Joël Moyal">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://pwasecurity.org/">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net">
+    <link rel="preconnect" href="https://pwasecurity.org">
 
     <!-- Open Graph (Facebook, LinkedIn, WhatsApp, iMessage) -->
     <meta property="og:type" content="website">
@@ -66,6 +70,105 @@
         "Entropy-based strength meter",
         "Fully client-side — no data stored or transmitted",
         "9 languages supported"
+      ]
+    }
+    </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this password generator truly secure?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. All passwords are generated using the Web Crypto API directly in your browser. No data is ever sent to a server, and the randomness is cryptographically strong." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does AI Mode store my prompts or passwords?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Your AI prompts are sent only to the Cloudflare Workers AI endpoint to generate a response. Nothing is logged or stored on our end." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long should my password be?",
+          "acceptedAnswer": { "@type": "Answer", "text": "For most accounts, 16+ characters with a mix of uppercase, lowercase, numbers, and symbols is excellent. For high-value accounts like banking or email, aim for 20+ characters." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why use a passphrase instead of a random password?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Passphrases are longer and easier to remember while still being very secure. A four-word passphrase carries over 44 bits of entropy and is far easier to type from memory than a dense random string." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use the same password on multiple sites?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. When any service suffers a data breach, attackers test leaked credentials against thousands of other sites automatically — a technique called credential stuffing. If you reuse a password, a single breach can cascade into dozens of compromised accounts. Use a unique, randomly generated password for every service." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is entropy and why does it matter for passwords?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Entropy, measured in bits, quantifies how unpredictable a password is. The higher the entropy, the more guesses an attacker must make to crack it. Adding uppercase, digits, and symbols to a 16-character password can reach 100+ bits — far beyond any current brute-force attack." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a PIN and when should I use one instead of a password?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A PIN is a short numeric code used to unlock a physical device or card. PINs are secure in that context because hardware enforces a limited number of attempts. For online accounts, a PIN alone is too short — use a full password or passphrase instead." }
+        },
+        {
+          "@type": "Question",
+          "name": "How does AI Mode generate passwords — is it safe?",
+          "acceptedAnswer": { "@type": "Answer", "text": "AI Mode sends your description to a Cloudflare Workers AI endpoint (Meta Llama model). The AI interprets your request and suggests a password; it is returned to your browser and never logged or stored. If you are concerned about privacy, use Random or Passphrase mode, which generates passwords entirely inside your browser." }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I store my passwords in my browser?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Browser-saved passwords are convenient but carry real risks. A dedicated password manager (Bitwarden, 1Password, KeePass) encrypts your vault with a master password only you know. For anything beyond casual accounts, a dedicated manager is strongly recommended." }
+        },
+        {
+          "@type": "Question",
+          "name": "What makes a password weak or easy to crack?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A password is weak if it is short (under 12 characters), uses predictable patterns (sequential numbers, keyboard walks like qwerty), contains personal information, or appears in common password lists. Always generate passwords randomly." }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should I change my passwords?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Modern guidance (NIST) has moved away from mandatory periodic changes. Change a password when you suspect compromise, the service reports a breach, or you detect suspicious login activity. Use Have I Been Pwned to check if your email appears in known breach databases." }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Organization + BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "pwasecurity",
+          "url": "https://pwasecurity.org",
+          "logo": "https://pwasecurity.org/favicon.svg",
+          "sameAs": [
+            "https://github.com/JoelMoyal/Password-generator",
+            "https://www.linkedin.com/in/joel-moyal",
+            "https://github.com/joelmoyal"
+          ],
+          "founder": {
+            "@type": "Person",
+            "name": "Joël Moyal",
+            "url": "https://joelmoyal.com"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pwasecurity.org/" },
+            { "@type": "ListItem", "position": 2, "name": "Password Generator", "item": "https://pwasecurity.org/#generator" },
+            { "@type": "ListItem", "position": 3, "name": "Security Guide", "item": "https://pwasecurity.org/#guide" },
+            { "@type": "ListItem", "position": 4, "name": "FAQ", "item": "https://pwasecurity.org/#faq" }
+          ]
+        }
       ]
     }
     </script>
@@ -823,8 +926,9 @@
             font-size: 17px;
             font-weight: 700;
             color: var(--text-1);
-            margin-bottom: 0.8rem;
+            margin: 0 0 0.8rem;
             letter-spacing: -0.3px;
+            line-height: 1.3;
         }
         .guide-block-body {
             font-size: 14px;
@@ -1322,7 +1426,7 @@
 <body>
     <nav class="nav" id="main-nav">
         <div class="nav-inner">
-            <a class="nav-logo" href="#">
+            <a class="nav-logo" href="/">
                 <div class="nav-logo-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 2L4 5.5V11c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V5.5L12 2z" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
@@ -1600,7 +1704,7 @@
                                 <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
                             </svg>
                         </div>
-                        <div class="guide-block-title" id="guide-1-title">The cost of a weak password</div>
+                        <h3 class="guide-block-title" id="guide-1-title">The cost of a weak password</h3>
                     </summary>
                     <p class="guide-block-body" id="guide-1-body">Over 15 billion stolen credentials are currently circulating in breach databases online. Attackers run automated scripts — called credential stuffing — that test leaked username/password pairs against hundreds of services in seconds. If you reuse a password from any breached site, every other account sharing that password is effectively compromised. A weak or reused password is not just a minor risk; it is an open door.</p>
                 </details>
@@ -1613,7 +1717,7 @@
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                             </svg>
                         </div>
-                        <div class="guide-block-title" id="guide-2-title">Anatomy of a strong password</div>
+                        <h3 class="guide-block-title" id="guide-2-title">Anatomy of a strong password</h3>
                     </summary>
                     <p class="guide-block-body" id="guide-2-body">Length beats complexity every time. A 20-character lowercase passphrase is exponentially harder to crack than an 8-character mix of symbols. What matters most is entropy — the number of possible combinations an attacker must try. Each additional character multiplies the search space. Aim for at least 16 characters; use uppercase, lowercase, digits, and symbols when the site allows them; and never include predictable patterns like your name, birth year, or "123".</p>
                 </details>
@@ -1627,7 +1731,7 @@
                                 <polyline points="2 7 12 12 22 7"/>
                             </svg>
                         </div>
-                        <div class="guide-block-title" id="guide-3-title">Passphrases vs random strings</div>
+                        <h3 class="guide-block-title" id="guide-3-title">Passphrases vs random strings</h3>
                     </summary>
                     <p class="guide-block-body" id="guide-3-body">A random 16-character string like <code style="font-size:11px;color:var(--text-3)">xK7!mP2#qL9$wR4@</code> is extremely secure but nearly impossible to memorise. A four-word passphrase like <code style="font-size:11px;color:var(--text-3)">correct-horse-battery-staple</code> is just as strong (over 44 bits of entropy) yet far easier to remember. Use a random password for accounts stored in a password manager, and a passphrase for anything you need to type from memory — like your manager's master password or your device login.</p>
                 </details>
@@ -1640,7 +1744,7 @@
                                 <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
                             </svg>
                         </div>
-                        <div class="guide-block-title" id="guide-4-title">The golden rules</div>
+                        <h3 class="guide-block-title" id="guide-4-title">The golden rules</h3>
                     </summary>
                     <p class="guide-block-body" id="guide-4-body">Following these five habits eliminates the vast majority of password-related account takeovers:</p>
                     <ul class="guide-rules" id="guide-4-rules">
