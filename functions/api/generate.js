@@ -48,16 +48,34 @@ Generate a strong, secure password or passphrase tailored to their description.
 - Respond ONLY with valid JSON in this exact format, nothing else:
 {"password":"<the password>","explanation":"<1-2 sentence explanation in ${replyLang}>"}`;
 
-    try {
-        const result = await env.AI.run('@cf/meta/llama-3-8b-instruct', {
-            messages: [
-                { role: 'system', content: systemPrompt },
-                { role: 'user', content: description.trim() }
-            ],
-            max_tokens: 300
-        });
+    // Cloudflare retired @cf/meta/llama-3-8b-instruct on 2026-05-30.
+    // Models are tried in order, so a future retirement does not take AI Mode down again.
+    const MODELS = [
+        '@cf/meta/llama-3.1-8b-instruct-fast',
+        '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    ];
 
-        const rawText = result.response || '';
+    try {
+        let result = null;
+        let lastError = null;
+        for (const model of MODELS) {
+            try {
+                result = await env.AI.run(model, {
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: description.trim() }
+                    ],
+                    max_tokens: 300
+                });
+                break;
+            } catch (modelErr) {
+                lastError = modelErr;
+                console.error('Workers AI model failed:', model, modelErr && modelErr.message);
+            }
+        }
+        if (!result) throw lastError || new Error('No model available');
+
+        const rawText = typeof result.response === 'string' ? result.response : JSON.stringify(result.response || '');
 
         // Extract JSON from the response
         const jsonMatch = rawText.match(/\{[\s\S]*"password"[\s\S]*"explanation"[\s\S]*\}/);
@@ -75,6 +93,7 @@ Generate a strong, secure password or passphrase tailored to their description.
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (err) {
+        console.error('AI generation failed:', err && err.message);
         return new Response(JSON.stringify({ error: 'AI generation failed. Please try again.' }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
