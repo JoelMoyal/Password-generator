@@ -44,6 +44,8 @@ Four generation modes:
 - **9 languages** — EN, DE, FR, ES, IT, PT, NL, PL, RU
 - **Mobile-first** — responsive down to small phones, touch-optimised
 - **No install needed** — open in any browser, no setup required
+- **Tumbler display** — each character sits in its own cell and rolls into place on a spring; digits and symbols are colour-coded so `0`/`O` and `1`/`l` are easy to tell apart
+- **Light and dark** — follows the system colour scheme
 
 ---
 
@@ -86,13 +88,14 @@ start index.html      # Windows
 
 ## Deploy
 
-The site is hosted on **Cloudflare Pages** and auto-deploys on every push to `main`. Any static host works — it's a single HTML file.
+The site is hosted on **Cloudflare Pages** and auto-deploys on every push to `main`. Any static host works — the generator is a single HTML file, the articles share `pages.css`, and the two typefaces are self-hosted in `fonts/` (no third-party font requests).
 
 ---
 
 ## Stack
 
 - Vanilla HTML, CSS, JavaScript
+- Martian Mono and Golos Text, self-hosted under the SIL Open Font License (see `fonts/`)
 - Web Crypto API (`crypto.getRandomValues`)
 - Cloudflare Pages (hosting)
 - Cloudflare Workers AI (AI Mode only)
